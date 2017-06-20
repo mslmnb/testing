@@ -1,28 +1,29 @@
 package kz.gala.testing.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Mussulmanbekova_GE on 14.06.2017.
- */
-public class Question implements HasId{
-    private Integer id;
+@NamedQueries({
+    @NamedQuery(name = Question.BY_ID, query = "SELECT q FROM Question q LEFT JOIN FETCH q.answers WHERE q.id=:id" )
+})
+
+@Entity
+@Table(name="questions")
+public class Question extends BaseEntity{
+    public static final String BY_ID = "Question.getById";
+
+    @Column(name="body", nullable=false)
     private String body;
-    private ArrayList<Answer> answers;
-    private Integer rightAnswerId;
 
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    private List<Answer> answers;
+
+    @Column(name="right_answer_id", nullable = false)
+    private Integer rightAnswerId;
 
     public void setBody(String body) {
         this.body = body;
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
     }
 
     public String getBody() {

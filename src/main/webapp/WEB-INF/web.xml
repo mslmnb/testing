@@ -6,15 +6,43 @@
 
     <display-name>Testing</display-name>
 
+    <!--<servlet>-->
+        <!--<servlet-name>examServlet</servlet-name>  -->
+        <!--<servlet-class>kz.gala.testing.web.ExamServlet</servlet-class>-->
+        <!--<load-on-startup>0</load-on-startup>-->
+    <!--</servlet>-->
+    <!---->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>examServlet</servlet-name>-->
+        <!--<url-pattern>/exam</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <servlet>
-        <servlet-name>examServlet</servlet-name>  
-        <servlet-class>kz.gala.testing.web.ExamServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet-mapping>
-        <servlet-name>examServlet</servlet-name>
-        <url-pattern>/exam</url-pattern>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/spring-app.xml
+            classpath:spring/spring-db.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     
 </web-app>
