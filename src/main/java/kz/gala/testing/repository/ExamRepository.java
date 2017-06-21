@@ -16,9 +16,9 @@ public interface ExamRepository {
     // добавить в репозиторий список вопросов для экзамена
     //void appendQuestions(Collection<Question> questions);
 
-    List<Exam> getNext(int id, int userId) ;
+    List<Exam> getNextFrom(int id, int userId) ;
 
-    List<Exam> getPrevious(int id, int userId);
+    List<Exam> getPreviousFrom(int id, int userId);
 
     List<Exam> getFirst(int userId) ;
 

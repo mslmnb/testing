@@ -20,11 +20,11 @@ public class DataJpaExamRepositoryImpl implements ExamRepository {
     private CrudExamRepository crudRepository;
 
 
-    public List<Exam> getNext(Integer id) {
+    public List<Exam> getNextFrom(Integer id) {
         return crudRepository.findByQuestionIdMoreThanEqualOrderByQuestionId(id);
     }
 
-    public List<Exam> getPrevious(Integer id) {
+    public List<Exam> getPreviousFrom(Integer id) {
         return crudRepository.findByQuestionIdLessThanEqualOrderByQuestionIdDesc(id);
     }
 
@@ -33,12 +33,12 @@ public class DataJpaExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public List<Exam> getNext(int id, int userId) {
+    public List<Exam> getNextFrom(int id, int userId) {
         return null;
     }
 
     @Override
-    public List<Exam> getPrevious(int id, int userId) {
+    public List<Exam> getPreviousFrom(int id, int userId) {
         return null;
     }
 

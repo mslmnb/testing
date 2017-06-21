@@ -20,7 +20,7 @@ public class Question extends BaseEntity{
     private List<Answer> answers;
 
     @Column(name="right_answer_id", nullable = false)
-    private Integer rightAnswerId;
+    private Integer rightAnswerId;                        // не отдавать на UI
 
     public void setBody(String body) {
         this.body = body;

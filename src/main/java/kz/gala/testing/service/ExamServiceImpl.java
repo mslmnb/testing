@@ -21,13 +21,13 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<Exam> getNext(Integer id, int userId) {
-        return repository.getNext(id, userId);
+    public List<Exam> getNextFrom(Integer id, int userId) {
+        return repository.getNextFrom(id, userId);
     }
 
     @Override
-    public List<Exam> getPrevious(Integer id, int userId) {
-        return repository.getPrevious(id, userId);
+    public List<Exam> getPreviousFrom(Integer id, int userId) {
+        return repository.getPreviousFrom(id, userId);
     }
 
     @Override

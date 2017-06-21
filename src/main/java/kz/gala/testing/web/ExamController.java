@@ -8,17 +8,14 @@ import kz.gala.testing.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * Created by Mussulmanbekova_GE on 15.06.2017.
  */
-@RestController
+@Controller
 @RequestMapping(value = "/exam")
 public class ExamController {
 
@@ -37,7 +34,9 @@ public class ExamController {
         List<Exam> examList =  service.getFirst(userId);
         Question currQuestion = questionService.get(examList.get(0).getQuestionId());
         model.addAttribute("question", currQuestion);
-        model.addAttribute("nextId", examList.get(1).getQuestionId());
+        if (examList.size()==2) {
+            model.addAttribute("nextId", true);
+        }
         // проверка, если спсок пустой - бросать эксепшен
         return "exam";
     }
@@ -48,24 +47,42 @@ public class ExamController {
         List<Exam> examList = service.getLast(userId);
         Question currQuestion = questionService.get(examList.get(0).getQuestionId());
         model.addAttribute("question", currQuestion);
-        model.addAttribute("previousId",examList.get(1).getQuestionId());
+        if (examList.size()==2) {
+            model.addAttribute("prevId", true);
+        }
         // проверка, если спсок пустой - бросать эксепшен
         return "exam";
     }
 
-    @GetMapping(value="/previous/{id}")
-    public String getPrevious(@PathVariable("id") Integer id, Model model) {
+    @PostMapping(value="/previous/{id}")
+    public String getPreviousFrom(@PathVariable("id") Integer id, Model model) {
         int userId = AuthorizedUser.id() ;
-        List<Exam> examList = service.getPrevious(id, userId);
-        model.addAttribute("question");
+        List<Exam> examList = service.getPreviousFrom(id, userId);
+        Question currQuestion = questionService.get(examList.get(1).getQuestionId());
+        model.addAttribute("question", currQuestion)
+             .addAttribute("nextId", true);
+        if (examList.size()==3) {
+            model.addAttribute("prevId", true);
+        } else {
+            model.addAttribute("prevId", false);
+        }
         // проверка, если спсок пустой - бросать эксепшен
         return "exam";
     }
 
-    @GetMapping(value="/next/{id}")
-    public String getNext(@PathVariable("id") Integer id, Model model) {
+    @PostMapping(value="/next/{id}")
+    public String getNextFrom(@PathVariable("id") Integer id, Model model) {
         int userId = AuthorizedUser.id() ;
-        List<Exam> examList = service.getNext(id, userId);
+        List<Exam> examList = service.getNextFrom(id, userId);
+        Question currQuestion = questionService.get(examList.get(1).getQuestionId());
+        model.addAttribute("question", currQuestion)
+                .addAttribute("prevId", true);
+        if (examList.size()==3) {
+             model.addAttribute("nextId", true);
+        } else {
+            model.addAttribute("nextId", false);
+        }
+
         // проверка, если спсок пустой - бросать эксепшен
         return "exam";
     }

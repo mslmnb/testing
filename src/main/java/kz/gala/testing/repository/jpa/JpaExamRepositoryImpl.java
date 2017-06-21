@@ -20,21 +20,21 @@ public class JpaExamRepositoryImpl implements ExamRepository {
     private EntityManager em;
 
     @Override
-    public List<Exam> getNext(int id, int userId) {
+    public List<Exam> getNextFrom(int id, int userId) {
         List<Exam> exams = em.createNamedQuery(Exam.GET_NEXT, Exam.class)
                              .setParameter("id", id)
                              .setParameter("userId", userId)
-                             .setMaxResults(2)
+                             .setMaxResults(3)
                              .getResultList();
         return exams;
     }
 
     @Override
-    public List<Exam> getPrevious(int id, int userId) {
+    public List<Exam> getPreviousFrom(int id, int userId) {
         List<Exam> exams = em.createNamedQuery(Exam.GET_PREVIOUS, Exam.class)
                              .setParameter("id", id)
                              .setParameter("userId", userId)
-                             .setMaxResults(2)
+                             .setMaxResults(3)
                              .getResultList();
         return exams;
     }
