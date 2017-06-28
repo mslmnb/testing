@@ -30,4 +30,19 @@ public class Question extends BaseEntity{
         return body;
     }
 
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public Integer getRightAnswerId() {
+        return rightAnswerId;
+    }
+
+    public void setRightAnswerId(Integer rightAnswerId) {
+        this.rightAnswerId = rightAnswerId;
+    }
 }

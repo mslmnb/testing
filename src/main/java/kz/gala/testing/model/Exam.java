@@ -40,28 +40,20 @@ public class Exam implements Serializable{
         this.id = id;
     }
 
-    //@Column(name = "question_id", nullable = false)
-    //@NotBlank
-    //private Integer questionId;
-
     @Column(name = "user_answer_id")
     private Integer userAnswerId;
 
-    //@Column(name = "user_id")
-    //@NotBlank
-    //private Integer user_id;
+    public Exam(ExamPrimaryKey id, Integer userAnswerId) {
+        this.id = id;
+        this.userAnswerId = userAnswerId;
+    }
 
-//    public Integer getQuestionId() {
-//        return questionId;
-//    }
+    public Exam() {
+    }
 
     public Integer getQuestionId() {
         return id.getQuestionId();
     }
-
-//    public void setQuestionId(Integer questionId) {
-//        this.questionId = questionId;
-//    }
 
     public void setQuestionId(Integer questionId) {
         id.setQuestionId(questionId);

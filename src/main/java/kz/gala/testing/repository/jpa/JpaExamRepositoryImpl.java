@@ -1,6 +1,7 @@
 package kz.gala.testing.repository.jpa;
 
 import kz.gala.testing.model.Exam;
+import kz.gala.testing.model.ExamPrimaryKey;
 import kz.gala.testing.repository.ExamRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +56,11 @@ public class JpaExamRepositoryImpl implements ExamRepository {
                              .setMaxResults(2)
                              .getResultList();
         return exams;
+    }
+
+    @Override
+    @Transactional
+    public void save(Integer id, Integer userAnswerId, int userId) {
+        em.merge(new Exam(new ExamPrimaryKey(userId, id), userAnswerId));
     }
 }

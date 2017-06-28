@@ -65,4 +65,3 @@ INSERT INTO answers (body,question_id) VALUES
   (100000, 100009),
   (100000, 100010);
 
-;

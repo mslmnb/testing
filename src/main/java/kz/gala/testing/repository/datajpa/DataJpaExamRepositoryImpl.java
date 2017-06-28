@@ -51,4 +51,9 @@ public class DataJpaExamRepositoryImpl implements ExamRepository {
     public List<Exam> getLast(int userId) {
         return null;
     }
+
+    @Override
+    public void save(Integer id, Integer userAnswerId, int userId) {
+
+    }
 }

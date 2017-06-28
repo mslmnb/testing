@@ -1,5 +1,6 @@
 package kz.gala.testing.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,6 +23,7 @@ public class Answer extends BaseEntity {
     @JoinColumn(name="question_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonIgnore
     private Question question;
 
     public void setBody(String body) {

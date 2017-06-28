@@ -1,27 +1,29 @@
 package kz.gala.testing.to;
 
 import kz.gala.testing.model.Answer;
-import kz.gala.testing.model.HasId;
+import kz.gala.testing.model.BaseEntity;
+import kz.gala.testing.model.Question;
 
-import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Mussulmanbekova_GE on 19.06.2017.
- */
-public class ExamTo {
+public class ExamTo extends BaseEntity {
 
-    private final Integer id;
+    private final String body;
 
-    private final Integer questionId;
+    private final List<Answer> answers;
+
+    private final Integer nextId;
+
+    private final Integer prevId;
 
     private final Integer userAnswerId;
 
-    private final ArrayList<Answer> answers;
-
-    public ExamTo(Integer id, Integer questionId, Integer userAnswerId, ArrayList<Answer> answers) {
-        this.id = id;
-        this.questionId = questionId;
-        this.userAnswerId = userAnswerId;
+    public ExamTo(Integer id, String body, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId) {
+        super(id);
+        this.body = body;
         this.answers = answers;
+        this.nextId = nextId;
+        this.prevId = prevId;
+        this.userAnswerId = userAnswerId;
     }
 }

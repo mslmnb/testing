@@ -16,9 +16,9 @@ import java.util.List;
  * Created by Mussulmanbekova_GE on 15.06.2017.
  */
 @Controller
-@RequestMapping(value = "/exam")
+@RequestMapping(value = "/exam")   // завести константу
 public class ExamController {
-
+    // создать AbstractExamController и наследоваться от него
     private ExamService service;
     private QuestionService questionService;
 
@@ -33,7 +33,8 @@ public class ExamController {
         int userId = AuthorizedUser.id() ;
         List<Exam> examList =  service.getFirst(userId);
         Question currQuestion = questionService.get(examList.get(0).getQuestionId());
-        model.addAttribute("question", currQuestion);
+        model.addAttribute("question", currQuestion)
+             .addAttribute("answers", currQuestion.getAnswers());
         if (examList.size()==2) {
             model.addAttribute("nextId", true);
         }
@@ -46,7 +47,8 @@ public class ExamController {
         int userId = AuthorizedUser.id() ;
         List<Exam> examList = service.getLast(userId);
         Question currQuestion = questionService.get(examList.get(0).getQuestionId());
-        model.addAttribute("question", currQuestion);
+        model.addAttribute("question", currQuestion)
+             .addAttribute("answers", currQuestion.getAnswers());
         if (examList.size()==2) {
             model.addAttribute("prevId", true);
         }
@@ -60,6 +62,7 @@ public class ExamController {
         List<Exam> examList = service.getPreviousFrom(id, userId);
         Question currQuestion = questionService.get(examList.get(1).getQuestionId());
         model.addAttribute("question", currQuestion)
+             .addAttribute("answers", currQuestion.getAnswers())
              .addAttribute("nextId", true);
         if (examList.size()==3) {
             model.addAttribute("prevId", true);
@@ -76,6 +79,7 @@ public class ExamController {
         List<Exam> examList = service.getNextFrom(id, userId);
         Question currQuestion = questionService.get(examList.get(1).getQuestionId());
         model.addAttribute("question", currQuestion)
+                .addAttribute("answers", currQuestion.getAnswers())
                 .addAttribute("prevId", true);
         if (examList.size()==3) {
              model.addAttribute("nextId", true);

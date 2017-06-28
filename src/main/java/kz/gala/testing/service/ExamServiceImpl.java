@@ -39,4 +39,9 @@ public class ExamServiceImpl implements ExamService {
     public List<Exam> getLast(int userId) {
         return repository.getLast(userId);
     }
+
+    @Override
+    public void save(Integer id, Integer userAnswerId, int userId) {
+        repository.save(id, userAnswerId, userId);
+    }
 }

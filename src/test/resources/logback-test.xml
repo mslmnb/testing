@@ -1,0 +1,26 @@
+<configuration>
+
+    <!--для Postgres версии 42.0.0  перенаправляем jul на slf4j api -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- логер для логирования на консоль-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>    // формат лога
+            <charset>UTF-8</charset>
+            <pattern>%-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="org.postgresql" level="debug"/>
+    <logger name="org.springframework.jdbc" level="debug"/>
+    <logger name="kz.gala.testing" level="debug"/>
+
+    <!-- настройки логирования по умолчанию-->
+    <root level="WARN">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>

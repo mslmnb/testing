@@ -24,5 +24,5 @@ public interface ExamRepository {
 
     List<Exam> getLast(int userId) ;
 
-
+    void save(Integer id, Integer userAnswerId, int userId);
 }

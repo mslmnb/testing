@@ -12,4 +12,6 @@ public interface ExamService {
     List<Exam> getPreviousFrom(Integer id, int userId);
     List<Exam> getFirst(int userId);
     List<Exam> getLast(int userId);
+
+    void save(Integer id, Integer userAnswerId, int userId);
 }

@@ -20,6 +20,14 @@ public class ExamPrimaryKey implements Serializable {
     @NotBlank
     private Integer questionId;
 
+    public ExamPrimaryKey() {
+    }
+
+    public ExamPrimaryKey(Integer userId, Integer questionId) {
+        this.userId = userId;
+        this.questionId = questionId;
+    }
+
     public Integer getUserId() {
         return userId;
     }
