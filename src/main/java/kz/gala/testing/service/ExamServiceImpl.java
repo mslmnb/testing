@@ -5,6 +5,8 @@ import kz.gala.testing.repository.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithIds;
+
 import java.util.List;
 
 /**
@@ -21,13 +23,13 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<Exam> getNextFrom(Integer id, int userId) {
-        return repository.getNextFrom(id, userId);
+    public List<Exam> getNextFrom(int questionId, int userId) {
+        return repository.getNextFrom(questionId, userId);
     }
 
     @Override
-    public List<Exam> getPreviousFrom(Integer id, int userId) {
-        return repository.getPreviousFrom(id, userId);
+    public List<Exam> getPreviousFrom(int questionId, int userId) {
+        return repository.getPreviousFrom(questionId, userId);
     }
 
     @Override
@@ -41,7 +43,12 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public void save(Integer id, Integer userAnswerId, int userId) {
-        repository.save(id, userAnswerId, userId);
+    public Exam get(int questionId, int userId) {
+        return checkNotFoundWithIds(repository.get(questionId, userId), userId, questionId);
+    }
+
+    @Override
+    public Exam update(Exam exam, int userAnswerId, int userId) {
+        return checkNotFoundWithIds(repository.update(exam, userAnswerId, userId), exam.getUserId(), exam.getQuestionId());
     }
 }

@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 @Transactional(readOnly = true)
 public class JpaQuestionRepositoryImpl implements QuestionRepository{
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
     public Question save(Question question) {
@@ -27,9 +27,6 @@ public class JpaQuestionRepositoryImpl implements QuestionRepository{
 
     @Override
     public Question get(int id) {
-        Question question = em.createNamedQuery(Question.BY_ID, Question.class)
-                    .setParameter("id", id)
-                    .getSingleResult(); // trows NoResultException or NonUniqueResultException
-        return question;
+        return em.find(Question.class, id);
     }
 }

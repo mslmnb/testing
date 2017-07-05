@@ -3,7 +3,6 @@ package kz.gala.testing.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Answer extends BaseEntity {
 
     @Column(name="body", nullable = false)
-    @NotBlank
+    @NotNull
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,6 +24,15 @@ public class Answer extends BaseEntity {
     @NotNull
     @JsonIgnore
     private Question question;
+
+    public Answer(Integer id, Question question, String body) {
+        super(id);
+        this.body = body;
+        this.question = question;
+    }
+
+    public Answer() {
+    }
 
     public void setBody(String body) {
         this.body = body;

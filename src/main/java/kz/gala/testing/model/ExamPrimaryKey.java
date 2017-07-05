@@ -43,4 +43,5 @@ public class ExamPrimaryKey implements Serializable {
     public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
+
 }

@@ -1,9 +1,6 @@
 package kz.gala.testing.repository;
 
 import kz.gala.testing.model.Exam;
-import kz.gala.testing.model.Question;
-
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,13 +13,16 @@ public interface ExamRepository {
     // добавить в репозиторий список вопросов для экзамена
     //void appendQuestions(Collection<Question> questions);
 
-    List<Exam> getNextFrom(int id, int userId) ;
+    List<Exam> getNextFrom(int questionId, int userId) ;
 
-    List<Exam> getPreviousFrom(int id, int userId);
+    List<Exam> getPreviousFrom(int questionId, int userId);
 
     List<Exam> getFirst(int userId) ;
 
     List<Exam> getLast(int userId) ;
 
-    void save(Integer id, Integer userAnswerId, int userId);
+
+    Exam update(Exam exam, int userAnswerId, int userId);
+
+    Exam get(int questionId, int userId);
 }

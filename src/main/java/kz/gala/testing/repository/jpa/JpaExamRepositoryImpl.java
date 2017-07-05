@@ -10,9 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-/**
- * Created by Mussulmanbekova_GE on 15.06.2017.
- */
 @Repository
 @Transactional(readOnly = true)
 public class JpaExamRepositoryImpl implements ExamRepository {
@@ -21,46 +18,50 @@ public class JpaExamRepositoryImpl implements ExamRepository {
     private EntityManager em;
 
     @Override
-    public List<Exam> getNextFrom(int id, int userId) {
-        List<Exam> exams = em.createNamedQuery(Exam.GET_NEXT, Exam.class)
-                             .setParameter("id", id)
+    public List<Exam> getNextFrom(int questionId, int userId) {
+        return em.createNamedQuery(Exam.NEXT, Exam.class)
+                             .setParameter("questionId", questionId)
                              .setParameter("userId", userId)
                              .setMaxResults(3)
                              .getResultList();
-        return exams;
     }
 
     @Override
-    public List<Exam> getPreviousFrom(int id, int userId) {
-        List<Exam> exams = em.createNamedQuery(Exam.GET_PREVIOUS, Exam.class)
-                             .setParameter("id", id)
+    public List<Exam> getPreviousFrom(int questionId, int userId) {
+        return em.createNamedQuery(Exam.PREVIOUS, Exam.class)
+                             .setParameter("questionId", questionId)
                              .setParameter("userId", userId)
                              .setMaxResults(3)
                              .getResultList();
-        return exams;
     }
 
     @Override
     public List<Exam> getFirst(int userId) {
-        List<Exam> exams = em.createNamedQuery(Exam.GET_FIRST, Exam.class)
+        return em.createNamedQuery(Exam.FIRST, Exam.class)
                              .setParameter("userId", userId)
                              .setMaxResults(2)
                              .getResultList();
-        return exams;
     }
 
     @Override
     public List<Exam> getLast(int userId) {
-        List<Exam> exams = em.createNamedQuery(Exam.GET_LAST, Exam.class)
+        return em.createNamedQuery(Exam.LAST, Exam.class)
                              .setParameter("userId", userId)
                              .setMaxResults(2)
                              .getResultList();
-        return exams;
+    }
+
+    @Override
+    public Exam get(int questionId, int userId) {
+        return em.find(Exam.class, new ExamPrimaryKey(userId, questionId));
     }
 
     @Override
     @Transactional
-    public void save(Integer id, Integer userAnswerId, int userId) {
-        em.merge(new Exam(new ExamPrimaryKey(userId, id), userAnswerId));
+    public Exam update(Exam exam, int userAnswerId, int userId) {
+        if (get(exam.getQuestionId(),userId)==null) {
+            return null;
+        }
+        return  em.merge(new Exam(exam.getId(), userAnswerId));
     }
 }

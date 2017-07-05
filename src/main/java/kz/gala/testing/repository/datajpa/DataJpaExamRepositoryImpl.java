@@ -53,7 +53,15 @@ public class DataJpaExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public void save(Integer id, Integer userAnswerId, int userId) {
+    public Exam update(Exam exam, int userAnswerId, int userId) {
+        return null;
+    }
 
+    @Override
+    public Exam get(int questionId, int userId) {
+        return null;
     }
 }
+
+
+

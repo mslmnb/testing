@@ -1,7 +1,6 @@
 package kz.gala.testing.web;
 
 import kz.gala.testing.AuthorizedUser;
-import kz.gala.testing.model.Answer;
 import kz.gala.testing.model.Exam;
 import kz.gala.testing.model.Question;
 import kz.gala.testing.service.ExamService;
@@ -9,7 +8,6 @@ import kz.gala.testing.service.QuestionService;
 import kz.gala.testing.to.ExamTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +19,7 @@ import java.util.List;
 @RequestMapping("ajax/exam")     // завести константу
 public class ExamAjaxController {
     // создать AbstractExamController и наследоваться от него
+    // посмотреть MealAjaxController.createOrUpdate - Spring binding
     private ExamService service;
     private QuestionService questionService;
 
@@ -39,13 +38,13 @@ public class ExamAjaxController {
         int nextId = examList.get(1).getQuestionId();
         Question currQuestion = questionService.get(currId);
 
-        ExamTo examTo = new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), nextId, null, examList.get(0).getUserAnswerId());
-        return examTo;
+        return new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), nextId, null, examList.get(0).getUserAnswerId());
     }
 
-    private void saveUserAnswer(Integer id, Integer userAnswerId, int userId) {
-        if (id!=null && userAnswerId!=null) {
-            service.save(id, userAnswerId, userId);
+    private void saveUserAnswer(Integer questionId, Integer userAnswerId, int userId) {
+        if (questionId!=null && userAnswerId!=null) {
+            Exam exam = new Exam(questionId,  userId, null);
+            service.update(exam, userAnswerId, userId);
         }
     }
 
@@ -59,8 +58,7 @@ public class ExamAjaxController {
         Integer nextId = (examList.size()==2) ? null : examList.get(2).getQuestionId();
         Question currQuestion = questionService.get(currId);
 
-        ExamTo examTo = new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), nextId, prevId, examList.get(1).getUserAnswerId());
-        return examTo;
+        return new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), nextId, prevId, examList.get(1).getUserAnswerId());
     }
 
     @PostMapping(value="/previous", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -74,8 +72,7 @@ public class ExamAjaxController {
         Question currQuestion = questionService.get(currId);
 
         // проверка, если спсок пустой - бросать эксепшен
-        ExamTo examTo = new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), nextId, prevId,  examList.get(1).getUserAnswerId());
-        return examTo;
+        return new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), nextId, prevId,  examList.get(1).getUserAnswerId());
     }
 
 
@@ -89,8 +86,7 @@ public class ExamAjaxController {
         Question currQuestion = questionService.get(examList.get(0).getQuestionId());
 
         // проверка, если спсок пустой - бросать эксепшен
-        ExamTo examTo = new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), null, prevId, examList.get(0).getUserAnswerId());
-        return examTo;
+        return new ExamTo(currId, currQuestion.getBody(), currQuestion.getAnswers(), null, prevId, examList.get(0).getUserAnswerId());
     }
 
 }

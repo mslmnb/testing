@@ -2,18 +2,27 @@ DROP TABLE IF EXISTS answers;
 DROP TABLE IF EXISTS exam;
 DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS themes;
 DROP SEQUENCE  IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START 100000;
 
+CREATE TABLE themes
+(
+  id        INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  NAME      VARCHAR NOT NULL
+);
+
 CREATE TABLE users
 (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  theme_id   INTEGER NOT NULL,
   name       VARCHAR NOT NULL,
   position   VARCHAR NOT NULL,
   department VARCHAR NOT NULL,
   login      VARCHAR NOT NULL,
-  password   VARCHAR NOT NULL
+  password   VARCHAR NOT NULL,
+  FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX users_unique_login_idx ON users (login);
 
@@ -21,14 +30,16 @@ CREATE UNIQUE INDEX users_unique_login_idx ON users (login);
 CREATE TABLE questions
 (
   id                INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  body              TEXT NOT NULL,
-  right_answer_id   INTEGER
+  theme_id          INTEGER NOT NULL,
+  body              VARCHAR NOT NULL,
+  right_answer_id   INTEGER,
+  FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE answers
 (
   id                INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  body              TEXT NOT NULL,
+  body              VARCHAR NOT NULL,
   question_id       INTEGER NOT NULL,
   FOREIGN KEY (question_id) REFERENCES questions (id) ON DELETE CASCADE
 );

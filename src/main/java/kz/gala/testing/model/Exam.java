@@ -1,11 +1,7 @@
 package kz.gala.testing.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Mussulmanbekova_GE on 15.06.2017.
@@ -13,10 +9,10 @@ import java.util.Set;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
-    @NamedQuery(name = Exam.GET_FIRST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId"),
-    @NamedQuery(name = Exam.GET_LAST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId DESC"),
-    @NamedQuery(name = Exam.GET_NEXT, query = "SELECT e FROM Exam e WHERE e.id.questionId>=:id AND e.id.userId=:userId ORDER BY e.id.questionId "),
-    @NamedQuery(name = Exam.GET_PREVIOUS, query = "SELECT e FROM Exam e WHERE e.id.questionId<=:id AND e.id.userId=:userId ORDER BY e.id.questionId DESC ")
+    @NamedQuery(name = Exam.FIRST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId"),
+    @NamedQuery(name = Exam.LAST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId DESC"),
+    @NamedQuery(name = Exam.NEXT, query = "SELECT e FROM Exam e WHERE e.id.questionId>=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId "),
+    @NamedQuery(name = Exam.PREVIOUS, query = "SELECT e FROM Exam e WHERE e.id.questionId<=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId DESC "),
 })
 
 
@@ -24,10 +20,10 @@ import java.util.Set;
 @Table(name = "exam", uniqueConstraints = {@UniqueConstraint(columnNames ={"user_id", "question_id"}, name = "exam_unique_user_question_idx")})
 public class Exam implements Serializable{
 
-    public static final String GET_FIRST = "Exam.getFirst";
-    public static final String GET_LAST = "Exam.getLast";
-    public static final String GET_NEXT = "Exam.getNext";
-    public static final String GET_PREVIOUS = "Exam.getPrevious";
+    public static final String FIRST = "Exam.getFirst";
+    public static final String LAST = "Exam.getLast";
+    public static final String NEXT = "Exam.getNext";
+    public static final String PREVIOUS = "Exam.getPrevious";
 
     @Id
     private ExamPrimaryKey id;
@@ -48,11 +44,19 @@ public class Exam implements Serializable{
         this.userAnswerId = userAnswerId;
     }
 
+    public Exam(Integer questionId, Integer userId, Integer userAnswerId) {
+        this(new ExamPrimaryKey(userId, questionId), userAnswerId);
+    }
+
     public Exam() {
     }
 
     public Integer getQuestionId() {
         return id.getQuestionId();
+    }
+
+    public Integer getUserId() {
+        return id.getUserId();
     }
 
     public void setQuestionId(Integer questionId) {
@@ -64,6 +68,17 @@ public class Exam implements Serializable{
 
     public void setUserAnswerId(Integer userAnswerId) {
         this.userAnswerId = userAnswerId;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "userId=" + id.getUserId() +
+                ", questionId=" + id.getQuestionId() +
+                ", userAnswerId=" + userAnswerId +
+                '}';
     }
 }
 
