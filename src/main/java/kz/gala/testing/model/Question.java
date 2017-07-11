@@ -24,7 +24,7 @@ public class Question extends BaseEntity{
     @NotNull
     private String body;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
     private List<Answer> answers;
 
     @Column(name="right_answer_id", nullable = false)

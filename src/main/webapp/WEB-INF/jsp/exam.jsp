@@ -15,6 +15,7 @@
 
 <h2>Идет тестирование</h2>
     <form>
+        <input id = "oldUserAnswerId" hidden value=${undefined}>
         <label class="question"> </label><br />
         <div id="answersBox">
         </div>
