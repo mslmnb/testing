@@ -58,18 +58,21 @@ function pageDraw(data) {
     for (choice in data.answers) {
 
         var currAnswerId = data.answers[choice].id;
+
+
         $("<input type='radio'>")
             .attr("name",'userAnswerId')
             .attr("id",currAnswerId)
             .attr("value",currAnswerId)
             .attr("checked", data.userAnswerId!=null&&data.userAnswerId==currAnswerId)
-            .appendTo(answersBox);
+            .appendTo($("<div class='col-sm-1'>").appendTo(answersBox));
 
         $("<label></label>")
             .attr("for",currAnswerId)
             .html(data.answers[choice].body)
             .appendTo(answersBox);
 
+        $("<br>").appendTo(answersBox);
     }
     initButtons(data);
 }

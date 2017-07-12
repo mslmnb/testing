@@ -5,7 +5,7 @@ import kz.gala.testing.model.BaseEntity;
 
 import java.util.List;
 
-public class ExamTo extends BaseEntity {
+public class ExamTo {
 
     private final String body;
 
@@ -21,7 +21,7 @@ public class ExamTo extends BaseEntity {
 
 
     public ExamTo(Integer id, String body, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId,Integer oldUserAnswerId) {
-        super(id);
+        //super(id);
         this.body = body;
         this.answers = answers;
         this.nextId = nextId;
@@ -31,7 +31,7 @@ public class ExamTo extends BaseEntity {
     }
 
     public ExamTo(Integer id, String body, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId) {
-        super(id);
+        //super(id);
         this.body = body;
         this.answers = answers;
         this.nextId = nextId;

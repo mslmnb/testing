@@ -1,5 +1,6 @@
 package kz.gala.testing.testdata;
 
+import kz.gala.testing.matcher.ModelMatcher;
 import kz.gala.testing.model.Answer;
 import kz.gala.testing.model.Question;
 
@@ -10,6 +11,8 @@ import static kz.gala.testing.testdata.ThemeTestData.THEME1;
  * Created by Mussulmanbekova_GE on 03.07.2017.
  */
 public class QuestionTestData {
+
+    public final static ModelMatcher<Question> MATCHER = ModelMatcher.of(Question.class);
 
     public static final int QUESTION1_ID = START_SEQ + 20;
     public static final int ANSWER1_ID = START_SEQ + 40;
@@ -73,5 +76,6 @@ public class QuestionTestData {
     }
 
     private QuestionTestData() {
+
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ExamServiceImpl implements ExamService {
 
-    private ExamRepository repository;
+    private final ExamRepository repository;
 
     @Autowired
     public ExamServiceImpl(ExamRepository repository) {
