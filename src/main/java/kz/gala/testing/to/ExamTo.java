@@ -2,10 +2,13 @@ package kz.gala.testing.to;
 
 import kz.gala.testing.model.Answer;
 import kz.gala.testing.model.BaseEntity;
+import kz.gala.testing.model.Question;
 
 import java.util.List;
 
 public class ExamTo {
+
+    private final Integer id;
 
     private final String body;
 
@@ -20,9 +23,9 @@ public class ExamTo {
     private final Integer oldUserAnswerId;
 
 
-    public ExamTo(Integer id, String body, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId,Integer oldUserAnswerId) {
-        //super(id);
-        this.body = body;
+    public ExamTo(Question question, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId, Integer oldUserAnswerId) {
+        this.id = question.getId();
+        this.body = question.getBody();
         this.answers = answers;
         this.nextId = nextId;
         this.prevId = prevId;
@@ -30,9 +33,9 @@ public class ExamTo {
         this.oldUserAnswerId = oldUserAnswerId;
     }
 
-    public ExamTo(Integer id, String body, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId) {
-        //super(id);
-        this.body = body;
+    public ExamTo(Question question, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId) {
+        this.id = question.getId();
+        this.body = question.getBody();
         this.answers = answers;
         this.nextId = nextId;
         this.prevId = prevId;

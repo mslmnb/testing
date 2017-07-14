@@ -26,33 +26,42 @@ public class ExamAjaxController extends AbstractExamController {
         super(service, questionService);
     }
 
+
+    @GetMapping(value="/first", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ExamTo getFirst1() {
+        ExamTo e = super.getFirst(null, null, null);
+        return e;
+    }
+
+
     @PostMapping(value="/first", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getFirst(@RequestParam("id") Integer id,
                            @RequestParam("userAnswerId") Integer userAnswerId,
-                           @RequestParam("edited") boolean edited) {
-        return super.getFirst(id, userAnswerId, edited);
+                           @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
+        ExamTo e = super.getFirst(id, userAnswerId, oldUserAnswerId);
+        return e;
     }
 
     @PostMapping(value="/next", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getNextFrom(@RequestParam("id") Integer id,
                               @RequestParam("userAnswerId") Integer userAnswerId,
-                              @RequestParam("edited") boolean edited) {
-        return super.getNextFrom(id, userAnswerId, edited);
+                              @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
+        return super.getNextFrom(id, userAnswerId, oldUserAnswerId);
     }
 
     @PostMapping(value="/previous", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getPreviousFrom(@RequestParam("id") Integer id,
                                   @RequestParam("userAnswerId") Integer userAnswerId,
-                                  @RequestParam("edited") boolean edited) {
-        return super.getPreviousFrom(id, userAnswerId, edited);
+                                  @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
+        return super.getPreviousFrom(id, userAnswerId, oldUserAnswerId);
     }
 
 
     @PostMapping(value="/last", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getLast(@RequestParam("id") Integer id,
                           @RequestParam("userAnswerId") Integer userAnswerId,
-                          @RequestParam("edited") boolean edited) {
-        return super.getLast(id, userAnswerId, edited);
+                          @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
+        return super.getLast(id, userAnswerId, oldUserAnswerId);
     }
 
 }

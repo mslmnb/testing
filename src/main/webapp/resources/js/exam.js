@@ -14,7 +14,6 @@ function getData(ajaxQuery) {
     var id = $('.question').attr('id');
     var userAnswerId = $('input[name=userAnswerId]:checked').val();
     var oldUserAnswerId = $('#oldUserAnswerId').val() ;
-    var edited;
 
 
     if (userAnswerId==undefined) {
@@ -24,26 +23,17 @@ function getData(ajaxQuery) {
         id = null;
     }
 
-    if (oldUserAnswerId==""&&userAnswerId == null) {
-        edited = false;
-    } else {
-        if (userAnswerId==oldUserAnswerId) {
-            edited = false;
-        } else {
-            edited = true;
-        }
-    }
-
-
+debugger;
     $.ajax({
         type: "POST",
         url: ajaxQuery,
-        data: {'id': id, 'userAnswerId': userAnswerId, 'edited': edited},
+        data: {'id': id, 'userAnswerId': userAnswerId, 'oldUserAnswerId': oldUserAnswerId},
         success: pageDraw
     });
 }
 
 function pageDraw(data) {
+debugger;
     $('.question')
         .html(data.body)
         .attr('id', data.id);
