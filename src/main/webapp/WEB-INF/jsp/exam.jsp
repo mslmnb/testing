@@ -9,7 +9,7 @@
 <div class="jumbotron">
     <div class="container">
         <form>
-            <input id="oldUserAnswerId" hidden>
+            <input id="userOldAnswerId" hidden>
             <h3>
                 <label class="question"> </label><br/>
             </h3>

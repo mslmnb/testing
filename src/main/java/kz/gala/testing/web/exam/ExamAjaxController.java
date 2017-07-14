@@ -26,42 +26,34 @@ public class ExamAjaxController extends AbstractExamController {
         super(service, questionService);
     }
 
-
-    @GetMapping(value="/first", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getFirst1() {
-        ExamTo e = super.getFirst(null, null, null);
-        return e;
-    }
-
-
     @PostMapping(value="/first", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getFirst(@RequestParam("id") Integer id,
+    public ExamTo getFirst(@RequestParam("questionId") Integer id,
                            @RequestParam("userAnswerId") Integer userAnswerId,
-                           @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
-        ExamTo e = super.getFirst(id, userAnswerId, oldUserAnswerId);
+                           @RequestParam("userOldAnswerId") Integer userOldAnswerId) {
+        ExamTo e = super.getFirst(id, userAnswerId, userOldAnswerId);
         return e;
     }
 
     @PostMapping(value="/next", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getNextFrom(@RequestParam("id") Integer id,
+    public ExamTo getNextFrom(@RequestParam("questionId") Integer id,
                               @RequestParam("userAnswerId") Integer userAnswerId,
-                              @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
-        return super.getNextFrom(id, userAnswerId, oldUserAnswerId);
+                              @RequestParam("userOldAnswerId") Integer userOldAnswerId) {
+        return super.getNextFrom(id, userAnswerId, userOldAnswerId);
     }
 
     @PostMapping(value="/previous", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getPreviousFrom(@RequestParam("id") Integer id,
+    public ExamTo getPreviousFrom(@RequestParam("questionId") Integer id,
                                   @RequestParam("userAnswerId") Integer userAnswerId,
-                                  @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
-        return super.getPreviousFrom(id, userAnswerId, oldUserAnswerId);
+                                  @RequestParam("userOldAnswerId") Integer userOldAnswerId) {
+        return super.getPreviousFrom(id, userAnswerId, userOldAnswerId);
     }
 
 
     @PostMapping(value="/last", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getLast(@RequestParam("id") Integer id,
+    public ExamTo getLast(@RequestParam("questionId") Integer id,
                           @RequestParam("userAnswerId") Integer userAnswerId,
-                          @RequestParam("oldUserAnswerId") Integer oldUserAnswerId) {
-        return super.getLast(id, userAnswerId, oldUserAnswerId);
+                          @RequestParam("userOldAnswerId") Integer userOldAnswerId) {
+        return super.getLast(id, userAnswerId, userOldAnswerId);
     }
 
 }

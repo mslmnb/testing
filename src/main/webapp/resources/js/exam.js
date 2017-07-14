@@ -13,7 +13,7 @@ function getData(ajaxQuery) {
 
     var id = $('.question').attr('id');
     var userAnswerId = $('input[name=userAnswerId]:checked').val();
-    var oldUserAnswerId = $('#oldUserAnswerId').val() ;
+    var userOldAnswerId = $('#userOldAnswerId').val() ;
 
 
     if (userAnswerId==undefined) {
@@ -27,7 +27,7 @@ debugger;
     $.ajax({
         type: "POST",
         url: ajaxQuery,
-        data: {'id': id, 'userAnswerId': userAnswerId, 'oldUserAnswerId': oldUserAnswerId},
+        data: {'questionId': id, 'userAnswerId': userAnswerId, 'userOldAnswerId': userOldAnswerId},
         success: pageDraw
     });
 }
@@ -35,10 +35,10 @@ debugger;
 function pageDraw(data) {
 debugger;
     $('.question')
-        .html(data.body)
-        .attr('id', data.id);
+        .html(data.questionBody)
+        .attr('id', data.questionId);
 
-    $('#oldUserAnswerId').val(data.oldUserAnswerId);
+    $('#userOldAnswerId').val(data.userOldAnswerId);
 
 
     var answersBox = $("#answersBox");
@@ -68,7 +68,7 @@ debugger;
 }
 
 function initButtons(data) {
-    if (data.prevId != null) {
+    if (data.prevQuestionId != null) {
         $('#prev').attr('disabled',false);
         $('#first').attr('disabled',false);
     } else {
@@ -76,7 +76,7 @@ function initButtons(data) {
         $('#first').attr('disabled',true);
     }
 
-    if (data.nextId != null) {
+    if (data.nextQuestionId != null) {
         $('#next').attr('disabled',false);
         $('#last').attr('disabled',false);
     } else {
