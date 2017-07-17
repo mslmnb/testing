@@ -6,12 +6,13 @@ import kz.gala.testing.model.Question;
 import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.QuestionService;
 import kz.gala.testing.to.ExamTo;
+import kz.gala.testing.to.QuestionWithUserAnswer;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 abstract public class AbstractExamController {
-    protected final org.slf4j.Logger log = LoggerFactory.getLogger(getClass());
+    private final org.slf4j.Logger log = LoggerFactory.getLogger(getClass());
     private ExamService service;
     private QuestionService questionService;
 
@@ -20,34 +21,35 @@ abstract public class AbstractExamController {
         this.questionService = questionService;
     }
 
-    public ExamTo getFirst(Integer id, Integer userAnswerId, Integer oldUserAnswerId) {
+    public ExamTo getFirst(QuestionWithUserAnswer q) {
         log.info("getFirst");
         int userId = AuthorizedUser.id() ;
-        saveUserAnswer(id, userAnswerId, oldUserAnswerId, userId);
+        saveUserAnswer(q, userId);
         List<Exam> examList =  service.getFirst(userId); // первый и второй вопросы
         int currId = examList.get(0).getQuestionId();
         int nextId = examList.get(1).getQuestionId();
         Question currQuestion = questionService.get(currId);
 
-        ExamTo  res = new ExamTo(currQuestion, currQuestion.getAnswers(), nextId, null, examList.get(0).getUserAnswerId());
-        return res;
+        return new ExamTo(currQuestion, currQuestion.getAnswers(), nextId, null, examList.get(0).getUserAnswerId());
     }
 
-    private void saveUserAnswer(Integer questionId, Integer userAnswerId, Integer oldUserAnswerId, int userId) {
-        if (userAnswerId!=oldUserAnswerId) {
-            log.info("update answer {} for question {} and user {}", userAnswerId, questionId, userId);
-            if (questionId != null && userAnswerId != null) {
+    private void saveUserAnswer(QuestionWithUserAnswer q, int userId) {
+        if (q.isEdited()) {
+            Integer questionId = q.getQuestionId();
+            Integer userAnswerId = q.getUserAnswerId();
+            if (questionId != null && userAnswerId != null) { // questionId == null попали на страницу впервые, userAnswerId == null - пользователь не давал ответ
+                log.info("update answer {} for question {} and user {}", userAnswerId, questionId, userId);
                 Exam exam = new Exam(questionId, userId, null);
                 service.update(exam, userAnswerId, userId);
             }
         }
     }
 
-    public ExamTo getNextFrom(Integer id, Integer userAnswerId, Integer oldUserAnswerId) {
-        log.info("getNextFrom {}", id);
+    public ExamTo getNextFrom(QuestionWithUserAnswer q) {
+        log.info("getNextFrom {}", q.getQuestionId());
         int userId = AuthorizedUser.id() ;
-        saveUserAnswer(id, userAnswerId, oldUserAnswerId, userId);
-        List<Exam> examList = service.getNextFrom(id, userId);
+        saveUserAnswer(q, userId);
+        List<Exam> examList = service.getNextFrom(q.getQuestionId(), userId);
         Integer prevId = examList.get(0).getQuestionId();
         Integer currId = examList.get(1).getQuestionId();
         Integer nextId = (examList.size()==2) ? null : examList.get(2).getQuestionId();
@@ -56,11 +58,11 @@ abstract public class AbstractExamController {
         return new ExamTo(currQuestion, currQuestion.getAnswers(), nextId, prevId, examList.get(1).getUserAnswerId());
     }
 
-    public ExamTo getPreviousFrom(Integer id, Integer userAnswerId, Integer oldUserAnswerId) {
-        log.info("getPreviousFrom {}", id);
+    public ExamTo getPreviousFrom(QuestionWithUserAnswer q) {
+        log.info("getPreviousFrom {}", q.getQuestionId());
         int userId = AuthorizedUser.id() ;
-        saveUserAnswer(id, userAnswerId, oldUserAnswerId, userId);
-        List<Exam> examList = service.getPreviousFrom(id, userId);
+        saveUserAnswer(q, userId);
+        List<Exam> examList = service.getPreviousFrom(q.getQuestionId(), userId);
         Integer nextId = examList.get(0).getQuestionId();
         Integer currId = examList.get(1).getQuestionId();
         Integer prevId = (examList.size()==2) ? null : examList.get(2).getQuestionId();
@@ -69,10 +71,10 @@ abstract public class AbstractExamController {
         return new ExamTo(currQuestion, currQuestion.getAnswers(), nextId, prevId,  examList.get(1).getUserAnswerId());
     }
 
-    public ExamTo getLast(Integer id, Integer userAnswerId, Integer oldUserAnswerId) {
-        log.info("getLast {}", id);
+    public ExamTo getLast(QuestionWithUserAnswer q) {
+        log.info("getLast {}", q.getQuestionId());
         int userId = AuthorizedUser.id() ;
-        saveUserAnswer(id, userAnswerId, oldUserAnswerId, userId);
+        saveUserAnswer(q, userId);
         List<Exam> examList = service.getLast(userId);
         Integer currId = examList.get(0).getQuestionId();
         Integer prevId = examList.get(1).getQuestionId();

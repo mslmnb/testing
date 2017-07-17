@@ -7,7 +7,8 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
- * Created by Mussulmanbekova_GE on 20.06.2017.
+ * WARN  RootClass [RootClass.java:285] HHH000038: Composite-id class does not override equals(): kz.gala.testing.model.ExamPrimaryKey
+ WARN  RootClass [RootClass.java:288] HHH000039: Composite-id class does not override hashCode(): kz.gala.testing.model.ExamPrimaryKey
  */
 @Embeddable
 public class ExamPrimaryKey implements Serializable {

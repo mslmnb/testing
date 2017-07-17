@@ -5,6 +5,7 @@ $(function() {
     $('#last').attr('onclick','getData("' + ajaxUrl + 'last")');
     $('#next').attr('onclick','getData("' + ajaxUrl + 'next")');
     $('#prev').attr('onclick','getData("' + ajaxUrl + 'previous")');
+    debugger;
     getData(ajaxUrl + 'first');
 });
 
