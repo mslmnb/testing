@@ -33,12 +33,12 @@ public class UserServiceImpl implements UserService {
         return checkNotFoundWithId(repository.get(userId), userId);
     }
 
-    public UserReport getUserReport(int userId) {
+    public UserReport getUserReport(int userId) throws NotFoundException {
     User user = get(userId);
     List<Exam> exams = examRepository.getAll(userId);
     int countOfQuestions = exams.size();
     int countOfAnswers = (int) exams.stream()
-            .filter(e->e.getUserAnswerId()==null)
+            .filter(e->e.getUserAnswerId()!=null)
             .count();
     int countOfRightAnswers = (int) exams.stream()
             .filter(e->questionRepository.getRightAnswerId(e.getQuestionId()).equals(e.getUserAnswerId()))

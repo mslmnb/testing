@@ -26,4 +26,17 @@ public class UserReport {
         this.countOfAnswers = countOfAnswers;
         this.countOfRightAnswers = countOfRightAnswers;
     }
+
+    @Override
+    public String toString() {
+        return "UserReport{" +
+                "themeName=" + themeName +
+                ", userName='" + userName + '\'' +
+                ", position='" + userPosition + '\'' +
+                ", department='" + userDepartment + '\'' +
+                ", countOfQuestions='" + countOfQuestions + '\'' +
+                ", countOfAnswers='" + countOfAnswers + '\'' +
+                ", countOfRightAnswers='" + countOfRightAnswers + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package kz.gala.testing.service;
 
+import kz.gala.testing.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,5 +19,12 @@ public class QuestionServiceTest extends AbstractServiceTest {
     @Test
     public void testGet() throws Exception {
         MATCHER.assertEquals(QUESTION1, service.get(QUESTION1_ID));
+    }
+
+    @Test
+    public void testGetNotFound() throws Exception {
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage("Not found entity with id="+(QUESTION1_ID - 1));
+        service.get(QUESTION1_ID - 1);
     }
 }

@@ -4,7 +4,7 @@ import kz.gala.testing.matcher.ModelMatcher;
 import kz.gala.testing.model.Exam;
 import kz.gala.testing.model.ExamPrimaryKey;
 
-import static kz.gala.testing.testdata.QuestionTestData.QUESTION1_ID;
+import static kz.gala.testing.testdata.QuestionTestData.*;
 import static kz.gala.testing.testdata.UserTestData.USER_ID;
 
 /**
