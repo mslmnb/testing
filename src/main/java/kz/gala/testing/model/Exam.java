@@ -3,16 +3,13 @@ package kz.gala.testing.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by Mussulmanbekova_GE on 15.06.2017.
- */
-
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
     @NamedQuery(name = Exam.FIRST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId"),
     @NamedQuery(name = Exam.LAST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId DESC"),
     @NamedQuery(name = Exam.NEXT, query = "SELECT e FROM Exam e WHERE e.id.questionId>=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId "),
     @NamedQuery(name = Exam.PREVIOUS, query = "SELECT e FROM Exam e WHERE e.id.questionId<=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId DESC "),
+    @NamedQuery(name = Exam.ALL, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId")
 })
 
 
@@ -24,6 +21,7 @@ public class Exam implements Serializable{
     public static final String LAST = "Exam.getLast";
     public static final String NEXT = "Exam.getNext";
     public static final String PREVIOUS = "Exam.getPrevious";
+    public static final String ALL = "Exam.getAll";
 
     @Id
     private ExamPrimaryKey id;

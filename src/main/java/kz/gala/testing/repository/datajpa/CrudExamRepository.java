@@ -11,23 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Mussulmanbekova_GE on 15.06.2017.
- */
-
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 public interface CrudExamRepository extends JpaRepository<Exam,Integer>{
-    @Modifying
-    @Query("SELECT FROM Exam e ORDER BY e.questionId LIMIT 2 WHERE e.questionId>=:id")
-    int getNext(@Param("id") int id);
-
-    @Modifying
-    @Query("SELECT FROM Exam e ORDER BY e.questionId DESC LIMIT 2 WHERE e.questionId<=:id")
-    int getPrevious(@Param("id") int id);
-
-
-    List<Exam> findByQuestionIdLessThanEqualOrderByQuestionIdDesc(int id);
-
-    List<Exam> findByQuestionIdMoreThanEqualOrderByQuestionId(int id);
+//    @Modifying
+//    @Query("SELECT FROM Exam e ORDER BY e.questionId LIMIT 2 WHERE e.questionId>=:id")
+//    int getNext(@Param("id") int id);
+//
+//    @Modifying
+//    @Query("SELECT FROM Exam e ORDER BY e.questionId DESC LIMIT 2 WHERE e.questionId<=:id")
+//    int getPrevious(@Param("id") int id);
+//
+//
+//    List<Exam> findByQuestionIdLessThanEqualOrderByQuestionIdDesc(int id);
+//
+//    List<Exam> findByQuestionIdMoreThanEqualOrderByQuestionId(int id);
 
 }

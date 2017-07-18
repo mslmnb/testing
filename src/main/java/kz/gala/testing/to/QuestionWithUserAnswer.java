@@ -1,13 +1,7 @@
 package kz.gala.testing.to;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-
 import java.io.Serializable;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 public class QuestionWithUserAnswer implements Serializable {
     private static final long serialVersionUID = 1L;
 

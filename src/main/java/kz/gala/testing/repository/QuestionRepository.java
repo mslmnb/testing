@@ -13,4 +13,6 @@ public interface QuestionRepository {
 
     Question get (int id);
 
+    Integer getRightAnswerId(int questionId);
+
 }

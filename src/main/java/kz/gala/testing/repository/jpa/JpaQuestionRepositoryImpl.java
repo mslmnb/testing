@@ -29,4 +29,9 @@ public class JpaQuestionRepositoryImpl implements QuestionRepository{
     public Question get(int id) {
         return em.find(Question.class, id);
     }
+
+    @Override
+    public Integer getRightAnswerId(int questionId) {
+        return get(questionId).getRightAnswerId();
+    }
 }

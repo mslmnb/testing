@@ -7,15 +7,11 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by Mussulmanbekova_GE on 03.07.2017.
- */
-
 @Entity
 @Table(name="users")
 public class User extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="theme_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull

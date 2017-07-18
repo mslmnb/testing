@@ -7,12 +7,13 @@ import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.QuestionService;
 import kz.gala.testing.to.ExamTo;
 import kz.gala.testing.to.QuestionWithUserAnswer;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 abstract public class AbstractExamController {
-    private final org.slf4j.Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private ExamService service;
     private QuestionService questionService;
 

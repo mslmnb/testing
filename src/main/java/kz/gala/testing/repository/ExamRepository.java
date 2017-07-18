@@ -3,9 +3,6 @@ package kz.gala.testing.repository;
 import kz.gala.testing.model.Exam;
 import java.util.List;
 
-/**
- * Created by Mussulmanbekova_GE on 14.06.2017.
- */
 public interface ExamRepository {
     // сохранить ответ пользователя
 
@@ -25,4 +22,6 @@ public interface ExamRepository {
     Exam update(Exam exam, int userAnswerId, int userId);
 
     Exam get(int questionId, int userId);
+
+    List<Exam> getAll(int userId);
 }

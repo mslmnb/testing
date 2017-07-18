@@ -12,10 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("ajax/exam")     // завести константу
+@RequestMapping("ajax/exam")
 public class ExamAjaxController extends AbstractExamController {
-    // создать AbstractExamController и наследоваться от него
-    // посмотреть MealAjaxController.createOrUpdate - Spring binding
 
     @Autowired
     public ExamAjaxController(ExamService service, QuestionService questionService) {

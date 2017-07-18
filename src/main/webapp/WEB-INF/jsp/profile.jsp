@@ -1,16 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Mussulmanbekova_GE
-  Date: 11.07.2017
-  Time: 17:27
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Профиль пользователя</title>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
+
 <body>
-    <h2>Профиль пользователя</h2>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>Профиль пользователя</h2>
+    </div>
+</div>
 </body>
 </html>

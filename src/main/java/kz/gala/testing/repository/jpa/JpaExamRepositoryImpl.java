@@ -52,6 +52,13 @@ public class JpaExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
+    public List<Exam> getAll(int userId) {
+        return em.createNamedQuery(Exam.ALL, Exam.class)
+                            .setParameter("userId", userId)
+                            .getResultList();
+    }
+
+    @Override
     public Exam get(int questionId, int userId) {
         return em.find(Exam.class, new ExamPrimaryKey(userId, questionId));
     }
