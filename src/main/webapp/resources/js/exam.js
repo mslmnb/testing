@@ -5,13 +5,15 @@ $(function() {
     $('#last').attr('onclick','getData("' + ajaxUrl + 'last")');
     $('#next').attr('onclick','getData("' + ajaxUrl + 'next")');
     $('#prev').attr('onclick','getData("' + ajaxUrl + 'previous")');
-    debugger;
+    $('#finish').attr('onclick','getData("' + ajaxUrl + 'report")');
+    ajaxUrl+'report'
+
     getData(ajaxUrl + 'first');
 });
 
 
 function getData(ajaxQuery) {
-
+debugger;
     var id = $('.question').attr('id');
     var userAnswerId = $('input[name=userAnswerId]:checked').val();
     var userOldAnswerId = $('#userOldAnswerId').val() ;
@@ -24,7 +26,6 @@ function getData(ajaxQuery) {
         id = null;
     }
 
-debugger;
     $.ajax({
         type: "POST",
         url: ajaxQuery,
@@ -33,39 +34,41 @@ debugger;
     });
 }
 
-function pageDraw(data) {
-debugger;
-    $('.question')
-        .html(data.questionBody)
-        .attr('id', data.questionId);
 
-    $('#userOldAnswerId').val(data.userOldAnswerId);
+function pageDraw(data, beDrawn) {
+    if (data!="") {
+        $('.question')
+            .html(data.questionBody)
+            .attr('id', data.questionId);
 
-
-    var answersBox = $("#answersBox");
-
-    answersBox.empty();
-
-    for (choice in data.answers) {
-
-        var currAnswerId = data.answers[choice].id;
+        $('#userOldAnswerId').val(data.userOldAnswerId);
 
 
-        $("<input type='radio'>")
-            .attr("name",'userAnswerId')
-            .attr("id",currAnswerId)
-            .attr("value",currAnswerId)
-            .attr("checked", data.userAnswerId!=null&&data.userAnswerId==currAnswerId)
-            .appendTo($("<div class='col-sm-1'>").appendTo(answersBox));
+        var answersBox = $("#answersBox");
 
-        $("<label></label>")
-            .attr("for",currAnswerId)
-            .html(data.answers[choice].body)
-            .appendTo(answersBox);
+        answersBox.empty();
 
-        $("<br>").appendTo(answersBox);
+        for (choice in data.answers) {
+
+            var currAnswerId = data.answers[choice].id;
+
+
+            $("<input type='radio'>")
+                .attr("name", 'userAnswerId')
+                .attr("id", currAnswerId)
+                .attr("value", currAnswerId)
+                .attr("checked", data.userAnswerId != null && data.userAnswerId == currAnswerId)
+                .appendTo($("<div class='col-sm-1'>").appendTo(answersBox));
+
+            $("<label></label>")
+                .attr("for", currAnswerId)
+                .html(data.answers[choice].body)
+                .appendTo(answersBox);
+
+            $("<br>").appendTo(answersBox);
+        }
+        initButtons(data);
     }
-    initButtons(data);
 }
 
 function initButtons(data) {

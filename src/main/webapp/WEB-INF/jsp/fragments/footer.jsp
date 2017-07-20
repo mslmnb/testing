@@ -2,6 +2,6 @@
 
 <div class="footer">
     <div class="container">
-        <a href="report">Завершить тестирование</a>
-    </div>
+
+     </div>
 </div>

@@ -20,12 +20,6 @@ public class RootController  {
         return "exam";
     }
 
-    @GetMapping("/report")
-    public String report(ModelMap model) {
-        model.addAttribute("userId", AuthorizedUser.id());
-        return "report";
-    }
-
     @GetMapping("/profile")
     public String profile() {
         return "profile";

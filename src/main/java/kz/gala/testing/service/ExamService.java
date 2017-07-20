@@ -1,6 +1,7 @@
 package kz.gala.testing.service;
 
 import kz.gala.testing.model.Exam;
+import kz.gala.testing.to.ExamReport;
 import kz.gala.testing.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,6 @@ public interface ExamService {
     Exam update(Exam exam, int userAnswerId, int userId) throws NotFoundException;
 
     Integer getRightAnswer(Exam exam);
+
+    ExamReport getExamReport(int userId) throws NotFoundException;
 }

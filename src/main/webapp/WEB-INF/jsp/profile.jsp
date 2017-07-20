@@ -5,9 +5,28 @@
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
+<jsp:useBean id="userReport" scope="request" type="kz.gala.testing.to.UserTo"/>
 <div class="jumbotron">
     <div class="container">
-        <h2>Профиль пользователя</h2>
+        <h3>Профиль пользователя</h3>
+        <br>
+
+        <table class="table">
+            <thead>
+            </thead>
+            <tr>
+                <td>ФИО</td>
+                <td>${userReport.userName}</td>
+            </tr>
+            <tr>
+                <td>Должность</td>
+                <td>${userReport.userPosition}</td>
+            </tr>
+            <tr>
+                <td>Подразделение</td>
+                <td>${userReport.userDepartment}</td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

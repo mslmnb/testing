@@ -21,8 +21,12 @@
         <button id="next">Вперед</button>
         <button id="last">В конец</button>
 
+        <br><br><br>
+        <a href="exam/report"  id="finish">Завершить тестирование</a>
+
     </div>
 </div>
+
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

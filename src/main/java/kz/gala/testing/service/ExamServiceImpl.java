@@ -1,8 +1,12 @@
 package kz.gala.testing.service;
 
 import kz.gala.testing.model.Exam;
+import kz.gala.testing.model.User;
 import kz.gala.testing.repository.ExamRepository;
 import kz.gala.testing.repository.QuestionRepository;
+import kz.gala.testing.repository.UserRepository;
+import kz.gala.testing.to.ExamReport;
+import kz.gala.testing.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +19,13 @@ public class ExamServiceImpl implements ExamService {
 
     private final ExamRepository repository;
     private final QuestionRepository questionRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public ExamServiceImpl(ExamRepository repository, QuestionRepository questionRepository) {
+    public ExamServiceImpl(ExamRepository repository, QuestionRepository questionRepository, UserRepository userRepository) {
         this.repository = repository;
         this.questionRepository = questionRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -60,6 +66,21 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public Exam update(Exam exam, int userAnswerId, int userId) {
         return checkNotFoundWithIds(repository.update(exam, userAnswerId, userId), exam.getUserId(), exam.getQuestionId());
+    }
+
+    @Override
+    public ExamReport getExamReport(int userId) throws NotFoundException {
+        User user = userRepository.get(userId);
+        List<Exam> exams = repository.getAll(userId);
+        int countOfQuestions = exams.size();
+        int countOfAnswers = (int) exams.stream()
+                .filter(e->e.getUserAnswerId()!=null)
+                .count();
+        int countOfRightAnswers = (int) exams.stream()
+                .filter(e->questionRepository.getRightAnswerId(e.getQuestionId()).equals(e.getUserAnswerId()))
+                .count();
+        return new ExamReport(user,countOfQuestions, countOfAnswers, countOfRightAnswers);
+
     }
 
 

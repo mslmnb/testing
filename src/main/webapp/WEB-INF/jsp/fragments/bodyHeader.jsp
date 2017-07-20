@@ -2,7 +2,7 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <a href="profile" class="navbar-brand">ФИО Пользователя</a>
+        <a href="user/profile" class="navbar-brand">ФИО Пользователя</a>
 
         <div class="collapse navbar-collapse">
 
