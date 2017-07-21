@@ -8,4 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CrudUserRepository extends JpaRepository<User, Integer>{
     @Override
     User findOne(Integer id);
+
+    @Transactional
+    @Override
+    User save(User user);
 }

@@ -17,4 +17,9 @@ public class DataJpaUserRepositoryImpl implements UserRepository {
     public User get(int id) {
         return crudUserRepository.findOne(id);
     }
+
+    @Override
+    public User save(User user) {
+        return crudUserRepository.save(user);
+    }
 }
