@@ -22,6 +22,8 @@ CREATE TABLE users
   department VARCHAR NOT NULL,
   login      VARCHAR NOT NULL,
   password   VARCHAR NOT NULL,
+  complete   BOOLEAN DEFAULT FALSE NOT NULL,
+  role       VARCHAR NOT NULL,
   FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX users_unique_login_idx ON users (login);
@@ -32,7 +34,7 @@ CREATE TABLE questions
   id                INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   theme_id          INTEGER NOT NULL,
   body              VARCHAR NOT NULL,
-  right_answer_id   INTEGER,
+  correct_answer_id   INTEGER,
   FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 

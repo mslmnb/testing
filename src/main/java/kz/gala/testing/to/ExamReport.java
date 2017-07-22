@@ -15,16 +15,16 @@ public class ExamReport {
     private final String userDepartment;
     private final Integer countOfQuestions;
     private final Integer countOfAnswers;
-    private final Integer countOfRightAnswers;
+    private final Integer countOfCorrectAnswers;
 
-    public ExamReport(User user, Integer countOfQuestions, Integer countOfAnswers, Integer countOfRightAnswers) {
+    public ExamReport(User user, Integer countOfQuestions, Integer countOfAnswers, Integer countOfCorrectAnswers) {
         this.themeName = user.getTheme().getName();
         this.userName = user.getName();
         this.userPosition = user.getPosition();
         this.userDepartment = user.getDepartment();
         this.countOfQuestions = countOfQuestions;
         this.countOfAnswers = countOfAnswers;
-        this.countOfRightAnswers = countOfRightAnswers;
+        this.countOfCorrectAnswers = countOfCorrectAnswers;
     }
 
     public String getThemeName() {
@@ -51,16 +51,16 @@ public class ExamReport {
         return countOfAnswers;
     }
 
-    public Integer getCountOfRightAnswers() {
-        return countOfRightAnswers;
+    public Integer getCountOfCorrectAnswers() {
+        return countOfCorrectAnswers;
     }
 
-    public double getProcentOfRightAnswer() {
-        return 100.00d*countOfRightAnswers/countOfQuestions;
+    public double getProcentOfCorrectAnswers() {
+        return 100.00d*countOfCorrectAnswers/countOfQuestions;
     }
 
     public String getMark () {
-        if (getProcentOfRightAnswer()<75d) {
+        if (getProcentOfCorrectAnswers()<75d) {
             return "неудовлетворительно";
         } else {
             return "удовлетворительно";
@@ -77,7 +77,7 @@ public class ExamReport {
                 ", department='" + userDepartment + '\'' +
                 ", countOfQuestions='" + countOfQuestions + '\'' +
                 ", countOfAnswers='" + countOfAnswers + '\'' +
-                ", countOfRightAnswers='" + countOfRightAnswers + '\'' +
+                ", countOfCorrectAnswers='" + countOfCorrectAnswers + '\'' +
                 '}';
     }
 }

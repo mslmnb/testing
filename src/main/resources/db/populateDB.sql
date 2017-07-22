@@ -18,21 +18,21 @@ INSERT INTO themes (name) VALUES
   ('тема8'),     --100 008
   ('тема9');     --100 009
 
-INSERT INTO users (name, theme_id, position, department, login,  password) VALUES
-  ('Сергеев И.И.',100000, 'инженер 1 кат', 'секретный отдел', 'User', 'UserPassword'),      -- 100 010
-  ('Антонов И.И.',100000, 'инженер 2 кат', 'админ отдел', 'Admin', 'AdminPassword'),    -- 100 011
-  ('Петров И.И.',100001, 'инженер 3 кат', 'отдел П', 'User12', 'UserPassword'),      -- 100 012
-  ('Васильев И.И.',100001, 'инженер 4 кат', 'отдел В', 'User13', 'UserPassword'),      -- 100 013
-  ('Петров И.И.',100001, 'техник 1 раз', 'отдел П', 'User14', 'UserPassword'),      -- 100 014
-  ('Павлов И.И.', 100002, 'техник 2 раз', 'отдел П', 'User15', 'UserPassword'),      -- 100 015
-  ('Матвеев И.И.', 100002, 'техник 3 раз', 'отдел М', 'User16', 'UserPassword'),      -- 100 016
-  ('Александров И.И.', 100002, 'технолог 1 кат', 'отдел А', 'User17', 'UserPassword'),      -- 100 017
-  ('Васечкин И.И.', 100002, 'технолог 2 кат', 'отдел В', 'User18', 'UserPassword'),      -- 100 018
-  ('Григорьев И.И.', 100002, 'технолог 3 кат', 'отдел Г', 'User19', 'UserPassword');      -- 100 019
+INSERT INTO users (name, theme_id, position, department, login,  password, complete, role) VALUES
+  ('Сергеев И.И.',100000, 'инженер 1 кат', 'секретный отдел', 'User', 'UserPassword', FALSE, 'USER'),      -- 100 010
+  ('Антонов И.И.',100000, 'инженер 2 кат', 'админ отдел', 'Admin', 'AdminPassword', FALSE, 'ADMIN'),    -- 100 011
+  ('Петров И.И.',100001, 'инженер 3 кат', 'отдел П', 'User12', 'UserPassword', FALSE, 'USER'),      -- 100 012
+  ('Васильев И.И.',100001, 'инженер 4 кат', 'отдел В', 'User13', 'UserPassword', FALSE, 'USER'),      -- 100 013
+  ('Петров И.И.',100001, 'техник 1 раз', 'отдел П', 'User14', 'UserPassword', FALSE, 'USER'),      -- 100 014
+  ('Павлов И.И.', 100002, 'техник 2 раз', 'отдел П', 'User15', 'UserPassword', FALSE, 'USER'),      -- 100 015
+  ('Матвеев И.И.', 100002, 'техник 3 раз', 'отдел М', 'User16', 'UserPassword', FALSE, 'USER'),      -- 100 016
+  ('Александров И.И.', 100002, 'технолог 1 кат', 'отдел А', 'User17', 'UserPassword', FALSE, 'USER'),      -- 100 017
+  ('Васечкин И.И.', 100002, 'технолог 2 кат', 'отдел В', 'User18', 'UserPassword', FALSE, 'USER'),      -- 100 018
+  ('Григорьев И.И.', 100002, 'технолог 3 кат', 'отдел Г', 'User19', 'UserPassword', FALSE, 'USER');      -- 100 019
 
 
 -- вопросы 100002 - 100010
-INSERT INTO questions (theme_id, body, right_answer_id  ) VALUES
+INSERT INTO questions (theme_id, body, correct_answer_id  ) VALUES
   (100000,'Земля по форме похожа на', 100041),  --100 020
   (100000,'Колобок был съеден', 100045),        --100 021
   (100000,'Дети любят', 100046),                --100 022

@@ -31,7 +31,7 @@ public class JpaQuestionRepositoryImpl implements QuestionRepository{
     }
 
     @Override
-    public Integer getRightAnswerId(int questionId) {
-        return get(questionId).getRightAnswerId();
+    public Integer getCorrectAnswerId(int questionId) {
+        return get(questionId).getCorrectAnswerId();
     }
 }

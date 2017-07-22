@@ -64,15 +64,15 @@ public class QuestionTestData {
     public static final Answer ANSWER27 = new Answer(ANSWER1_ID + 26, QUESTION9, "фрукт");
 
     static {
-        QUESTION1.setRightAnswerId(ANSWER1_ID + 1);
-        QUESTION2.setRightAnswerId(ANSWER1_ID + 5);
-        QUESTION3.setRightAnswerId(ANSWER1_ID + 6);
-        QUESTION4.setRightAnswerId(ANSWER1_ID + 11);
-        QUESTION5.setRightAnswerId(ANSWER1_ID + 12);
-        QUESTION6.setRightAnswerId(ANSWER1_ID + 16);
-        QUESTION7.setRightAnswerId(ANSWER1_ID + 18);
-        QUESTION8.setRightAnswerId(ANSWER1_ID + 21);
-        QUESTION9.setRightAnswerId(ANSWER1_ID + 26);
+        QUESTION1.setCorrectAnswerId(ANSWER1_ID + 1);
+        QUESTION2.setCorrectAnswerId(ANSWER1_ID + 5);
+        QUESTION3.setCorrectAnswerId(ANSWER1_ID + 6);
+        QUESTION4.setCorrectAnswerId(ANSWER1_ID + 11);
+        QUESTION5.setCorrectAnswerId(ANSWER1_ID + 12);
+        QUESTION6.setCorrectAnswerId(ANSWER1_ID + 16);
+        QUESTION7.setCorrectAnswerId(ANSWER1_ID + 18);
+        QUESTION8.setCorrectAnswerId(ANSWER1_ID + 21);
+        QUESTION9.setCorrectAnswerId(ANSWER1_ID + 26);
     }
 
     private QuestionTestData() {

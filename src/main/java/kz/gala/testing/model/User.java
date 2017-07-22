@@ -38,7 +38,18 @@ public class User extends BaseEntity {
     @Length(min=5)
     private String password;
 
-    public User(Integer id, Theme theme, String name, String position, String department, String login, String password) {
+    @Column(name = "complete", nullable = false)
+    @NotNull
+    private boolean complete;
+
+    @Column(name = "role", nullable = false)
+    @NotNull
+    private String role;
+
+    public User() {
+    }
+
+    public User(Integer id, Theme theme, String name, String position, String department, String login, String password, Boolean complete, String role) {
         super(id);
         this.theme = theme;
         this.name = name;
@@ -46,6 +57,8 @@ public class User extends BaseEntity {
         this.department = department;
         this.login = login;
         this.password = password;
+        this.complete = complete;
+        this.role = role;
     }
 
     public Theme getTheme() {
@@ -96,7 +109,20 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public User() {
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(Boolean complete) {
+        this.complete = complete;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -107,7 +133,8 @@ public class User extends BaseEntity {
                 ", position='" + position + '\'' +
                 ", department='" + department + '\'' +
                 ", login='" + login + '\'' +
-//                ", roles=" + roles +
+                ", complete=" + complete +
+                ", role=" + role +
                 '}';
     }
 }

@@ -50,8 +50,8 @@
                 <td>${userReport.themeName}</td>
                 <td>${userReport.countOfQuestions}</td>
                 <td>${userReport.countOfAnswers}</td>
-                <td>${userReport.countOfRightAnswers}</td>
-                <td><fmt:formatNumber value="${userReport.procentOfRightAnswer}" pattern="0.0"/></td>
+                <td>${userReport.countOfCorrectAnswers}</td>
+                <td><fmt:formatNumber value="${userReport.procentOfCorrectAnswers}" pattern="0.0"/></td>
             </tr>
         </table>
         <br>

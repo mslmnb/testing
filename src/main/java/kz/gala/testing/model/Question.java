@@ -1,7 +1,5 @@
 package kz.gala.testing.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -27,9 +25,9 @@ public class Question extends BaseEntity{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
     private List<Answer> answers;
 
-    @Column(name="right_answer_id", nullable = false)
+    @Column(name="correct_answer_id", nullable = false)
     @NotNull
-    private Integer rightAnswerId;                        // не отдавать на UI
+    private Integer correctAnswerId;                        // не отдавать на UI
 
     public Question() {
     }
@@ -56,12 +54,12 @@ public class Question extends BaseEntity{
         this.answers = answers;
     }
 
-    public Integer getRightAnswerId() {
-        return rightAnswerId;
+    public Integer getCorrectAnswerId() {
+        return correctAnswerId;
     }
 
-    public void setRightAnswerId(Integer rightAnswerId) {
-        this.rightAnswerId = rightAnswerId;
+    public void setCorrectAnswerId(Integer correctAnswerId) {
+        this.correctAnswerId = correctAnswerId;
     }
 
     @Override
@@ -69,7 +67,7 @@ public class Question extends BaseEntity{
         return "Question{" +
                 "themeId=" + theme.getId() +
                 ", body='" + body + '\'' +
-                ", rightAnswerId=" + rightAnswerId +
+                ", correctAnswerId=" + correctAnswerId +
                 '}';
     }
 }

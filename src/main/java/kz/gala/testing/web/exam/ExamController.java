@@ -18,6 +18,18 @@ public class ExamController extends AbstractExamController{
         super(service, questionService);
     }
 
+
+    @GetMapping
+    public String exam(Model model) {
+        if (super.isComplete(AuthorizedUser.id())) {
+            model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id()));
+            return "report";
+        } else {
+            return "exam";
+        }
+    }
+
+
     @GetMapping(value="/report")
     public String getUserReport(Model model) {
         model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id()));

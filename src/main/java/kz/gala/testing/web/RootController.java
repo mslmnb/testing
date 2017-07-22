@@ -15,11 +15,6 @@ public class RootController  {
         return "index";
     }
 
-    @GetMapping("/exam")
-    public String exam() {
-        return "exam";
-    }
-
     @GetMapping("/profile")
     public String profile() {
         return "profile";

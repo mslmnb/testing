@@ -24,4 +24,5 @@ public interface ExamRepository {
     Exam get(int questionId, int userId);
 
     List<Exam> getAll(int userId);
+
 }

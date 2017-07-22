@@ -18,7 +18,6 @@ abstract public class AbstractExamController {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private ExamService service;
     private QuestionService questionService;
-    private UserService userService;
 
     public AbstractExamController(ExamService service, QuestionService questionService) {
         this.service = service;
@@ -78,9 +77,13 @@ abstract public class AbstractExamController {
         List<Exam> examList = service.getLast(userId);
         Integer currId = examList.get(0).getQuestionId();
         Integer prevId = examList.get(1).getQuestionId();
-        Question currQuestion = questionService.get(examList.get(0).getQuestionId());
+        Question currQuestion = questionService.get(currId);
 
         return new ExamTo(currQuestion, currQuestion.getAnswers(), null, prevId, examList.get(0).getUserAnswerId());
+    }
+
+    public boolean isComplete(int userId) {
+        return service.isComplete(userId);
     }
 
     public ExamReport getExamReport(int userId) {

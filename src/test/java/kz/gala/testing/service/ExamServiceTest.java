@@ -64,22 +64,26 @@ public class ExamServiceTest extends AbstractServiceTest {
 
         int questionId = EXAM1.getQuestionId();
         int userId = EXAM1.getUserId() + 1;
-        int answerId = questionService.get(questionId).getRightAnswerId();
+        int answerId = questionService.get(questionId).getCorrectAnswerId();
 
         thrown.expect(NotFoundException.class);
         thrown.expectMessage("Not found entity with id=[" +userId + ", " + questionId + "]");
         service.update(new Exam(questionId, userId, null), answerId, userId);
     }
 
-
     @Test
     public void testUpdate() throws Exception {
         int questionId = EXAM1.getQuestionId();
         int userId = EXAM1.getUserId();
-        int answerId = questionService.get(questionId).getRightAnswerId();
+        int answerId = questionService.get(questionId).getCorrectAnswerId();
         service.update(EXAM1, answerId, userId);
         EXAM1.setUserAnswerId(answerId);
         MATCHER.assertEquals(EXAM1, service.get(questionId,userId));
+    }
+
+    @Test
+    public void testGetCorrectAnswer() {
+        MATCHER_REPORT.assertEquals(EXAM_REPORT, service.getExamReport(USER_ID));
     }
 
 }

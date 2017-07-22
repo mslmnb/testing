@@ -10,6 +10,7 @@ import kz.gala.testing.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithId;
 import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithIds;
 
 import java.util.List;
@@ -59,27 +60,30 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Integer getRightAnswer(Exam exam) {
-        return questionRepository.get(exam.getQuestionId()).getRightAnswerId();
-    }
-
-    @Override
     public Exam update(Exam exam, int userAnswerId, int userId) {
         return checkNotFoundWithIds(repository.update(exam, userAnswerId, userId), exam.getUserId(), exam.getQuestionId());
     }
 
     @Override
+    public boolean isComplete(int userId) throws NotFoundException{
+        User user = checkNotFoundWithId(userRepository.get(userId), userId);
+        return user.isComplete();
+    }
+
+    @Override
     public ExamReport getExamReport(int userId) throws NotFoundException {
-        User user = userRepository.get(userId);
+        User user = checkNotFoundWithId(userRepository.get(userId), userId);
+        user.setComplete(true);
+        userRepository.save(user);
         List<Exam> exams = repository.getAll(userId);
         int countOfQuestions = exams.size();
         int countOfAnswers = (int) exams.stream()
                 .filter(e->e.getUserAnswerId()!=null)
                 .count();
-        int countOfRightAnswers = (int) exams.stream()
-                .filter(e->questionRepository.getRightAnswerId(e.getQuestionId()).equals(e.getUserAnswerId()))
+        int countOfCorrectAnswers = (int) exams.stream()
+                .filter(e->questionRepository.getCorrectAnswerId(e.getQuestionId()).equals(e.getUserAnswerId()))
                 .count();
-        return new ExamReport(user,countOfQuestions, countOfAnswers, countOfRightAnswers);
+        return new ExamReport(user,countOfQuestions, countOfAnswers, countOfCorrectAnswers);
 
     }
 
