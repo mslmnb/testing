@@ -5,7 +5,9 @@ import kz.gala.testing.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static kz.gala.testing.testdata.ExamTestData.*;
 import static kz.gala.testing.testdata.UserTestData.USER_ID;
@@ -60,6 +62,11 @@ public class ExamServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void testGetAll() {
+        MATCHER.assertCollectionEquals(Arrays.asList(EXAM1, EXAM2, EXAM3, EXAM4, EXAM5, EXAM6, EXAM7, EXAM8, EXAM9), service.getAll(USER_ID));
+    }
+
+    @Test
     public void testUpdateNotFound() {
 
         int questionId = EXAM1.getQuestionId();
@@ -68,7 +75,7 @@ public class ExamServiceTest extends AbstractServiceTest {
 
         thrown.expect(NotFoundException.class);
         thrown.expectMessage("Not found entity with id=[" +userId + ", " + questionId + "]");
-        service.update(new Exam(questionId, userId, null), answerId, userId);
+        service.update(new Exam(userId, questionId, null), answerId, userId);
     }
 
     @Test
@@ -82,8 +89,21 @@ public class ExamServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testGetCorrectAnswer() {
+    public void testGetExamReport() {
         MATCHER_REPORT.assertEquals(EXAM_REPORT, service.getExamReport(USER_ID));
+    }
+
+    @Test
+    public void testDelete() {
+        service.delete(USER_ID);
+        MATCHER.assertCollectionEquals(new ArrayList<Exam>(), service.getAll(USER_ID));
+    }
+
+    @Test
+    public void testInsert() {
+        service.delete(USER_ID);
+        service.insert(USER_ID);
+        MATCHER.assertCollectionEquals(Arrays.asList(EXAM1, EXAM2, EXAM3, EXAM4, EXAM5, EXAM6, EXAM7, EXAM8, EXAM9), service.getAll(USER_ID));
     }
 
 }

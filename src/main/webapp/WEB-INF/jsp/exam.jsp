@@ -16,13 +16,21 @@
             <div id="answersBox">
             </div>
         </form>
-        <button id="first">В начало</button>
-        <button id="prev">Назад</button>
-        <button id="next">Вперед</button>
-        <button id="last">В конец</button>
+        <button class="btn btn-primary" type="button" id="first">
+            <span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" type="button" id="prev">
+            <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" type="button" id="next">
+            <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" type="button" id="last">
+            <span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+        </button>
 
         <br><br><br>
-        <a href="exam/report"  id="finish">Завершить тестирование</a>
+        <a class="btn btn-info" href="exam/report"  id="finish">Завершить тестирование</a>
 
     </div>
 </div>

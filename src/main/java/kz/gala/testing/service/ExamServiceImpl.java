@@ -87,5 +87,13 @@ public class ExamServiceImpl implements ExamService {
 
     }
 
+    @Override
+    public void insert(int userId) {
+        repository.insert(userId, userRepository.get(userId).getTheme().getId());
+    }
 
+    @Override
+    public void delete(int userId) {
+        repository.delete(userId);
+    }
 }

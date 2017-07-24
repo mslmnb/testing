@@ -9,7 +9,7 @@ import java.io.Serializable;
     @NamedQuery(name = Exam.LAST, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId DESC"),
     @NamedQuery(name = Exam.NEXT, query = "SELECT e FROM Exam e WHERE e.id.questionId>=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId "),
     @NamedQuery(name = Exam.PREVIOUS, query = "SELECT e FROM Exam e WHERE e.id.questionId<=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId DESC "),
-    @NamedQuery(name = Exam.ALL, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId")
+    @NamedQuery(name = Exam.ALL, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId")
 })
 
 
@@ -42,7 +42,7 @@ public class Exam implements Serializable{
         this.userAnswerId = userAnswerId;
     }
 
-    public Exam(Integer questionId, Integer userId, Integer userAnswerId) {
+    public Exam(Integer userId, Integer questionId, Integer userAnswerId) {
         this(new ExamPrimaryKey(userId, questionId), userAnswerId);
     }
 

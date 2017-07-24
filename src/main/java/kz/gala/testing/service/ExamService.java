@@ -20,4 +20,8 @@ public interface ExamService {
 
     ExamReport getExamReport(int userId) throws NotFoundException;
     boolean isComplete(int userId) throws NotFoundException;
+
+    void insert(int userId);
+
+    void delete(int userId);
 }

@@ -7,7 +7,7 @@ DELETE FROM themes;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO themes (name) VALUES
-  ('тема0'),     --100 000
+  ('Общий кругозор'),     --100 000
   ('тема1'),     --100 001
   ('тема2'),     --100 002
   ('тема3'),     --100 003

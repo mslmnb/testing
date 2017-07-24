@@ -25,4 +25,8 @@ public interface ExamRepository {
 
     List<Exam> getAll(int userId);
 
+    int insert(int userId, int themeId);
+
+    int delete(int userId);
+
 }

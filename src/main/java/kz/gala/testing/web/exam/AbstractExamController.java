@@ -1,11 +1,9 @@
 package kz.gala.testing.web.exam;
 
-import kz.gala.testing.AuthorizedUser;
 import kz.gala.testing.model.Exam;
 import kz.gala.testing.model.Question;
 import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.QuestionService;
-import kz.gala.testing.service.UserService;
 import kz.gala.testing.to.ExamReport;
 import kz.gala.testing.to.ExamTo;
 import kz.gala.testing.to.QuestionWithUserAnswer;
@@ -41,7 +39,7 @@ abstract public class AbstractExamController {
             Integer userAnswerId = q.getUserAnswerId();
             if (questionId != null && userAnswerId != null) { // questionId == null попали на страницу впервые, userAnswerId == null - пользователь не давал ответ
                 log.info("update answer {} for question {} and user {}", userAnswerId, questionId, userId);
-                Exam exam = new Exam(questionId, userId, null);
+                Exam exam = new Exam(userId, questionId, null);
                 service.update(exam, userAnswerId, userId);
             }
         }

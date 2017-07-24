@@ -7,15 +7,27 @@
     <display-name>Testing</display-name>
 
     <!--<servlet>-->
-        <!--<servlet-name>examServlet</servlet-name>  -->
-        <!--<servlet-class>kz.gala.testing.web.ExamServlet</servlet-class>-->
-        <!--<load-on-startup>0</load-on-startup>-->
+    <!--<servlet-name>examServlet</servlet-name>  -->
+    <!--<servlet-class>kz.gala.testing.web.ExamServlet</servlet-class>-->
+    <!--<load-on-startup>0</load-on-startup>-->
     <!--</servlet>-->
     <!---->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>examServlet</servlet-name>-->
-        <!--<url-pattern>/exam</url-pattern>-->
+    <!--<servlet-name>examServlet</servlet-name>-->
+    <!--<url-pattern>/exam</url-pattern>-->
     <!--</servlet-mapping>-->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/spring-app.xml
+            classpath:spring/spring-db.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
@@ -32,17 +44,6 @@
     </servlet-mapping>
 
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:spring/spring-app.xml
-            classpath:spring/spring-db.xml
-        </param-value>
-    </context-param>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
     <filter>
         <filter-name>encodingFilter</filter-name>

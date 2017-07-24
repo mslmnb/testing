@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
+//@Repository
 @Transactional(readOnly = true)
 public class JpaExamRepositoryImpl implements ExamRepository {
 
@@ -72,4 +72,27 @@ public class JpaExamRepositoryImpl implements ExamRepository {
         return  em.merge(new Exam(exam.getId(), userAnswerId));
     }
 
+    @Override
+    @Transactional
+    public int insert(int userId, int theneId) {
+        // в User пропистать поле Set<Queries, null>
+        // тогда при добавлении записи User будут добавлятся новые записи в Exam
+        //em.createQuery("INSERT INTO Exam e (e.id.userId, e.id.questionId, e.userAnswerId) SELECT 100011, q.id, null FROM Question q").executeUpdate();
+       // em.createQuery("INSERT INTO Exam e (userId, questionId, userAnswerId) values (100011, 100020, null )").executeUpdate();
+
+       // em.createQuery("INSERT INTO Exam (user_Id, question_Id, user_answer_id) SELECT 100011, q.id, null FROM Questions q").executeUpdate();
+// INSERT INTO Exam (user_Id, question_Id, user_answer_id) SELECT 100011, q.id, null FROM Questions q
+
+//        em.getTransaction().begin();
+//        em.persist(model);
+//        em.getTransaction().commit();
+
+        //@MapsId("idProducto")
+        return 0;
+    }
+
+    @Override
+    public int delete(int userId) {
+        return 0;
+    }
 }

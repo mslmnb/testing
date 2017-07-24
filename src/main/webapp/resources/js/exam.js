@@ -6,14 +6,13 @@ $(function() {
     $('#next').attr('onclick','getData("' + ajaxUrl + 'next")');
     $('#prev').attr('onclick','getData("' + ajaxUrl + 'previous")');
     $('#finish').attr('onclick','getData("' + ajaxUrl + 'report")');
-    ajaxUrl+'report'
 
     getData(ajaxUrl + 'first');
 });
 
 
 function getData(ajaxQuery) {
-debugger;
+
     var id = $('.question').attr('id');
     var userAnswerId = $('input[name=userAnswerId]:checked').val();
     var userOldAnswerId = $('#userOldAnswerId').val() ;
@@ -35,7 +34,7 @@ debugger;
 }
 
 
-function pageDraw(data, beDrawn) {
+function pageDraw(data) {
     if (data!="") {
         $('.question')
             .html(data.questionBody)
