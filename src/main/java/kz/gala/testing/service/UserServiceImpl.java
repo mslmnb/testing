@@ -36,4 +36,23 @@ public class UserServiceImpl implements UserService {
         user.setName(userTo.getName());
         return checkNotFoundWithId(repository.save(user), userId);
     }
+
+    @Override
+    public User updateWithNoComplete(UserTo userTo, int userId) throws NotFoundException {
+        if (userTo.getId()!=userId) {
+            // завести класс исключения AccessException
+            throw new NotFoundException("Can't update entity with id="+ userId);
+        }
+        User user = get(userId);
+        user.setDepartment(userTo.getDepartment());
+        user.setPosition(userTo.getPosition());
+        user.setName(userTo.getName());
+        user.setComplete(false);
+        return checkNotFoundWithId(save(user), userId);
+    }
+
+    @Override
+    public User save(User user) {
+        return repository.save(user);
+    }
 }

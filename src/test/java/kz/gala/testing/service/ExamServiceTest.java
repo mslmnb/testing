@@ -2,12 +2,12 @@ package kz.gala.testing.service;
 
 import kz.gala.testing.model.Exam;
 import kz.gala.testing.util.exception.NotFoundException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static kz.gala.testing.testdata.ExamTestData.*;
 import static kz.gala.testing.testdata.UserTestData.USER_ID;
@@ -106,4 +106,8 @@ public class ExamServiceTest extends AbstractServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(EXAM1, EXAM2, EXAM3, EXAM4, EXAM5, EXAM6, EXAM7, EXAM8, EXAM9), service.getAll(USER_ID));
     }
 
+    @Test
+    public void testIsComplete() {
+        Assert.assertEquals(false, service.isComplete(USER_ID));
+    }
 }

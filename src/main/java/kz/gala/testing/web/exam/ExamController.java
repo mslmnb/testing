@@ -23,7 +23,7 @@ public class ExamController extends AbstractExamController{
     public String exam(Model model) {
         if (super.isComplete(AuthorizedUser.id())) {
             model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id()));
-            return "report";
+            return "redirect:/";
         } else {
             return "exam";
         }

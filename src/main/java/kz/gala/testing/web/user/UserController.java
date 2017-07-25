@@ -2,6 +2,7 @@ package kz.gala.testing.web.user;
 
 import kz.gala.testing.AuthorizedUser;
 import kz.gala.testing.model.User;
+import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.UserService;
 import kz.gala.testing.to.UserTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController extends AbstractUserController {
 
     @Autowired
-    public UserController(UserService service) {
-        super(service);
+    public UserController(UserService service, ExamService examService) {
+        super(service, examService);
     }
 
     @GetMapping(value = "/profile")
@@ -36,8 +37,9 @@ public class UserController extends AbstractUserController {
             @Param("position") String position,
             @Param("department") String department) {
         UserTo userTo = new UserTo(id, name, position, department);
-        super.update(userTo, AuthorizedUser.id());
-        return "exam";
+        super.updateWithNoComplete(userTo, AuthorizedUser.id());
+        super.examStart( AuthorizedUser.id());
+        return "redirect:/exam";
 
     }
 }

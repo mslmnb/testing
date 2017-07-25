@@ -31,8 +31,8 @@
                     <td><input type="text" name="department" value="${userTo.department}"></td>
                 </tr>
             </table>
-            <button type="submit">Сохранить</button>
-            <button onclick="window.history.back()">Отмена</button>
+            <button  class="btn btn-info" type="submit">Сохранить и продолжить</button>
+            <button  class="btn btn-info" onclick="window.history.back()">Отмена</button>
         </form>
     </div>
 </div>

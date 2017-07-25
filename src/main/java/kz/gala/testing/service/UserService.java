@@ -8,4 +8,6 @@ import kz.gala.testing.util.exception.NotFoundException;
 public interface UserService {
     User get(int id) throws NotFoundException;
     User update(UserTo userTo, int userId)throws NotFoundException;
+    User save(User user);
+    User updateWithNoComplete(UserTo userTo, int userId) throws NotFoundException;
 }
