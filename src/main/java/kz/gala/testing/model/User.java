@@ -1,11 +1,13 @@
 package kz.gala.testing.model;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -29,7 +31,7 @@ public class User extends BaseEntity {
     @NotNull
     private String department;
 
-    @Column(name="login", nullable = false)
+    @Column(name="login", nullable = false, unique = true)
     @NotNull
     private String login;
 
@@ -42,14 +44,15 @@ public class User extends BaseEntity {
     @NotNull
     private boolean complete;
 
-    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     @NotNull
-    private String role;
+    private Role role;
 
     public User() {
     }
 
-    public User(Integer id, Theme theme, String name, String position, String department, String login, String password, Boolean complete, String role) {
+    public User(Integer id, Theme theme, String name, String position, String department, String login, String password, Boolean complete, Role role) {
         super(id);
         this.theme = theme;
         this.name = name;
@@ -117,11 +120,11 @@ public class User extends BaseEntity {
         this.complete = complete;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

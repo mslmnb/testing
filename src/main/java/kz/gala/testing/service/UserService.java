@@ -10,4 +10,6 @@ public interface UserService {
     User update(UserTo userTo, int userId)throws NotFoundException;
     User save(User user);
     User updateWithNoComplete(UserTo userTo, int userId) throws NotFoundException;
+
+    User getByLogin(String login) throws NotFoundException;
 }

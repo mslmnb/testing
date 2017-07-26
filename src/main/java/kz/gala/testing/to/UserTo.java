@@ -2,7 +2,11 @@ package kz.gala.testing.to;
 
 import kz.gala.testing.model.User;
 
-public class UserTo {
+import java.io.Serializable;
+
+public class UserTo implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
     private String name;
     private String position;
@@ -52,5 +56,15 @@ public class UserTo {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "UserTo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                ", department='" + department + '\'' +
+                '}';
     }
 }

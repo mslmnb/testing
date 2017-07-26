@@ -1,6 +1,7 @@
 package kz.gala.testing.web.user;
 
 import kz.gala.testing.AuthorizedUser;
+import kz.gala.testing.model.Role;
 import kz.gala.testing.model.User;
 import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.UserService;
@@ -26,6 +27,9 @@ public class UserController extends AbstractUserController {
     @GetMapping(value = "/profile")
     public String getProfile(Model model) {
         User user = super.get(AuthorizedUser.id());
+        if (Role.ROLE_ADMIN.equals(user.getRole())) {
+            return "redirect:/admin/themes";
+        }
         UserTo userTo = new UserTo(user);
         model.addAttribute("userTo", userTo);
         return "profile";

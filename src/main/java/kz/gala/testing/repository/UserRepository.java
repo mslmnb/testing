@@ -6,4 +6,6 @@ public interface UserRepository {
     // null if not found
     User get(int id);
     User save(User user);
+
+    User getByLogin(String login);
 }

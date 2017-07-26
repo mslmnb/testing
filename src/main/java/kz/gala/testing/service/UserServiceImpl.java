@@ -1,16 +1,22 @@
 package kz.gala.testing.service;
 
+import kz.gala.testing.AuthorizedUser;
 import kz.gala.testing.model.User;
 import kz.gala.testing.repository.UserRepository;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import static kz.gala.testing.util.ValidationUtil.checkNotFound;
 import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository repository;
 
@@ -54,5 +60,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return repository.save(user);
+    }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String login) throws UsernameNotFoundException {
+        User u = repository.getByLogin(login.toLowerCase());
+        if (u == null) {
+            throw new UsernameNotFoundException("User " + login + " is not found");
+        }
+        return new AuthorizedUser(u);
+    }
+
+    @Override
+    public User getByLogin(String login) throws NotFoundException {
+        Assert.notNull(login,"login must not be null");
+        User u = repository.getByLogin(login);
+        return checkNotFound(u,"login=" + login);
     }
 }

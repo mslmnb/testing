@@ -12,7 +12,12 @@ public class RootController  {
 
     @GetMapping("/")
     public String root() {
-        return "index";
+        return "redirect:user/profile";
+    }
+
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
 //    @GetMapping("/profile")

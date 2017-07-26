@@ -92,4 +92,9 @@ public class UserServiceTest extends AbstractServiceTest {
         MATCHER.assertEquals(USER,service.save(USER));
 
     }
+
+    @Test
+    public void testGetByLogin() {
+        MATCHER.assertEquals(USER, service.getByLogin("user"));
+    }
 }

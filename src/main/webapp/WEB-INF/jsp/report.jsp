@@ -58,5 +58,6 @@
         <label>Итоговая оценка: ${userReport.mark}</label>
     </div>
 </div>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

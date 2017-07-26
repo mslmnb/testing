@@ -22,4 +22,9 @@ public class DataJpaUserRepositoryImpl implements UserRepository {
     public User save(User user) {
         return crudUserRepository.save(user);
     }
+
+    @Override
+    public User getByLogin(String login) {
+        return crudUserRepository.findByLogin(login);
+    }
 }
