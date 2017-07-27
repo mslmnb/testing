@@ -6,10 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
-/**
- * WARN  RootClass [RootClass.java:285] HHH000038: Composite-id class does not override equals(): kz.gala.testing.model.ExamPrimaryKey
- WARN  RootClass [RootClass.java:288] HHH000039: Composite-id class does not override hashCode(): kz.gala.testing.model.ExamPrimaryKey
- */
 @Embeddable
 public class ExamPrimaryKey implements Serializable {
 
@@ -45,4 +41,22 @@ public class ExamPrimaryKey implements Serializable {
         this.questionId = questionId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExamPrimaryKey that = (ExamPrimaryKey) o;
+
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        return questionId != null ? questionId.equals(that.questionId) : that.questionId == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (questionId != null ? questionId.hashCode() : 0);
+        return result;
+    }
 }
