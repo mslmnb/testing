@@ -13,7 +13,7 @@
             <br>
             <jsp:useBean id="userTo" scope="request" type="kz.gala.testing.to.UserTo"/>
             <form method="post" action="user/profile">
-                <input type="number" hidden name="id" value="${userTo.id}">
+                <input type="hidden" name="id" id = "id" value="${userTo.id}">
                 <table class="table">
                     <thead>
                     </thead>

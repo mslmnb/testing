@@ -36,4 +36,32 @@ public class Theme extends BaseEntity {
                 "name='" + name + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Theme that = (Theme) o;
+
+        if (this.getId()!=null ? !this.getId().equals(that.getId()) : that.getId()!=null ) {
+            return false;
+        }
+        boolean res = name != null ? name.equals(that.name) : that.name == null;
+        return res;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Theme theme1 = new Theme(10, "ыаацкуа");
+        Theme theme2 = new Theme(10, "ыаацкуа");
+        System.out.println(theme1.equals(theme2));
+    }
 }

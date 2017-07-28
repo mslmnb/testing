@@ -1,8 +1,10 @@
 package kz.gala.testing.service;
 
-import com.sun.deploy.security.UserDeclinedException;
+import kz.gala.testing.model.User;
 import kz.gala.testing.to.UserTo;
+import kz.gala.testing.util.UserUtil;
 import kz.gala.testing.util.exception.NotFoundException;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,57 +28,45 @@ public class UserServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void testGetByLogin() {
+        MATCHER.assertEquals(USER, service.getByLogin("user"));
+    }
+
+    @Test
     public void testUpdate() throws Exception {
         String updatePosition = "обновление должности";
         String updateDepartment = "обновление подразделения";
         String updateName = "обновление имени";
-        UserTo userTo = new UserTo(USER);
+        UserTo userTo = UserUtil.asTo(USER);
         userTo.setPosition(updatePosition);
         userTo.setDepartment(updateDepartment);
         userTo.setName(updateName);
-        service.update(userTo, USER_ID);
-        USER.setPosition(updatePosition);
-        USER.setName(updateName);
-        USER.setDepartment(updateDepartment);
-        MATCHER.assertEquals(USER, service.get(USER_ID));
-    }
+        service.update(userTo);
 
-    @Test
-    public void testUpdateNotFound() throws Exception {
-        UserTo userTo = new UserTo(USER);
-        thrown.expect(NotFoundException.class);
-        thrown.expectMessage("Can't update entity with id=" + (USER_ID+1));
-        service.update(userTo, USER_ID+1);
+        User updatedUser = new User(USER_ID, USER.getTheme(), updateName, updatePosition, updateDepartment,
+                USER.getLogin(), USER.getPassword(), USER.isComplete(), USER.getRole());
+        MATCHER.assertEquals(updatedUser, service.get(USER_ID));
     }
 
     @Test
     public void testUpdateWithNoComplete() throws Exception {
-        USER.setComplete(true);
-        service.save(USER);
+        User updatedUser = new User(USER_ID, USER.getTheme(), USER.getName(), USER.getPosition(), USER.getDepartment(),
+                USER.getLogin(), USER.getPassword(), true, USER.getRole());
+
+        service.save(updatedUser);
 
         String updatePosition = "обновление должности";
         String updateDepartment = "обновление подразделения";
         String updateName = "обновление имени";
-        UserTo userTo = new UserTo(USER);
+        UserTo userTo = UserUtil.asTo(USER);
         userTo.setPosition(updatePosition);
         userTo.setDepartment(updateDepartment);
         userTo.setName(updateName);
-        service.updateWithNoComplete(userTo, USER_ID);
+        service.updateWithNoComplete(userTo);
 
-        USER.setPosition(updatePosition);
-        USER.setName(updateName);
-        USER.setDepartment(updateDepartment);
-        USER.setComplete(false);
-
-        MATCHER.assertEquals(USER, service.get(USER_ID));
-    }
-
-    @Test
-    public void testUpdateWithNoCompleteNotFound() throws Exception {
-        UserTo userTo = new UserTo(USER);
-        thrown.expect(NotFoundException.class);
-        thrown.expectMessage("Can't update entity with id=" + (USER_ID+1));
-        service.updateWithNoComplete(userTo, USER_ID+1);
+        updatedUser = new User(USER_ID, USER.getTheme(), updateName, updatePosition, updateDepartment,
+                USER.getLogin(), USER.getPassword(), false, USER.getRole());
+        MATCHER.assertEquals(updatedUser, service.get(USER_ID));
 
     }
 
@@ -85,16 +75,11 @@ public class UserServiceTest extends AbstractServiceTest {
         String updatePosition = "обновление должности";
         String updateDepartment = "обновление подразделения";
         String updateName = "обновление имени";
-        USER.setPosition(updatePosition);
-        USER.setName(updateName);
-        USER.setDepartment(updateDepartment);
-        USER.setComplete(true);
-        MATCHER.assertEquals(USER,service.save(USER));
+        User updatedUser = new User(USER_ID, USER.getTheme(), updateName, updatePosition, updateDepartment,
+                USER.getLogin(), USER.getPassword(), true, USER.getRole());
+
+        MATCHER.assertEquals(updatedUser,service.save(updatedUser));
 
     }
 
-    @Test
-    public void testGetByLogin() {
-        MATCHER.assertEquals(USER, service.getByLogin("user"));
-    }
 }

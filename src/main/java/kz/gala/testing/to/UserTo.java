@@ -22,14 +22,6 @@ public class UserTo implements Serializable {
         this.department = department;
     }
 
-    public UserTo(User user) {
-        this.id = user.getId();
-        this.name = user.getName();
-        this.position = user.getPosition();
-        this.department = user.getDepartment();
-    }
-
-
     public String getName() {
         return name;
     }
@@ -44,6 +36,10 @@ public class UserTo implements Serializable {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {

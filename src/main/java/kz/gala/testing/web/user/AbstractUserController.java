@@ -28,22 +28,20 @@ public abstract class AbstractUserController {
         return service.get(id);
     }
 
-    public User update(UserTo userTo, int userId) {
+    public void update(UserTo userTo, int userId) {
         log.info("update {}", userId);
-        return service.update(userTo, userId);
+        service.update(userTo);
     }
 
-    public User updateWithNoComplete(UserTo userTo, int userId) {
+    public void updateWithNoComplete(UserTo userTo, int userId) {
         log.info("update with no complete {}", userId);
-        return service.updateWithNoComplete(userTo, userId);
-
+        service.updateWithNoComplete(userTo);
     }
 
 
     public void examStart(int id) {
         examService.delete(id);
         examService.insert(id);
-
     }
 
 }

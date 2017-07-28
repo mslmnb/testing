@@ -2,6 +2,7 @@ package kz.gala.testing;
 
 import kz.gala.testing.model.User;
 import kz.gala.testing.to.UserTo;
+import kz.gala.testing.util.UserUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -15,7 +16,7 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
 
     public AuthorizedUser(User user) {
         super(user.getLogin(), user.getPassword(), true, true, true, true, Collections.singleton(user.getRole()));
-        userTo = new UserTo(user);
+        userTo = UserUtil.asTo(user);
     }
 
     public static AuthorizedUser safeGet() {

@@ -4,9 +4,10 @@ import kz.gala.testing.AuthorizedUser;
 import kz.gala.testing.model.User;
 import kz.gala.testing.repository.UserRepository;
 import kz.gala.testing.to.UserTo;
+import kz.gala.testing.util.UserUtil;
 import kz.gala.testing.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -31,35 +32,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User update(UserTo userTo, int userId) throws NotFoundException {
-        if (userTo.getId()!=userId) {
-            // завести класс исключения AccessException
-            throw new NotFoundException("Can't update entity with id="+ userId);
-        }
-        User user = get(userId);
-        user.setDepartment(userTo.getDepartment());
-        user.setPosition(userTo.getPosition());
-        user.setName(userTo.getName());
-        return checkNotFoundWithId(repository.save(user), userId);
+    public void update(UserTo userTo){
+        User user = get(userTo.getId());
+        UserUtil.updateFromTo(userTo, user);
+        save(user);
     }
 
     @Override
-    public User updateWithNoComplete(UserTo userTo, int userId) throws NotFoundException {
-        if (userTo.getId()!=userId) {
-            // завести класс исключения AccessException
-            throw new NotFoundException("Can't update entity with id="+ userId);
-        }
-        User user = get(userId);
-        user.setDepartment(userTo.getDepartment());
-        user.setPosition(userTo.getPosition());
-        user.setName(userTo.getName());
+    public void updateWithNoComplete(UserTo userTo) {
+        User user = get(userTo.getId());
+        UserUtil.updateFromTo(userTo, user);
         user.setComplete(false);
-        return checkNotFoundWithId(save(user), userId);
+        save(user);
     }
 
     @Override
     public User save(User user) {
-        return repository.save(user);
+        return repository.save(UserUtil.prepareToSave(user));
     }
 
     @Override
@@ -77,4 +66,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User u = repository.getByLogin(login);
         return checkNotFound(u,"login=" + login);
     }
+
 }

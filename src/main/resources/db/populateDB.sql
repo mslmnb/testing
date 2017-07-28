@@ -19,16 +19,16 @@ INSERT INTO themes (name) VALUES
   ('тема9');     --100 009
 
 INSERT INTO users (name, theme_id, position, department, login,  password, complete, role) VALUES
-  ('Сергеев И.И.',100000, 'инженер 1 кат', 'секретный отдел', 'user', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 010
-  ('Антонов И.И.',100000, 'инженер 2 кат', 'админ отдел', 'admin', 'AdminPassword', FALSE, 'ROLE_ADMIN'),    -- 100 011
-  ('Петров И.И.',100001, 'инженер 3 кат', 'отдел П', 'user12', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 012
-  ('Васильев И.И.',100001, 'инженер 4 кат', 'отдел В', 'user13', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 013
-  ('Петров И.И.',100001, 'техник 1 раз', 'отдел П', 'user14', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 014
-  ('Павлов И.И.', 100002, 'техник 2 раз', 'отдел П', 'user15', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 015
-  ('Матвеев И.И.', 100002, 'техник 3 раз', 'отдел М', 'user16', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 016
-  ('Александров И.И.', 100002, 'технолог 1 кат', 'отдел А', 'user17', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 017
-  ('Васечкин И.И.', 100002, 'технолог 2 кат', 'отдел В', 'user18', 'UserPassword', FALSE, 'ROLE_USER'),      -- 100 018
-  ('Григорьев И.И.', 100002, 'технолог 3 кат', 'отдел Г', 'user19', 'UserPassword', FALSE, 'ROLE_USER');      -- 100 019
+  ('Сергеев И.И.',100000, 'инженер 1 кат', 'секретный отдел', 'user', '$2a$10$m3o0NecLqcbt.7JHe2/gu.V4ae6Syn8k0iKxNJWwO3zsJ.IcA/1rq', FALSE, 'ROLE_USER'),      -- 100 010
+  ('Антонов И.И.',100000, 'инженер 2 кат', 'админ отдел', 'admin', '$2a$10$gg2voU/Spf7OXjya63W36O6GhYIqgEkRZaTYhMgZlhKsOMJ7zMrsO', FALSE, 'ROLE_ADMIN'),    -- 100 011
+  ('Петров И.И.',100001, 'инженер 3 кат', 'отдел П', 'user12', '$2a$10$XRqfXH2bfsVEPnzAdw0tZ.TTqMpykREVXjq4NBILzjBDsu2PtTHP.', FALSE, 'ROLE_USER'),      -- 100 012
+  ('Васильев И.И.',100001, 'инженер 4 кат', 'отдел В', 'user13', '$2a$10$YL63R6WrXF5BsSRyJNDPD.zeWVgKbNuD61lXAJcC8qgtKi5oFknGy', FALSE, 'ROLE_USER'),      -- 100 013
+  ('Петров И.И.',100001, 'техник 1 раз', 'отдел П', 'user14', '$2a$10$FSq84xQ6KWaRqBTJP70uS.YVgVMfTgHhWL8r81qt3RsueJoRgXWba', FALSE, 'ROLE_USER'),      -- 100 014
+  ('Павлов И.И.', 100002, 'техник 2 раз', 'отдел П', 'user15', '$2a$10$P3cUW3G9y4pLO9qq71JozOvlqsxIIEoSCJcY644QIjuoPWTN.diBm', FALSE, 'ROLE_USER'),      -- 100 015
+  ('Матвеев И.И.', 100002, 'техник 3 раз', 'отдел М', 'user16', '$2a$10$Wc3lQZIrKG6DaetRNErRsu7CPxZKWJHI.l2FbOlBVQ3xB33i8RXda', FALSE, 'ROLE_USER'),      -- 100 016
+  ('Александров И.И.', 100002, 'технолог 1 кат', 'отдел А', 'user17', '$2a$10$lmefU7uXkuyHmnu54pYj9eOJCAN1zZWGgQshg2DU779h./wwvNkF6', FALSE, 'ROLE_USER'),      -- 100 017
+  ('Васечкин И.И.', 100002, 'технолог 2 кат', 'отдел В', 'user18', '$2a$10$Bj51S0zuhGOrj8goQ.ync.C4lgnODFZd0r8UCvlS6NSHXKhkVcFCO', FALSE, 'ROLE_USER'),      -- 100 018
+  ('Григорьев И.И.', 100002, 'технолог 3 кат', 'отдел Г', 'user19', '$2a$10$O6/HJpmlDY1DySuWnZ4Af.5YAb5g7a8kl/1lhAQzL1QBhFEhsAYbe', FALSE, 'ROLE_USER');      -- 100 019
 
 
 -- вопросы 100002 - 100010

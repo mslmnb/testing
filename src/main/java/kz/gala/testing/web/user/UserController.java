@@ -6,6 +6,7 @@ import kz.gala.testing.model.User;
 import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.UserService;
 import kz.gala.testing.to.UserTo;
+import kz.gala.testing.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
@@ -30,17 +31,14 @@ public class UserController extends AbstractUserController {
         if (Role.ROLE_ADMIN.equals(user.getRole())) {
             return "redirect:/admin/themes";
         }
-        UserTo userTo = new UserTo(user);
+        UserTo userTo = UserUtil.asTo(user);;
         model.addAttribute("userTo", userTo);
         return "profile";
     }
 
     @PostMapping(value = "/profile")
-    public String updateProfile(@Param("id") Integer id,
-            @Param("name") String name,
-            @Param("position") String position,
-            @Param("department") String department) {
-        UserTo userTo = new UserTo(id, name, position, department);
+    public String updateProfile(UserTo userTo) {
+        //UserTo userTo = new UserTo(id, name, position, department);
         super.updateWithNoComplete(userTo, AuthorizedUser.id());
         super.examStart( AuthorizedUser.id());
         return "redirect:/exam";

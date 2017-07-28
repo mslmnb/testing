@@ -30,8 +30,11 @@
         <csrf disabled="true"/>
     </http>
 
+    <beans:bean class="kz.gala.testing.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
+
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
+            <password-encoder ref="passwordEncoder"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
