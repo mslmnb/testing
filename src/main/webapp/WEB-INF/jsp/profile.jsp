@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -12,7 +13,7 @@
             <h3>Профиль пользователя</h3>
             <br>
             <jsp:useBean id="userTo" scope="request" type="kz.gala.testing.to.UserTo"/>
-            <form method="post" action="user/profile">
+            <form:form method="post" action="user/profile">
                 <input type="hidden" name="id" id = "id" value="${userTo.id}">
                 <table class="table">
                     <thead>
@@ -32,7 +33,7 @@
                 </table>
                 <button class="btn btn-info" type="submit">Сохранить и продолжить</button>
                 <a class="btn btn-info" href="logout">Отмена</a>
-            </form>
+            </form:form>
         </div>
     </div>
 </section>

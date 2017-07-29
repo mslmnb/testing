@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -8,14 +9,14 @@
 
 <div class="jumbotron">
     <div class="container">
-        <form>
+        <form:form>
             <input id="userOldAnswerId" hidden>
             <h3>
                 <label class="question"> </label><br/>
             </h3>
             <div id="answersBox">
             </div>
-        </form>
+        </form:form>
         <button class="btn btn-primary" type="button" id="first">
             <span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
         </button>

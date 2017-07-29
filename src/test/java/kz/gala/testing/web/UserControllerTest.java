@@ -1,6 +1,7 @@
 package kz.gala.testing.web;
 
 import org.junit.Test;
+import org.springframework.http.MediaType;
 
 import static kz.gala.testing.TestUtil.userAuth;
 import static kz.gala.testing.testdata.UserTestData.USER;
@@ -26,6 +27,7 @@ public class UserControllerTest extends AbstractControllerTest {
     @Test
     public void testPostProfile() throws Exception {
         mockMvc.perform(post("/user/profile")
+                .contentType(MediaType.APPLICATION_JSON)
                 .param("id", Integer.toString(USER_ID))
                 .param("name", "Корректировка имени пользователя")
                 .param("position", "Корректировка дложности пользователя")
@@ -34,6 +36,6 @@ public class UserControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/exam"));
-
+// посмотреть MealRestControllerTest.testCreate()
     }
 }
