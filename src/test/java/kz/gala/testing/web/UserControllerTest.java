@@ -1,11 +1,14 @@
 package kz.gala.testing.web;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import static kz.gala.testing.TestUtil.userAuth;
 import static kz.gala.testing.testdata.UserTestData.USER;
 import static kz.gala.testing.testdata.UserTestData.USER_ID;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,17 +28,18 @@ public class UserControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testPostProfile() throws Exception {
+    public void testUpdateProfile() throws Exception {
         mockMvc.perform(post("/user/profile")
-                .contentType(MediaType.APPLICATION_JSON)
                 .param("id", Integer.toString(USER_ID))
                 .param("name", "Корректировка имени пользователя")
                 .param("position", "Корректировка дложности пользователя")
                 .param("department", "Корректировка подразделения пользователя")
+                .with(csrf())
                 .with(userAuth(USER)))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/exam"));
-// посмотреть MealRestControllerTest.testCreate()
     }
+
+
 }

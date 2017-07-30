@@ -4,6 +4,7 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,15 +21,15 @@ public class User extends BaseEntity {
     private Theme theme;
 
     @Column(name="name", nullable = false)
-    @NotNull
+    @NotBlank
     private String name;
 
     @Column(name="position", nullable = false)
-    @NotNull
+    @NotBlank
     private String position;
 
     @Column(name="department", nullable = false)
-    @NotNull
+    @NotBlank
     private String department;
 
     @Column(name="login", nullable = false, unique = true)

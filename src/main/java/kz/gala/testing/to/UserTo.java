@@ -1,6 +1,7 @@
 package kz.gala.testing.to;
 
-import kz.gala.testing.model.User;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import java.io.Serializable;
 
@@ -8,8 +9,14 @@ public class UserTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    @NotBlank
+    @SafeHtml
     private String name;
+    @NotBlank
+    @SafeHtml
     private String position;
+    @NotBlank
+    @SafeHtml
     private String department;
 
     public UserTo() {

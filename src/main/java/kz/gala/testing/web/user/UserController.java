@@ -8,13 +8,14 @@ import kz.gala.testing.service.UserService;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("user")
@@ -37,7 +38,7 @@ public class UserController extends AbstractUserController {
     }
 
     @PostMapping(value = "/profile")
-    public String updateProfile(UserTo userTo) {
+    public String updateProfile(@Valid UserTo userTo) {
         //UserTo userTo = new UserTo(id, name, position, department);
         super.updateWithNoComplete(userTo, AuthorizedUser.id());
         super.examStart( AuthorizedUser.id());
