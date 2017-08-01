@@ -61,9 +61,9 @@ public class ExamReport {
 
     public String getMark () {
         if (getProcentOfCorrectAnswers()<75d) {
-            return "неудовлетворительно";
+            return "0";
         } else {
-            return "удовлетворительно";
+            return "1";
         }
     }
 

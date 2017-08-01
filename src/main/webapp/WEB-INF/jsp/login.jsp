@@ -8,25 +8,31 @@
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <div class="navbar-header navbar-brand">ТЕСТИРОВАНИЕ</div>
+        <div class="navbar-header navbar-brand"><spring:message code="app.title"/></div>
         <div class="navbar-collapse collapse">
-            <form:form class="navbar-form navbar-right" role="form" action="spring_security_check" method="post">
-            <div class="form-group">
-                <input type="text"
-                       placeholder="Логин"
-                       class="form-control"
-                       name="username">
-            </div>
-            <div class="form-group">
-                <input type="password"
-                       placeholder="Пароль"
-                       class="form-control"
-                       name="password">
-            </div>
-            <button type="submit" class="btn btn-success">
-                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-            </button>
-            </form:form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form:form class="navbar-form navbar-right" role="form" action="spring_security_check"
+                               method="post">
+                        <div class="form-group">
+                            <input type="text"
+                                   placeholder="Login"
+                                   class="form-control"
+                                   name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password"
+                                   placeholder="Password"
+                                   class="form-control"
+                                   name="password">
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        </button>
+                    </form:form>
+                </li>
+                <jsp:include page="fragments/lang.jsp"/>
+            </ul>
         </div>
     </div>
 </div>
@@ -48,18 +54,20 @@
         <p>
             <%--кнопка «Войти как Admin»--%>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('Admin', 'AdminPassword')">
-                Войти как Admin
+                <spring:message code="app.enter"/> Admin
             </button>
             <%--кнопка «Войти как User»--%>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('User', 'UserPassword')">
-                Войти как User
+                <spring:message code="app.enter"/> User
             </button>
         </p>
+
         <br/>
         <p>Стек технологий: <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
             <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
             <a href="http://projects.spring.io/spring-data-jpa/">Spring Data JPA</a>,
-            <a href="http://spring.io/blog/2014/05/07/preview-spring-security-test-method-security">Spring Security Test</a>,
+            <a href="http://spring.io/blog/2014/05/07/preview-spring-security-test-method-security">Spring Security
+                Test</a>,
             <a href="http://hibernate.org/orm/">Hibernate ORM</a>,
             <%--<a href="http://hibernate.org/validator/">Hibernate Validator</a>,--%>
             <a href="http://www.slf4j.org/">SLF4J</a>,

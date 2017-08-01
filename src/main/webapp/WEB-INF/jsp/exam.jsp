@@ -1,5 +1,7 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 
@@ -31,7 +33,9 @@
         </button>
 
         <br><br><br>
-        <a class="btn btn-info" href="exam/report"  id="finish">Завершить тестирование</a>
+        <a class="btn btn-info" href="exam/report"  id="finish">
+            <spring:message code="exam.finish"/>
+        </a>
 
     </div>
 </div>

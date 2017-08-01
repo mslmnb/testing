@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 
@@ -38,11 +40,13 @@ public class UserController extends AbstractUserController {
     }
 
     @PostMapping(value = "/profile")
-    public String updateProfile(@Valid UserTo userTo) {
-        //UserTo userTo = new UserTo(id, name, position, department);
-        super.updateWithNoComplete(userTo, AuthorizedUser.id());
-        super.examStart( AuthorizedUser.id());
-        return "redirect:/exam";
+    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
+        if (!result.hasErrors()) {
+            super.updateWithNoComplete(userTo, AuthorizedUser.id());
+            super.examStart(AuthorizedUser.id());
+            return "redirect:/exam";
+        }
+        return "profile";
 
     }
 }

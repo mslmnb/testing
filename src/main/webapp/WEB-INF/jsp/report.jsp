@@ -1,5 +1,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 
@@ -10,52 +13,75 @@
 <jsp:useBean id="userReport" scope="request" type="kz.gala.testing.to.ExamReport"/>
 <div class="jumbotron">
     <div class="container">
-        <h3>Итоги тестирования</h3>
+        <h3><spring:message code="examReport.results"/></h3>
         <br>
 
-        <table class="table">
-            <thead>
-            </thead>
-            <tr>
-                <td>ФИО</td>
-                <td>${userReport.userName}</td>
-            </tr>
-            <tr>
-                <td>Должность</td>
-                <td>${userReport.userPosition}</td>
-            </tr>
-            <tr>
-                <td>Подразделение</td>
-                <td>${userReport.userDepartment}</td>
-            </tr>
-        </table>
+        <label class="control-label col-sm-2"><spring:message code="userTo.name"/></label>
+        <div class="col-sm-10">${userReport.userName}</div>
+        <br><br>
+        <label class="control-label col-sm-2"><spring:message code="userTo.position"/></label>
+        <div class="col-sm-10">${userReport.userPosition}</div>
+        <br><br>
+        <label class="control-label col-sm-2"><spring:message code="userTo.department"/></label>
+        <div class="col-sm-10">${userReport.userDepartment}</div>
+        <br><br><br>
 
-        <table class="table" cellspacing="7">
-            <thead>
-            <tr>
-                <th>Тестирование по категории</th>
-                <th>Всего</th>
-                <th colspan="2">Ответы</th>
-                <th>%</th>
-            </tr>
-            <tr>
-                <th></th>
-                <th>вопросов</th>
-                <th>всего</th>
-                <th>правильных</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tr>
-                <td>${userReport.themeName}</td>
-                <td>${userReport.countOfQuestions}</td>
-                <td>${userReport.countOfAnswers}</td>
-                <td>${userReport.countOfCorrectAnswers}</td>
-                <td><fmt:formatNumber value="${userReport.procentOfCorrectAnswers}" pattern="0.0"/></td>
-            </tr>
-        </table>
+        <div class="table-bordered">
+            <table></table>
+        </div>
+
         <br>
-        <label>Итоговая оценка: ${userReport.mark}</label>
+        <div class="col-sm-4">
+            <label><spring:message code="examReport.subject"/></label>
+        </div>
+        <div class="col-sm-2">
+            <label><spring:message code="examReport.totalQuestionPart1"/></label>
+        </div>
+        <div class="col-sm-4">
+            <label><spring:message code="examReport.answers"/></label>
+        </div>
+        <div class="col-sm-2">
+            <label>%</label>
+        </div>
+
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
+            <label><spring:message code="examReport.totalQuestionPart2"/></label>
+        </div>
+        <div class="col-sm-2">
+            <label><spring:message code="examReport.totalAnswers"/></label>
+        </div>
+        <div class="col-sm-2">
+            <label><spring:message code="examReport.correctAnswers"/></label>
+        </div>
+        <div class="col-sm-2"></div>
+        <br>
+
+        <br><br>
+        <div class="table-bordered">
+            <table></table>
+        </div>
+
+        <div class="col-sm-4">${userReport.themeName}</div>
+        <div class="col-sm-2">${userReport.countOfQuestions}</div>
+        <div class="col-sm-2">${userReport.countOfAnswers}</div>
+        <div class="col-sm-2">${userReport.countOfCorrectAnswers}</div>
+        <div class="col-sm-2"><fmt:formatNumber value="${userReport.procentOfCorrectAnswers}" pattern="0.0"/></div>
+
+        <br><br>
+        <div class="table-bordered">
+            <table></table>
+        </div>
+        <br><br>
+
+        <label><spring:message code="examReport.mark"/>:</label>
+        <c:if test="${userReport.mark>0}">
+            <label><spring:message code="examReport.positiveMark"/></label>
+        </c:if>
+        <c:if test="${userReport.mark==0}">
+            <label><spring:message code="examReport.negativeMark"/></label>
+        </c:if>
+
     </div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>

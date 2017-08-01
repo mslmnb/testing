@@ -21,7 +21,7 @@ public class ExamController extends AbstractExamController{
 
     @GetMapping
     public String exam(Model model) {
-        // если пользователь уже завершил тестирование закрыть доступ к тестированию
+        // в реальном проекте если пользователь уже завершил тестирование закрыть доступ к тестированию
         if (super.isComplete(AuthorizedUser.id())) {
             model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id()));
             return "redirect:/exam/report";
