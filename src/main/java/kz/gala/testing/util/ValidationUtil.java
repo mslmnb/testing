@@ -3,11 +3,6 @@ package kz.gala.testing.util;
 import kz.gala.testing.model.BaseEntity;
 import kz.gala.testing.util.exception.NotFoundException;
 
-import java.util.List;
-
-/**
- * Created by Mussulmanbekova_GE on 20.06.2017.
- */
 public class ValidationUtil {
     private ValidationUtil() {
     }

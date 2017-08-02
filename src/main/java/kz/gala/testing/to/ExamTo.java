@@ -2,7 +2,6 @@ package kz.gala.testing.to;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import kz.gala.testing.model.Answer;
-import kz.gala.testing.model.BaseEntity;
 import kz.gala.testing.model.Question;
 
 import java.util.List;

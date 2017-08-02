@@ -1,13 +1,10 @@
 package kz.gala.testing.repository.jdbc;
 
 import kz.gala.testing.model.Exam;
-import kz.gala.testing.model.ExamPrimaryKey;
 import kz.gala.testing.repository.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

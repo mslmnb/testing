@@ -3,7 +3,6 @@ package kz.gala.testing.repository.jpa;
 import kz.gala.testing.model.Exam;
 import kz.gala.testing.model.ExamPrimaryKey;
 import kz.gala.testing.repository.ExamRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;

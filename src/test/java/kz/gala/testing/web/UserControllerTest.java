@@ -1,9 +1,6 @@
 package kz.gala.testing.web;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import static kz.gala.testing.TestUtil.userAuth;
 import static kz.gala.testing.testdata.UserTestData.USER;

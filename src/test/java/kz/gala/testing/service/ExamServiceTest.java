@@ -58,7 +58,7 @@ public class ExamServiceTest extends AbstractServiceTest {
 
         thrown.expect(NotFoundException.class);
         thrown.expectMessage("Not found entity with id=[" +userId + ", " + questionId + "]");
-        Exam e =service.get(questionId,userId);
+        service.get(questionId,userId);
     }
 
     @Test

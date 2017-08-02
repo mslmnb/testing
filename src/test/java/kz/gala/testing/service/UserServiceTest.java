@@ -4,7 +4,6 @@ import kz.gala.testing.model.User;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.UserUtil;
 import kz.gala.testing.util.exception.NotFoundException;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
