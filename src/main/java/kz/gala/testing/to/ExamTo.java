@@ -48,6 +48,6 @@ public class ExamTo  {
     }
 
     public boolean isEdited() {
-            return !(userAnswerId == userOldAnswerId);
+            return !userAnswerId.equals(userOldAnswerId);
     }
 }

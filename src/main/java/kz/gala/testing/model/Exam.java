@@ -26,6 +26,9 @@ public class Exam implements Serializable{
     @Id
     private ExamPrimaryKey id;
 
+    @Column(name = "user_answer_id")
+    private Integer userAnswerId;
+
     public ExamPrimaryKey getId() {
         return id;
     }
@@ -33,9 +36,6 @@ public class Exam implements Serializable{
     public void setId(ExamPrimaryKey id) {
         this.id = id;
     }
-
-    @Column(name = "user_answer_id")
-    private Integer userAnswerId;
 
     public Exam(ExamPrimaryKey id, Integer userAnswerId) {
         this.id = id;
