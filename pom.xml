@@ -52,6 +52,9 @@
         <hibernate.version>5.2.9.Final</hibernate.version>
         <hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
 
+        <!--Tools-->
+        <ehcache.version>2.10.3</ehcache.version>
+
         <!--DB-->
         <postgresql.version>42.0.0</postgresql.version>
 
@@ -59,6 +62,7 @@
         <webjars-jquery.version>3.2.1</webjars-jquery.version>
         <webjars-bootstrap.version>3.3.7-1</webjars-bootstrap.version>
         <webjars-noty.version>2.4.1</webjars-noty.version>
+        <webjars-datatables.version>1.10.15</webjars-datatables.version>
 
         <!--    Tests  -->
         <junit.version>4.12</junit.version>
@@ -71,8 +75,7 @@
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
+            <artifactId>spring-context-support</artifactId>
             <exclusions>
                 <exclusion>      <!--запрещаем Spring-core подтягивать common-loging-->
                     <groupId>commons-logging</groupId>
@@ -110,6 +113,11 @@
             <version>${spring-security.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
 
         <!--Web-->
         <dependency>
@@ -150,11 +158,18 @@
             <version>${hibernate-validator.version}</version>
         </dependency>
 
-        <!--Expression Language for JSP-->
+        <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Logging with SLF4J & LogBack -->
@@ -206,6 +221,17 @@
             <exclusions>
                 <exclusion>
                     <groupId>org.webjars</groupId>
+                    <artifactId>jquery</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>datatables</artifactId>
+            <version>${webjars-datatables.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.webjars.bower</groupId>
                     <artifactId>jquery</artifactId>
                 </exclusion>
             </exclusions>

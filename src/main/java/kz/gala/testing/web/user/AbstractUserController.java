@@ -24,17 +24,17 @@ public abstract class AbstractUserController {
 
 
     public User get(int id) {
-        log.info("get {}", id);
+        log.info("get user{}", id);
         return service.get(id);
     }
 
     public void update(UserTo userTo, int userId) {
-        log.info("update {}", userId);
+        log.info("update user{}", userId);
         service.update(userTo);
     }
 
     public void updateWithNoComplete(UserTo userTo, int userId) {
-        log.info("update with no complete {}", userId);
+        log.info("update user with no complete {}", userId);
         service.updateWithNoComplete(userTo);
     }
 

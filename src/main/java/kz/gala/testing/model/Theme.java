@@ -1,18 +1,22 @@
 package kz.gala.testing.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="themes")
 public class Theme extends BaseEntity {
 
     @Column(name = "name", nullable=false)
-    @NotNull
+    @NotBlank
     private String name;
 
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy="theme")
+//    private List<Question> questions;
+//
+//    @OneToMany(fetch =FetchType.LAZY, mappedBy = "theme")
+//    private List<User> users;
 
     public Theme(Integer id, String name) {
         super(id);
@@ -30,12 +34,6 @@ public class Theme extends BaseEntity {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Theme{" +
-                "name='" + name + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -47,9 +45,7 @@ public class Theme extends BaseEntity {
         if (this.getId()!=null ? !this.getId().equals(that.getId()) : that.getId()!=null ) {
             return false;
         }
-        boolean res = name != null ? name.equals(that.name) : that.name == null;
-        return res;
-
+        return name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override
@@ -63,5 +59,12 @@ public class Theme extends BaseEntity {
         Theme theme1 = new Theme(10, "ыаацкуа");
         Theme theme2 = new Theme(10, "ыаацкуа");
         System.out.println(theme1.equals(theme2));
+    }
+
+    @Override
+    public String toString() {
+        return "Theme{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
