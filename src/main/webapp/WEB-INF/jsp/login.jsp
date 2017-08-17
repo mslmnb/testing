@@ -39,8 +39,8 @@
 
 <div class="jumbotron">
     <div class="container">
+        <%--вывод сообщения об ошибке при неудачном логировании--%>
         <c:if test="${param.error}">
-            <%--вывод сообщения об ошибке при неудачном логировании--%>
             <div class="error">
                     ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
             </div>

@@ -7,7 +7,7 @@ function makeEditable() {
     $.ajaxSetup({cache: false});
 
     $(document).ajaxError(function(event, jqXHR, options, jsExc) {
-       failNoty(event, jqXHR, options, jsExc)
+       failNoty(jqXHR);
     });
 
     var token = $("meta[name='_csrf']").attr("content");
@@ -64,9 +64,10 @@ function successNoty(key) {
 
 function failNoty(jqXHR) {
     closeNoty();
-    var errorInfo = $.parseJSON(jqXHR);
+    var errorInfo = $.parseJSON(jqXHR.responseText);
     failedNote = noty({
-        text: i18["common.errorStatus"] + ":" + jqXHR.status + "<br>" + errorInfo.cause + "<br>" + errorInfo.details.join("<br>"),
+        // text: i18n['common.errorStatus'] + ': ' + jqXHR.status + '<br>' + errorInfo.cause + '<br>' + errorInfo.details.join("<br>"),
+        text: i18n['common.errorStatus'] + ': ' + jqXHR.status + '<br>' + errorInfo + '<br>',
         type: "error",
         layout: "bottomRight"
     });

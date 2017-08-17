@@ -11,6 +11,7 @@
     <%-- резолвить ссылки относительно контекста приложения (testing) --%>
     <base href="${pageContext.request.contextPath}/"/>
 
+    <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/datatables/1.10.15/media/css/dataTables.bootstrap.min.css">
     <link rel="shortcut icon" href="resources/images/icon-test.png">
