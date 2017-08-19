@@ -2,7 +2,6 @@ package kz.gala.testing.web.admin;
 
 import kz.gala.testing.model.Theme;
 import kz.gala.testing.service.ThemeService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

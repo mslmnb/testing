@@ -8,7 +8,6 @@ import kz.gala.testing.service.UserService;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +33,7 @@ public class UserController extends AbstractUserController {
         if (Role.ROLE_ADMIN.equals(user.getRole())) {
             return "redirect:/admin/themes";
         }
-        UserTo userTo = UserUtil.asTo(user);;
+        UserTo userTo = UserUtil.asTo(user);
         model.addAttribute("userTo", userTo);
         return "profile";
     }
@@ -44,6 +43,7 @@ public class UserController extends AbstractUserController {
         if (!result.hasErrors()) {
             super.updateWithNoComplete(userTo, AuthorizedUser.id());
             super.examStart(AuthorizedUser.id());
+            status.setComplete(); //маркирует текущую сессию как завершенную
             return "redirect:/exam";
         }
         return "profile";

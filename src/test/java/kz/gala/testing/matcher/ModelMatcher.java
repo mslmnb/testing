@@ -6,11 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
-/**
- * Created by Mussulmanbekova_GE on 28.06.2017.
- */
 public class ModelMatcher<T> {
 
     private Equality<T> equality;                   //  для каждого класса свой equality (аналог компоратора)

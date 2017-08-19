@@ -7,7 +7,6 @@ import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.UserUtil;
 import kz.gala.testing.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

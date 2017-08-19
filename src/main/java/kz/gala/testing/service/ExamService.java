@@ -3,7 +3,6 @@ package kz.gala.testing.service;
 import kz.gala.testing.model.Exam;
 import kz.gala.testing.to.ExamReport;
 import kz.gala.testing.util.exception.NotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
