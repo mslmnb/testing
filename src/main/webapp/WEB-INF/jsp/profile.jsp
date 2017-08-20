@@ -15,7 +15,7 @@
         <br/><br/>
 
         <form:form modelAttribute="userTo" class="form-horizontal" method="post" action="user/profile">
-            <input type="hidden" name="id" id = "id" value="${userTo.id}">
+            <input type="hidden" name="id" id="id" value="${userTo.id}">
 
             <spring:message code="userTo.name" var="name"/>
             <testing:inputField name="name" label="${name}"/>
@@ -28,14 +28,15 @@
 
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">
-                <button class="btn btn-info" type="submit">
-                    <spring:message code="userTo.save"/>
-                </button>
+                    <button class="btn btn-info" type="submit">
+                        <spring:message code="userTo.save"/>
+                    </button>
+                </div>
             </div>
         </form:form>
-
     </div>
 </div>
+
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

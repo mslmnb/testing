@@ -74,13 +74,14 @@ function failNoty(jqXHR) {
 }
 
 function add() {
+    closeNoty();
     $('#modalTitle').html(i18n["addTitle"]);
     form.find(":input").val("");
     $('#editRow').modal();
 }
 
 function updateRow(id) {
-    debugger;
+    closeNoty();
     $('#modalTitle').html(i18n["editTitle"])
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
@@ -91,6 +92,7 @@ function updateRow(id) {
 }
 
 function deleteRow(id) {
+    closeNoty();
     $.ajax({
         url: ajaxUrl + id,
         type: "DELETE",
