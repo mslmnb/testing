@@ -60,8 +60,8 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Exam update(Exam exam, int userAnswerId, int userId) {
-        return checkNotFoundWithIds(repository.update(exam, userAnswerId, userId), exam.getUserId(), exam.getQuestionId());
+    public Exam update(Exam exam, int userId) {
+        return checkNotFoundWithIds(repository.update(exam, userId), userId, exam.getQuestionId());
     }
 
     @Override
@@ -78,13 +78,12 @@ public class ExamServiceImpl implements ExamService {
         List<Exam> exams = repository.getAll(userId);
         int countOfQuestions = exams.size();
         int countOfAnswers = (int) exams.stream()
-                .filter(e->e.getUserAnswerId()!=null)
+                .filter(e->e.getUserAnswerEnums()>0)
                 .count();
         int countOfCorrectAnswers = (int) exams.stream()
-                .filter(e->questionRepository.getCorrectAnswerId(e.getQuestionId()).equals(e.getUserAnswerId()))
+                .filter(e->questionRepository.getCorrectAnswerEnums(e.getQuestionId())==e.getUserAnswerEnums())
                 .count();
         return new ExamReport(user,countOfQuestions, countOfAnswers, countOfCorrectAnswers);
-
     }
 
     @Override

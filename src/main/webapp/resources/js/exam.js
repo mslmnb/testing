@@ -1,4 +1,5 @@
 var ajaxUrl = "ajax/exam/";
+var oldUserAnswerEnums;
 
 function initButtons(data) {
     if (data.prevQuestionId !==null) {
@@ -24,8 +25,9 @@ function pageDraw(data) {
             .html(data.questionBody)
             .attr("id", data.questionId);
 
-        $("#userOldAnswerId").val(data.userOldAnswerId);
+        // $("#oldUserAnswerEnums").val(data.userAnswerEnums);
 
+        oldUserAnswerEnums = data.userAnswerEnums;
 
         var answersBox = $("#answersBox");
 
@@ -33,18 +35,18 @@ function pageDraw(data) {
 
         for (choice in data.answers) {
 
-            var currAnswerId = data.answers[choice].id;
+            var currAnswerEnum = data.answers[choice].enumerator;
 
 
-            $("<input type='radio'>")
+            $("<input type='checkbox'>")
                 .attr("name", "userAnswerId")
-                .attr("id", currAnswerId)
-                .attr("value", currAnswerId)
-                .attr("checked", data.userAnswerId !== null && data.userAnswerId === currAnswerId)
+                .attr("id", currAnswerEnum)
+                .attr("value", currAnswerEnum)
+                .attr("checked", hasBeenChosen(currAnswerEnum, data.userAnswerEnums))
                 .appendTo($("<div class='col-sm-1'>").appendTo(answersBox));
 
             $("<label></label>")
-                .attr("for", currAnswerId)
+                .attr("for", currAnswerEnum)
                 .html(data.answers[choice].body)
                 .appendTo(answersBox);
 
@@ -54,25 +56,54 @@ function pageDraw(data) {
     }
 }
 
+function hasBeenChosen (currEnum, enums) {
+    if  (enums===undefined || enums<=0) {
+        return false ;
+    }
+    return (pow(2, currEnum) & enums)> 0;
+}
+
+function pow(x, n) {
+    var pow = 1;
+    for (var i = 1; i<=n; i++) {
+        pow = pow * x;
+    }
+    return pow;
+
+}
 
 function getData(ajaxQuery) {
 
-    var id = $(".question").attr("id");
-    var userAnswerId = $("input[name=userAnswerId]:checked").val();
-    var userOldAnswerId = $("#userOldAnswerId").val() ;
+    var questionId = $(".question").attr("id");
 
+    var boxes = $("input:checkbox:checked");
 
-    if (userAnswerId===undefined) {
-        userAnswerId = null;
+    var userAnswerEnums = 0;
+    for (var i = 0; i<boxes.length; i++) {
+        userAnswerEnums = userAnswerEnums + pow(2,boxes[i].value);
     }
-    if (id===undefined) {
-        id = null;
+
+    if (questionId===undefined) {
+        questionId = null;
     }
+
+    if (oldUserAnswerEnums===undefined) {
+        edited = false;
+    } else {
+        edited = (oldUserAnswerEnums!=userAnswerEnums);
+    }
+
+    var jsonData = JSON.stringify({
+        'questionId' : questionId,
+        'userAnswerEnums': userAnswerEnums,
+        'edited': edited
+    });
 
     $.ajax({
         type: "POST",
         url: ajaxQuery,
-        data: {'questionId': id, 'userAnswerId': userAnswerId, 'userOldAnswerId': userOldAnswerId},
+        data:  jsonData,
+        contentType: 'application/json',
         success: pageDraw
     });
 }

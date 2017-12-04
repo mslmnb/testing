@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@SuppressWarnings("JpaQlInspection")
 @NamedQueries({
     @NamedQuery(name = Question.BY_ID, query = "SELECT q FROM Question q LEFT JOIN FETCH q.answers WHERE q.id=:id" )
 })
@@ -22,12 +23,12 @@ public class Question extends BaseEntity{
     @NotNull
     private String body;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "primaryKey.question")
     private List<Answer> answers;
 
-    @Column(name="correct_answer_id", nullable = false)
+    @Column(name="correct_answer_enums", nullable = false)
     @NotNull
-    private Integer correctAnswerId;                        // не отдавать на UI
+    private Integer correctAnswerEnums;                        // не отдавать на UI
 
     public Question() {
     }
@@ -36,6 +37,13 @@ public class Question extends BaseEntity{
         super(id);
         this.theme = theme;
         this.body = body;
+    }
+
+    public Question (Integer id, Theme theme,String body, Integer correctAnswerId) {
+        super(id);
+        this.theme = theme;
+        this.body = body;
+        this.correctAnswerEnums = correctAnswerId;
     }
 
     public void setBody(String body) {
@@ -54,12 +62,12 @@ public class Question extends BaseEntity{
         this.answers = answers;
     }
 
-    public Integer getCorrectAnswerId() {
-        return correctAnswerId;
+    public Integer getCorrectAnswerEnums() {
+        return correctAnswerEnums;
     }
 
     public void setCorrectAnswerId(Integer correctAnswerId) {
-        this.correctAnswerId = correctAnswerId;
+        this.correctAnswerEnums = correctAnswerId;
     }
 
     @Override
@@ -67,7 +75,6 @@ public class Question extends BaseEntity{
         return "Question{" +
                 "themeId=" + theme.getId() +
                 ", body='" + body + '\'' +
-                ", correctAnswerId=" + correctAnswerId +
                 '}';
     }
 }

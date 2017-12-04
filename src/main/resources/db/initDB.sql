@@ -31,27 +31,28 @@ CREATE UNIQUE INDEX users_unique_login_idx ON users (login);
 
 CREATE TABLE questions
 (
-  id                INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  theme_id          INTEGER NOT NULL,
-  body              VARCHAR NOT NULL,
-  correct_answer_id   INTEGER,
+  id                     INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  theme_id               INTEGER NOT NULL,
+  body                   VARCHAR NOT NULL,
+  correct_answer_enums   INTEGER NOT NULL,
   FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE answers
 (
-  id                INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  enum                INTEGER,
   body              VARCHAR NOT NULL,
   question_id       INTEGER NOT NULL,
   FOREIGN KEY (question_id) REFERENCES questions (id) ON DELETE CASCADE
 );
+ CREATE UNIQUE INDEX answers_unique_question_enum_idx ON answers (question_id, enum);
 
 CREATE TABLE exam
 (
-  user_id           INTEGER NOT NULL,
-  question_id       INTEGER NOT NULL,
-  user_answer_id    INTEGER,
+  user_id                INTEGER NOT NULL,
+  question_id            INTEGER NOT NULL,
+  user_answer_enums      INTEGER NOT NULL DEFAULT 0,
   FOREIGN KEY (question_id) REFERENCES  questions (id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX exam_unique_user_question_idx ON exam (user_id, question_id)
+CREATE UNIQUE INDEX exam_unique_user_question_idx ON exam (user_id, question_id);

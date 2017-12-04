@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("ajax/exam")
 public class ExamAjaxController extends AbstractExamController {
@@ -19,28 +21,32 @@ public class ExamAjaxController extends AbstractExamController {
     }
 
     @PostMapping(value="/first", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getFirst(QuestionWithUserAnswer q) {
+    public ExamTo getFirst(@RequestBody QuestionWithUserAnswer q) {
         return super.getFirst(q, AuthorizedUser.id());
     }
 
+//    @PostMapping(value="/next", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ExamTo getNextFrom(QuestionWithUserAnswer q) {
+//        return super.getNextFrom(q, AuthorizedUser.id());
+//    }
+
     @PostMapping(value="/next", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getNextFrom(QuestionWithUserAnswer q) {
+    public ExamTo getNextFrom(@RequestBody QuestionWithUserAnswer q) {
         return super.getNextFrom(q, AuthorizedUser.id());
     }
-
     @PostMapping(value="/previous", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getPreviousFrom(QuestionWithUserAnswer q) {
+    public ExamTo getPreviousFrom(@RequestBody QuestionWithUserAnswer q) {
         return super.getPreviousFrom(q, AuthorizedUser.id());
     }
 
 
     @PostMapping(value="/last", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ExamTo getLast(QuestionWithUserAnswer q) {
+    public ExamTo getLast(@RequestBody QuestionWithUserAnswer q) {
         return super.getLast(q, AuthorizedUser.id());
     }
 
     @PostMapping(value="/report", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void finishTest(QuestionWithUserAnswer q) {
+    public void finishTest(@RequestBody QuestionWithUserAnswer q) {
         super.saveUserAnswer(q, AuthorizedUser.id());
     }
 }

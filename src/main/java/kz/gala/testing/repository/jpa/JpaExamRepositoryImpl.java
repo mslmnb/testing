@@ -64,11 +64,11 @@ public class JpaExamRepositoryImpl implements ExamRepository {
 
     @Override
     @Transactional
-    public Exam update(Exam exam, int userAnswerId, int userId) {
-        if (get(exam.getQuestionId(),userId)==null) {
+    public Exam update(Exam exam, int userId) {
+        if (get(exam.getPrimaryKey().getQuestionId(),userId)==null) {
             return null;
         }
-        return  em.merge(new Exam(exam.getId(), userAnswerId));
+        return  em.merge(exam);
     }
 
     @Override

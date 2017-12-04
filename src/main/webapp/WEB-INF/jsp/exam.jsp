@@ -12,7 +12,7 @@
 <div class="jumbotron">
     <div class="container">
         <form:form>
-            <input id="userOldAnswerId" hidden>
+            <input id="oldUserAnswerEnums" hidden>
             <h3>
                 <label class="question"> </label><br/>
             </h3>

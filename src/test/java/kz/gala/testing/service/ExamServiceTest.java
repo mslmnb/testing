@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static kz.gala.testing.testdata.ExamTestData.*;
 import static kz.gala.testing.testdata.UserTestData.USER_ID;
@@ -53,8 +54,8 @@ public class ExamServiceTest extends AbstractServiceTest {
     @Test
     public void testGetNotFound() {
 
-        int userId = EXAM1.getUserId() + 1 ;
-        int questionId = EXAM1.getQuestionId();
+        int userId = EXAM1.getPrimaryKey().getUserId() + 1 ;
+        int questionId = EXAM1.getPrimaryKey().getQuestionId();
 
         thrown.expect(NotFoundException.class);
         thrown.expectMessage("Not found entity with id=[" +userId + ", " + questionId + "]");
@@ -69,22 +70,21 @@ public class ExamServiceTest extends AbstractServiceTest {
     @Test
     public void testUpdateNotFound() {
 
-        int questionId = EXAM1.getQuestionId();
-        int userId = EXAM1.getUserId() + 1;
-        int answerId = questionService.get(questionId).getCorrectAnswerId();
+        int questionId = EXAM1.getPrimaryKey().getQuestionId();
+        int userId = EXAM1.getPrimaryKey().getUserId() + 1;
 
         thrown.expect(NotFoundException.class);
         thrown.expectMessage("Not found entity with id=[" +userId + ", " + questionId + "]");
-        service.update(new Exam(userId, questionId, null), answerId, userId);
+        service.update(EXAM1, userId);
     }
 
     @Test
     public void testUpdate() throws Exception {
         int questionId = EXAM1.getQuestionId();
         int userId = EXAM1.getUserId();
-        int answerId = questionService.get(questionId).getCorrectAnswerId();
-        service.update(EXAM1, answerId, userId);
-        EXAM1.setUserAnswerId(answerId);
+        int userAnswerEnums = questionService.get(questionId).getCorrectAnswerEnums();
+        EXAM1.setUserAnswerEnums(userAnswerEnums);
+        service.update(EXAM1, userId);
         MATCHER.assertEquals(EXAM1, service.get(questionId,userId));
     }
 

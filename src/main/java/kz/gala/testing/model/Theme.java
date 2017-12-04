@@ -3,6 +3,7 @@ package kz.gala.testing.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="themes")
@@ -12,11 +13,11 @@ public class Theme extends BaseEntity {
     @NotBlank
     private String name;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy="theme")
-//    private List<Question> questions;
-//
-//    @OneToMany(fetch =FetchType.LAZY, mappedBy = "theme")
-//    private List<User> users;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="theme")
+    private List<Question> questions;
+
+    @OneToMany(fetch =FetchType.LAZY, mappedBy = "theme")
+    private List<User> users;
 
     public Theme(Integer id, String name) {
         super(id);
@@ -53,12 +54,6 @@ public class Theme extends BaseEntity {
         int result = super.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
-    }
-
-    public static void main(String[] args) {
-        Theme theme1 = new Theme(10, "ыаацкуа");
-        Theme theme2 = new Theme(10, "ыаацкуа");
-        System.out.println(theme1.equals(theme2));
     }
 
     @Override

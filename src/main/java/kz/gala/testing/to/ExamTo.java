@@ -9,6 +9,7 @@ import java.util.List;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
+//
 //смотрим на все поля, не смотрим на геттеры, на is- геттеры, на сеттеры
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 public class ExamTo  {
@@ -23,31 +24,15 @@ public class ExamTo  {
 
     private final Integer prevQuestionId;
 
-    private final Integer userAnswerId;
+    private final Integer userAnswerEnums;
 
-    private final Integer userOldAnswerId;
-
-    public ExamTo(Question question, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId, Integer userOldAnswerId) {
+    public ExamTo(Question question, Integer nextQuestionId, Integer prevQuestionId, Integer userAnswerEnums) {
         this.questionId = question.getId();
         this.questionBody = question.getBody();
-        this.answers = answers;
-        this.nextQuestionId = nextId;
-        this.prevQuestionId = prevId;
-        this.userAnswerId = userAnswerId;
-        this.userOldAnswerId = userOldAnswerId;
+        this.answers = question.getAnswers();
+        this.nextQuestionId = nextQuestionId;
+        this.prevQuestionId = prevQuestionId;
+        this.userAnswerEnums = userAnswerEnums;
     }
 
-    public ExamTo(Question question, List<Answer> answers, Integer nextId, Integer prevId, Integer userAnswerId) {
-        this.questionId = question.getId();
-        this.questionBody = question.getBody();
-        this.answers = answers;
-        this.nextQuestionId = nextId;
-        this.prevQuestionId = prevId;
-        this.userAnswerId = userAnswerId;
-        this.userOldAnswerId = userAnswerId;
-    }
-
-    public boolean isEdited() {
-            return !userAnswerId.equals(userOldAnswerId);
-    }
 }

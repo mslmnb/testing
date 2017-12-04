@@ -19,7 +19,7 @@ public interface ExamRepository {
     List<Exam> getLast(int userId) ;
 
 
-    Exam update(Exam exam, int userAnswerId, int userId);
+    Exam update(Exam exam, int userId);
 
     Exam get(int questionId, int userId);
 

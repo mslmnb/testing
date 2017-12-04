@@ -6,29 +6,25 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Created by Mussulmanbekova_GE on 14.06.2017.
  */
 @Entity
 @Table(name="answers")
-public class Answer extends BaseEntity {
+public class Answer { //implements Serializable
 
     @Column(name="body", nullable = false)
     @NotNull
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="question_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
-    @JsonIgnore
-    private Question question;
+    @Id
+    private AnswerPrimaryKey primaryKey;
 
-    public Answer(Integer id, Question question, String body) {
-        super(id);
+    public Answer(Question question, Integer enumerator, String body) {
+        this.primaryKey = new AnswerPrimaryKey(question, enumerator);
         this.body = body;
-        this.question = question;
     }
 
     public Answer() {
@@ -42,18 +38,21 @@ public class Answer extends BaseEntity {
         return body;
     }
 
-    public Question getQuestion() {
-        return question;
+
+    public Integer getQuestionId() {
+        return primaryKey.getQuestionId();
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public Integer getEnumerator() {
+        return primaryKey.getEnumerator();
     }
+
 
     @Override
     public String toString() {
         return "Answer{" +
-                "id=" + getId() +
+                "question_id=" + getQuestionId() +
+                "enum=" + getEnumerator() +
                 "body='" + body + '\'' +
                 '}';
     }

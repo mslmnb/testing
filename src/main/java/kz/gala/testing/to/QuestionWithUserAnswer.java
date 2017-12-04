@@ -1,28 +1,30 @@
 package kz.gala.testing.to;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class QuestionWithUserAnswer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer questionId;
-    private Integer userAnswerId;
-    private Integer userOldAnswerId;
+    private Integer userAnswerEnums;
+    private Boolean edited;
 
     public QuestionWithUserAnswer() {
     }
 
-    public QuestionWithUserAnswer(Integer questionId, Integer userAnswerId, Integer userOldAnswerId) {
+    public QuestionWithUserAnswer(Integer questionId, Integer userAnswerEnums, Boolean edited) {
         this.questionId = questionId;
-        this.userAnswerId = userAnswerId;
-        this.userOldAnswerId = userOldAnswerId;
+        this.userAnswerEnums = userAnswerEnums;
+        this.edited = edited;
     }
 
-    public boolean isEdited() {
-        if (userOldAnswerId==null) {
-            return  userAnswerId!=null;
-        }
-        return !userOldAnswerId.equals(userAnswerId);
+    public Boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(Boolean edited) {
+        this.edited = edited;
     }
 
     public boolean isNull() {
@@ -33,23 +35,15 @@ public class QuestionWithUserAnswer implements Serializable {
         return questionId;
     }
 
-    public Integer getUserAnswerId() {
-        return userAnswerId;
-    }
-
-    public Integer getuserOldAnswerId() {
-        return userOldAnswerId;
+    public Integer getUserAnswerEnums() {
+        return userAnswerEnums;
     }
 
     public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 
-    public void setUserAnswerId(Integer userAnswerId) {
-        this.userAnswerId = userAnswerId;
-    }
-
-    public void setUserOldAnswerId(Integer userOldAnswerId) {
-        this.userOldAnswerId = userOldAnswerId;
+    public void setUserAnswerEnums(Integer userAnswerEnums) {
+        this.userAnswerEnums = userAnswerEnums;
     }
 }

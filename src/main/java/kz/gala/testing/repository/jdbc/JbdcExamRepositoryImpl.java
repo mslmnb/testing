@@ -4,7 +4,9 @@ import kz.gala.testing.model.Exam;
 import kz.gala.testing.repository.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +16,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class JbdcExamRepositoryImpl implements ExamRepository {
 
-    //private static final BeanPropertyRowMapper<Exam> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Exam.class);
-    private static final ExamMapper ROW_MAPPER = new ExamMapper();
+    //private static final BeanPropertyRowMapper<Exam> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Exam.class); - этот вариант не работает
+    private static final RowMapper ROW_MAPPER = new ExamMapper();
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -35,7 +37,9 @@ public class JbdcExamRepositoryImpl implements ExamRepository {
 
     @Override
     public List<Exam> getFirst(int userId) {
-        return jdbcTemplate.query("SELECT * from exam WHERE user_id=? ORDER BY question_id LIMIT 2",ROW_MAPPER,userId);
+        //return jdbcTemplate.query("SELECT * from exam WHERE user_id=? ORDER BY question_id LIMIT 2",ROW_MAPPER,userId);
+        List<Exam> result = jdbcTemplate.query("SELECT * from exam WHERE user_id=? ORDER BY question_id LIMIT 2",ROW_MAPPER,userId);
+        return result;
     }
 
     @Override
@@ -45,14 +49,13 @@ public class JbdcExamRepositoryImpl implements ExamRepository {
 
     @Transactional
     @Override
-    public Exam update(Exam exam, int userAnswerId, int userId) {
+    public Exam update(Exam exam, int userId) {
         if (exam.getUserId()!=userId)
             return null;
-        if (jdbcTemplate.update("UPDATE exam SET user_answer_id=? WHERE user_id=? AND question_id=?"
-                                , userAnswerId, userId, exam.getQuestionId()) == 0) {
+        if (jdbcTemplate.update("UPDATE exam SET user_answer_enums=? WHERE user_id=? AND question_id=?"
+                                , exam.getUserAnswerEnums(), userId, exam.getQuestionId()) == 0) {
             return null;
         }
-        exam.setUserAnswerId(userAnswerId);
         return exam;
     }
 
@@ -70,7 +73,7 @@ public class JbdcExamRepositoryImpl implements ExamRepository {
     @Transactional
     @Override
     public int insert(int userId, int themeId) {
-        return jdbcTemplate.update("INSERT INTO exam (user_id, question_id, user_answer_id) SELECT ?, q.id, null FROM questions q WHERE q.theme_id=?", userId, themeId);
+        return jdbcTemplate.update("INSERT INTO exam (user_id, question_id) SELECT ?, q.id FROM questions q WHERE q.theme_id=?", userId, themeId);
     }
 
     @Transactional

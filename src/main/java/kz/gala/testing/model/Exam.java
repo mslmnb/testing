@@ -1,5 +1,7 @@
 package kz.gala.testing.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,7 +17,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "exam", uniqueConstraints = {@UniqueConstraint(columnNames ={"user_id", "question_id"}, name = "exam_unique_user_question_idx")})
-public class Exam implements Serializable{
+public class Exam { //implements Serializable
 
     public static final String FIRST = "Exam.getFirst";
     public static final String LAST = "Exam.getLast";
@@ -24,58 +26,59 @@ public class Exam implements Serializable{
     public static final String ALL = "Exam.getAll";
 
     @Id
-    private ExamPrimaryKey id;
+    private ExamPrimaryKey primaryKey;
 
-    @Column(name = "user_answer_id")
-    private Integer userAnswerId;
+    //  каждый ответ имеет порядковый номер enumerator
+    // enumerator указывает порядковый номер бита для данного ответа
+    // userAnswerEnums - набор битовой информации
+    // если соответствующий ответ был выбран пользователем, то соответствующий бит равен 1
+    @Column(name = "user_answer_enums")
+    private Integer userAnswerEnums;
 
-    public ExamPrimaryKey getId() {
-        return id;
+    public ExamPrimaryKey getPrimaryKey() {
+        return primaryKey;
     }
 
-    public void setId(ExamPrimaryKey id) {
-        this.id = id;
+    public void setPrimaryKey(ExamPrimaryKey primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public Exam(ExamPrimaryKey id, Integer userAnswerId) {
-        this.id = id;
-        this.userAnswerId = userAnswerId;
+    public Exam(Integer userId, Integer questionId, Integer userAnswerEnums) {
+        this.primaryKey = new ExamPrimaryKey(userId, questionId);
+        this.userAnswerEnums = userAnswerEnums;
     }
 
-    public Exam(Integer userId, Integer questionId, Integer userAnswerId) {
-        this(new ExamPrimaryKey(userId, questionId), userAnswerId);
+
+    public Exam(ExamPrimaryKey primaryKey, Integer userAnswerEnums) {
+        this.primaryKey = primaryKey;
+        this.userAnswerEnums = userAnswerEnums;
     }
 
     public Exam() {
     }
 
+    public void setUserAnswerEnums(Integer userAnswerEnums) {
+        this.userAnswerEnums = userAnswerEnums;
+    }
+
+    public Integer getUserAnswerEnums() {
+        return userAnswerEnums;
+    }
+
     public Integer getQuestionId() {
-        return id.getQuestionId();
+        return primaryKey.getQuestionId();
     }
 
     public Integer getUserId() {
-        return id.getUserId();
+        return primaryKey.getUserId();
     }
-
-    public void setQuestionId(Integer questionId) {
-        id.setQuestionId(questionId);
-    }
-    public Integer getUserAnswerId() {
-        return userAnswerId;
-    }
-
-    public void setUserAnswerId(Integer userAnswerId) {
-        this.userAnswerId = userAnswerId;
-    }
-
-
 
     @Override
     public String toString() {
         return "Exam{" +
-                "userId=" + id.getUserId() +
-                ", questionId=" + id.getQuestionId() +
-                ", userAnswerId=" + userAnswerId +
+                "userId=" + getUserId() +
+                ", questionId=" + getQuestionId() +
+                ", userAnswerEnums=" + userAnswerEnums +
                 '}';
     }
 }

@@ -15,7 +15,7 @@ public interface ExamService {
     List<Exam> getAll(int userId);
 
     Exam get(int questionId, int userId) throws NotFoundException;
-    Exam update(Exam exam, int userAnswerId, int userId) throws NotFoundException;
+    Exam update(Exam exam,  int userId) throws NotFoundException;
 
     ExamReport getExamReport(int userId) throws NotFoundException;
     boolean isComplete(int userId) throws NotFoundException;

@@ -12,7 +12,8 @@ class ExamMapper implements RowMapper<Exam> {
     public Exam mapRow(ResultSet rs, int rowNum) throws SQLException {
         Integer questionId = rs.getInt("question_id");
         Integer userId = rs.getInt("user_id");
-        Integer userAnswerId = rs.getInt("user_answer_id");
-        return new Exam(userId, questionId, userAnswerId==0 ? null : userAnswerId);
+        Integer userAnswerEnums = rs.getInt("user_answer_enums");
+        return new Exam(userId, questionId, userAnswerEnums);
     }
+
 }
