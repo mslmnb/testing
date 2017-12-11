@@ -2,6 +2,8 @@ package kz.gala.testing.repository;
 
 import kz.gala.testing.model.Question;
 
+import java.util.List;
+
 public interface QuestionRepository {
     // добавить новый вопрос
     // удалить вопрос по id
@@ -15,4 +17,5 @@ public interface QuestionRepository {
 
     Integer getCorrectAnswerEnums(int questionId);
 
+    List<Question> getAll(int themeId);
 }

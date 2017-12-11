@@ -6,12 +6,9 @@
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 
-
-</body>
-</html>
 <div class="jumbotron">
     <div class="container">
-        <h2>Вопросы</h2>
+        <h2>Ответы</h2>
         <h3>Страница на стадии разработки</h3>
     </div>
 </div>

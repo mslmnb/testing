@@ -5,15 +5,15 @@ function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
 
-function renderAnswersBtn(data, type, row) {
-    if (type === "display") {
-        return "<a class='btn btn-info' href='admin/themes/answers'>" + i18n["btnAnswers"] + "</a>";
+function renderQuestionsBtn(type, row) {
+        if (type === "display") {
+        return "<a class='btn btn-info' href='admin/themes/"+ row.id + "/questions'>" + i18n["btnQuestions"] + "</a>";
     }
 }
 
-function renderUsersBtn(data, type, row) {
+function renderUsersBtn(type, row) {
     if (type === "display") {
-        return "<a class='btn btn-info' href='admin/themes/users'>" + i18n["btnUsers"] + "</a>";
+        return "<a class='btn btn-info' href='admin/themes/"+ row.id + "/users'>" + i18n["btnUsers"] + "</a>";
     }
 }
 
@@ -24,7 +24,7 @@ function renderUsersBtn(data, type, row) {
                 "data": "name"
             },
             {
-                "render": renderAnswersBtn,
+                "render": renderQuestionsBtn,
                 "defaultContent": "",
                 "orderable": false
             },
@@ -42,7 +42,7 @@ function renderUsersBtn(data, type, row) {
                 "render": renderDeleteBtn,
                 "defaultContent": "",
                 "orderable": false
-            },
+            }
         ],
         "order": [
             [

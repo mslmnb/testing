@@ -1,6 +1,7 @@
 package kz.gala.testing.service;
 
 import kz.gala.testing.model.Theme;
+import kz.gala.testing.to.ThemeTo;
 import kz.gala.testing.util.exception.NotFoundException;
 
 import java.util.List;

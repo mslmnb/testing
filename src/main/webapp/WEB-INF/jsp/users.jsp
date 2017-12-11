@@ -7,8 +7,8 @@
 
 
 
-</body>
-</html>
+<div class="themeId"></div>
+
 <div class="jumbotron">
     <div class="container">
         <h2>Пользователи</h2>

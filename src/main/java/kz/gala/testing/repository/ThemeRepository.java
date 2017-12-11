@@ -1,6 +1,7 @@
 package kz.gala.testing.repository;
 
 import kz.gala.testing.model.Theme;
+import kz.gala.testing.to.ThemeTo;
 
 import java.util.List;
 

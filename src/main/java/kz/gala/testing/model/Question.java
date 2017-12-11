@@ -1,5 +1,7 @@
 package kz.gala.testing.model;
 
+import kz.gala.testing.to.QuestionTo;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -15,8 +17,8 @@ public class Question extends BaseEntity{
     public static final String BY_ID = "Question.getById";
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "theme_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "theme_id")//, nullable = false)
+    //@NotNull
     private Theme theme;
 
     @Column(name="body", nullable=false)
@@ -26,17 +28,24 @@ public class Question extends BaseEntity{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "primaryKey.question")
     private List<Answer> answers;
 
-    @Column(name="correct_answer_enums", nullable = false)
-    @NotNull
+    @Column(name="correct_answer_enums") //, nullable = false)
+    //@NotNull
     private Integer correctAnswerEnums;                        // не отдавать на UI
 
     public Question() {
+    }
+
+    public Question (Integer id, String body) {
+        super(id);
+        this.body = body;
+        correctAnswerEnums = 0;
     }
 
     public Question (Integer id, Theme theme,String body) {
         super(id);
         this.theme = theme;
         this.body = body;
+        correctAnswerEnums = 0;
     }
 
     public Question (Integer id, Theme theme,String body, Integer correctAnswerId) {
@@ -44,6 +53,13 @@ public class Question extends BaseEntity{
         this.theme = theme;
         this.body = body;
         this.correctAnswerEnums = correctAnswerId;
+    }
+
+    public Question (QuestionTo questionTo, Theme theme) {
+        super(questionTo.getId());
+        this.body = questionTo.getBody();
+        this.theme = theme;
+        correctAnswerEnums = 0;
     }
 
     public void setBody(String body) {
@@ -70,10 +86,14 @@ public class Question extends BaseEntity{
         this.correctAnswerEnums = correctAnswerId;
     }
 
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
-                "themeId=" + theme.getId() +
+                //"themeId=" + theme.getId() +
                 ", body='" + body + '\'' +
                 '}';
     }

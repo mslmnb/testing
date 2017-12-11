@@ -6,12 +6,12 @@
 
 <body>
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
-<script type="text/javascript" src="resources/js/themeDatatables.js" defer></script>
+<script type="text/javascript" src="resources/js/questionDatatables.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron">
     <div class="container">
-        <h3><spring:message code="theme.title"/></h3>
+        <h3><spring:message code="question.title"/></h3>
         <br/>
         <a class="btn btn-primary" onclick="add()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -20,13 +20,12 @@
         <br/><br/>
         <table class="table table-striped display" id="datatable">
             <thead>
-                <tr>
-                    <th><spring:message code="theme.name"/></th>
-                    <th><spring:message code="theme.questions"/></th>
-                    <th><spring:message code="theme.users"/></th>
-                    <th></th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th><spring:message code="question.body"/></th>
+                <th><spring:message code="question.answers"/></th>
+                <th></th>
+                <th></th>
+            </tr>
             </thead>
         </table>
     </div>
@@ -42,10 +41,9 @@
                 <form:form class="form-horizontal" id="detailsForm">
                     <input type="hidden" id="id" name="id">
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3"><spring:message code="theme.name"/></label>
-
+                        <label for="body" class="control-label col-xs-3"><spring:message code="question.body"/></label>
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="theme.name"/>">
+                            <input type="text" class="form-control" id="body" name="body" placeholder="<spring:message code="question.body"/>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -66,10 +64,9 @@
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
 <script type="text/javascript">
-    i18n["addTitle"] = "<spring:message code="theme.add"/>";
-    i18n["editTitle"] = "<spring:message code="theme.edit"/>";
-    i18n["btnQuestions"] = "<spring:message code="theme.questions"/>";
-    i18n["btnUsers"] = "<spring:message code="theme.users"/>";
+    i18n["addTitle"] = "<spring:message code="question.add"/>";
+    i18n["editTitle"] = "<spring:message code="question.edit"/>";
+    i18n["btnAnswers"] = "<spring:message code="theme.answers"/>";
 </script>
 
 </html>

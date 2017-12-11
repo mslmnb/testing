@@ -60,16 +60,7 @@ function hasBeenChosen (currEnum, enums) {
     if  (enums===undefined || enums<=0) {
         return false ;
     }
-    return (pow(2, currEnum) & enums)> 0;
-}
-
-function pow(x, n) {
-    var pow = 1;
-    for (var i = 1; i<=n; i++) {
-        pow = pow * x;
-    }
-    return pow;
-
+    return (Math.pow(2, currEnum) & enums)> 0;
 }
 
 function getData(ajaxQuery) {
@@ -80,7 +71,7 @@ function getData(ajaxQuery) {
 
     var userAnswerEnums = 0;
     for (var i = 0; i<boxes.length; i++) {
-        userAnswerEnums = userAnswerEnums + pow(2,boxes[i].value);
+        userAnswerEnums = userAnswerEnums + Math.pow(2,boxes[i].value);
     }
 
     if (questionId===undefined) {
@@ -118,7 +109,7 @@ $(function() {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
 
-    $(document).ajaxSend(function(e, xhr, options){
+    $(document).ajaxSend(function(e, xhr){
         xhr.setRequestHeader(header, token);
     });
 

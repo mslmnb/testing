@@ -1,7 +1,9 @@
 package kz.gala.testing.web.admin;
 
+import kz.gala.testing.model.Question;
 import kz.gala.testing.model.Theme;
 import kz.gala.testing.service.ThemeService;
+import kz.gala.testing.to.ThemeTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class AdminAjaxController extends AbstractAdminController{
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Theme> getAll() {
+    public List<ThemeTo> getAll() {
         return super.getAll();
     }
 
@@ -56,4 +58,6 @@ public class AdminAjaxController extends AbstractAdminController{
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }

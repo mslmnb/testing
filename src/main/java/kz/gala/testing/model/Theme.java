@@ -24,6 +24,10 @@ public class Theme extends BaseEntity {
         this.name = name;
     }
 
+    public Theme(Integer id) {
+        super(id);
+    }
+
     public Theme() {
     }
 

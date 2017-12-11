@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -39,5 +41,10 @@ public class QuestionServiceImpl implements QuestionService {
     public Question update(Question question) throws NotFoundException {
         Assert.notNull(question, "question must not be null");  //throws IllegalArgumentException
         return checkNotFoundWithId(repository.save(question), question.getId());
+    }
+
+    @Override
+    public List<Question> getAll(int themeId) {
+        return repository.getAll(themeId);
     }
 }

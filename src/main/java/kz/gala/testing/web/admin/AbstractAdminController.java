@@ -4,6 +4,7 @@ import kz.gala.testing.Profiles;
 import kz.gala.testing.model.BaseEntity;
 import kz.gala.testing.model.Theme;
 import kz.gala.testing.service.ThemeService;
+import kz.gala.testing.to.ThemeTo;
 import kz.gala.testing.util.exception.ApplicationException;
 import kz.gala.testing.web.ExceptionInfoHandler;
 import org.slf4j.Logger;
@@ -13,11 +14,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static kz.gala.testing.util.ValidationUtil.checkIdConsistent;
 import static kz.gala.testing.util.ValidationUtil.checkNew;
 
-public class AbstractAdminController {
+public abstract class AbstractAdminController {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractAdminController.class);
 
     public static final String EXCEPTION_MODIFICATION_RESTRICTION = "exception.theme.modificationRestriction";
@@ -39,7 +41,7 @@ public class AbstractAdminController {
     }
 
     public Theme get(int id) {
-        LOG.info("get theme{}", id);
+        LOG.info("get theme {}", id);
         return themeService.get(id);
     }
 
@@ -49,26 +51,26 @@ public class AbstractAdminController {
         themeService.delete(id);
     }
 
-    public Theme create(Theme theme) {
-        LOG.info("create {}", theme);
-        checkNew(theme);
-        return themeService.save(theme);
+    public Theme create(Theme t) {
+        LOG.info("create {}", t);
+        checkNew(t);
+        return themeService.save(t);
     }
 
-    public void update(Theme theme, int themeId) {
-        LOG.info("update {} with id={}", theme, themeId);
-        checkIdConsistent(theme, themeId);
-        themeService.update(theme);
+    public void update(Theme t, int id) {
+        LOG.info("update {} with id={}", t, id);
+        checkIdConsistent(t, id);
+        themeService.update(t);
     }
 
-    public List<Theme> getAll() {
+    public List<ThemeTo> getAll() {
         LOG.info("get all themes");
-        return themeService.getAll();
+        return themeService.getAll().stream().map(t->new ThemeTo(t)).collect(Collectors.toList());
 
     }
 
 
-    public void checkModificationAllowed(int id) {
+    private void checkModificationAllowed(int id) {
         if(modificationRestriction && id== BaseEntity.START_SEQ) {
             throw new ApplicationException(EXCEPTION_MODIFICATION_RESTRICTION, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);
         }

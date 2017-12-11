@@ -34,7 +34,7 @@ CREATE TABLE questions
   id                     INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   theme_id               INTEGER NOT NULL,
   body                   VARCHAR NOT NULL,
-  correct_answer_enums   INTEGER NOT NULL,
+  correct_answer_enums   INTEGER NOT NULL DEFAULT 0,
   FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 
