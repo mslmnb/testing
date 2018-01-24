@@ -1,19 +1,22 @@
 var ajaxUrl;
+var adminUrl;
 var datatableApi;
 
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
 
-function renderAnswersBtn(type, row) {
+function renderAnswersBtn(data, type, row) {
     if (type === "display") {
-        return "<a class='btn btn-info' href='"+ ajaxUrl + row.id + "/answers'>" + i18n["btnAnswers"] + "</a>";
+        var body = '"' + row.body + '"';
+        return "<a class='btn btn-info' href='"+ adminUrl + row.id + "/answers' onclick='saveToLocalStorage(" + row.id + ", " + body + ");'>" + i18n["btnAnswers"] + "</a>";
     }
 }
 
-
 $(function () {
-    ajaxUrl = "ajax/admin/themes/100000/questions/";
+    adminUrl = "admin/themes/" + $("#themeId").html() + "/questions/";
+    ajaxUrl = "ajax/" + adminUrl;
+    $("#themeName").html(localStorage.getItem($("#themeId").html()));
     datatableApi = $('#datatable').DataTable(extendsOpts({
        "columns": [
            {

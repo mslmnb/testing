@@ -47,4 +47,25 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getAll(int themeId) {
         return repository.getAll(themeId);
     }
+
+    @Override
+    public void correct(Integer questionId, Integer enumerator, Boolean correct) {
+
+        Assert.notNull(enumerator, "enumerator must not be null");  //throws IllegalArgumentException
+        Assert.notNull(questionId, "questionId must not be null");  //throws IllegalArgumentException
+        Assert.notNull(correct, "correct must not be null");
+        //откорректировать в соответствии со значением isCorrect поле question.correct_answer_enum
+        Question q = repository.get(questionId);
+        Integer correctAnswerEnums = q.getCorrectAnswerEnums();
+        int mask = (int) Math.pow(2, enumerator);
+        // устанавливаю единицу в позиции enumerator
+        correctAnswerEnums = correctAnswerEnums | mask;
+        if (!correct) {
+            // устанавливаю ноль в позиции enumerator
+            correctAnswerEnums = correctAnswerEnums ^ mask;
+        }
+        q.setCorrectAnswerEnums(correctAnswerEnums);
+        repository.save(q);
+    }
+
 }

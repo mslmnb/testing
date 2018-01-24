@@ -69,7 +69,7 @@
             <a href="http://spring.io/blog/2014/05/07/preview-spring-security-test-method-security">Spring Security
                 Test</a>,
             <a href="http://hibernate.org/orm/">Hibernate ORM</a>,
-            <%--<a href="http://hibernate.org/validator/">Hibernate Validator</a>,--%>
+            <a href="http://hibernate.org/validator/">Hibernate Validator</a>,
             <a href="http://www.slf4j.org/">SLF4J</a>,
             <a href="https://github.com/FasterXML/jackson">Json Jackson</a>,
             <a href="http://ru.wikipedia.org/wiki/JSP">JSP</a>,

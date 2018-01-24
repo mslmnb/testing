@@ -5,19 +5,23 @@ function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
 
-function renderQuestionsBtn(type, row) {
+function renderQuestionsBtn(data, type, row) {
         if (type === "display") {
-        return "<a class='btn btn-info' href='admin/themes/"+ row.id + "/questions'>" + i18n["btnQuestions"] + "</a>";
+            var name = '"' + row.name + '"';
+            return "<a class='btn btn-info' href='admin/themes/"+ row.id + "/questions' onclick='saveToLocalStorage(" + row.id + ", " + name + ");'>" + i18n["btnQuestions"] + "</a>";
     }
 }
 
-function renderUsersBtn(type, row) {
+function renderUsersBtn(data, type, row) {
     if (type === "display") {
-        return "<a class='btn btn-info' href='admin/themes/"+ row.id + "/users'>" + i18n["btnUsers"] + "</a>";
+        var name = '"' + row.name + '"';
+        return "<a class='btn btn-info' href='admin/themes/"+ row.id + "/users' onclick='saveToLocalStorage(" + row.id + ", " + name + ");'>" + i18n["btnUsers"] + " </a>";
     }
 }
 
     $(function () {
+    localStorage.clear();
+    localStorage["title"] = "ТЕСТИРОВАНИЕ"
     datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
             {

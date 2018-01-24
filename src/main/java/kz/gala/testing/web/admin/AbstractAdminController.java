@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static kz.gala.testing.util.ThemeUtil.asTo;
+import static kz.gala.testing.util.ThemeUtil.convertToListThemeTo;
 import static kz.gala.testing.util.ValidationUtil.checkIdConsistent;
 import static kz.gala.testing.util.ValidationUtil.checkNew;
 
@@ -40,9 +42,9 @@ public abstract class AbstractAdminController {
         this.themeService = themeService;
     }
 
-    public Theme get(int id) {
+    public ThemeTo get(int id) {
         LOG.info("get theme {}", id);
-        return themeService.get(id);
+        return asTo(themeService.get(id));
     }
 
     public void delete(int id) {
@@ -65,7 +67,7 @@ public abstract class AbstractAdminController {
 
     public List<ThemeTo> getAll() {
         LOG.info("get all themes");
-        return themeService.getAll().stream().map(t->new ThemeTo(t)).collect(Collectors.toList());
+        return convertToListThemeTo(themeService.getAll());
 
     }
 

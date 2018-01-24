@@ -1,7 +1,5 @@
 package kz.gala.testing.model;
 
-import kz.gala.testing.to.QuestionTo;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -35,6 +33,10 @@ public class Question extends BaseEntity{
     public Question() {
     }
 
+    public Question (Integer id) {
+        super(id);
+    }
+
     public Question (Integer id, String body) {
         super(id);
         this.body = body;
@@ -48,18 +50,11 @@ public class Question extends BaseEntity{
         correctAnswerEnums = 0;
     }
 
-    public Question (Integer id, Theme theme,String body, Integer correctAnswerId) {
+    public Question (Integer id, Theme theme,String body, Integer correctAnswerEnums) {
         super(id);
         this.theme = theme;
         this.body = body;
-        this.correctAnswerEnums = correctAnswerId;
-    }
-
-    public Question (QuestionTo questionTo, Theme theme) {
-        super(questionTo.getId());
-        this.body = questionTo.getBody();
-        this.theme = theme;
-        correctAnswerEnums = 0;
+        this.correctAnswerEnums = correctAnswerEnums;
     }
 
     public void setBody(String body) {
@@ -82,8 +77,8 @@ public class Question extends BaseEntity{
         return correctAnswerEnums;
     }
 
-    public void setCorrectAnswerId(Integer correctAnswerId) {
-        this.correctAnswerEnums = correctAnswerId;
+    public void setCorrectAnswerEnums(Integer correctAnswerEnums) {
+        this.correctAnswerEnums = correctAnswerEnums;
     }
 
     public void setTheme(Theme theme) {

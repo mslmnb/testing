@@ -77,6 +77,7 @@ function add() {
     closeNoty();
     $('#modalTitle').html(i18n["addTitle"]);
     form.find(":input").val("");
+    form.find(":input:checkbox").attr("checked",false);
     $('#editRow').modal();
 }
 
@@ -86,6 +87,7 @@ function updateRow(id) {
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
+            form.find("textarea[name='" + key + "']").val(value);
         });
         $('#editRow').modal();
     });
@@ -129,10 +131,16 @@ function renderEditBtn(data, type, row) {
 
 function renderDeleteBtn(data, type, row) {
     if (type === "display") {
-        return "<a onclick='deleteRow(" + row.id + ");'>"+
+        return "<a onclick='deleteRow(" + row.id + ");'>" +
             "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
     }
 }
+
+    function saveToLocalStorage(id, value) {
+        localStorage[id] = value;
+    }
+
+
 
 
 

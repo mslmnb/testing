@@ -29,7 +29,7 @@ public class AdminAjaxController extends AbstractAdminController{
 
     @Override
     @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Theme get(@PathVariable("id") int id) {
+    public ThemeTo get(@PathVariable("id") int id) {
         return super.get(id);
     }
 

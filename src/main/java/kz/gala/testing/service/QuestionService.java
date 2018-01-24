@@ -16,4 +16,5 @@ public interface QuestionService {
 
     List<Question> getAll(int themeId);
 
+    void correct(Integer questionId, Integer enumerator, Boolean correct);
 }

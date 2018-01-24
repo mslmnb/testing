@@ -24,6 +24,12 @@ public class AnswerPrimaryKey implements Serializable { //обязательно
     public AnswerPrimaryKey() {
     }
 
+    public AnswerPrimaryKey(Integer questionId, Integer enumerator) {
+        this.question = new Question(questionId);
+        this.enumerator = enumerator;
+    }
+
+
     public AnswerPrimaryKey(Question question, Integer enumerator) {
         this.question = question;
         this.enumerator = enumerator;

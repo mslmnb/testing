@@ -54,13 +54,14 @@ public class QuestionAjaxController extends AbstractQuestionController {
         }
         question.setTheme(new Theme(themeId));
         if (question.isNew()) {
-            question.setCorrectAnswerId(0);
+            question.setCorrectAnswerEnums(0);
             super.create(question);
         } else {
             Question questionFromDb = super.get(question.getId());
-            question.setCorrectAnswerId(questionFromDb.getCorrectAnswerEnums());
+            question.setCorrectAnswerEnums(questionFromDb.getCorrectAnswerEnums());
             super.update(question, question.getId());
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

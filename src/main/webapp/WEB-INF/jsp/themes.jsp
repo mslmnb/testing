@@ -21,11 +21,11 @@
         <table class="table table-striped display" id="datatable">
             <thead>
                 <tr>
-                    <th><spring:message code="theme.name"/></th>
-                    <th><spring:message code="theme.questions"/></th>
-                    <th><spring:message code="theme.users"/></th>
-                    <th></th>
-                    <th></th>
+                    <th class="col-md-6"><spring:message code="theme.name"/></th>
+                    <th class="col-md-2"><spring:message code="theme.questions"/></th>
+                    <th class="col-md-2"><spring:message code="theme.users"/></th>
+                    <th class="col-md-1"></th>
+                    <th class="col-md-1"></th>
                 </tr>
             </thead>
         </table>

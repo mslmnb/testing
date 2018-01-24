@@ -1,5 +1,6 @@
 package kz.gala.testing.web.admin;
 
+import kz.gala.testing.model.Theme;
 import kz.gala.testing.service.ExamService;
 import kz.gala.testing.service.QuestionService;
 import kz.gala.testing.web.exam.AbstractExamController;
@@ -22,10 +23,17 @@ public class AdminController { // extends AbstractExamController
         return "themes";
     }
 
-    @GetMapping(value="/themes/{id}/questions")
-    public String answers(Model model, @PathVariable("id") int id) {
-        model.addAttribute("themesId", id);
+    @GetMapping(value="/themes/{themeId}/questions")
+    public String questions(Model model, @PathVariable("themeId") int themeId) {
+        model.addAttribute("themeId", themeId);
         return "questions";
+    }
+
+    @GetMapping(value="/themes/{themeId}/questions/{questionId}/answers")
+    public String answers(Model model, @PathVariable("themeId") int themeId, @PathVariable("questionId") int questionId) {
+        model.addAttribute("themeId", themeId);
+        model.addAttribute("questionId", questionId);
+        return "answers";
     }
 
 //    @GetMapping(value="/themes/users/{id}")
