@@ -36,9 +36,9 @@ public class AdminController { // extends AbstractExamController
         return "answers";
     }
 
-//    @GetMapping(value="/themes/users/{id}")
-//    public String users(Model model, @PathVariable("id") int id) {
-//        model.addAttribute("themesId", id);
-//        return "users";
-//    }
+    @GetMapping(value = "/themes/{themeId}/users")
+    public String users(Model model, @PathVariable("themeId") int themeId) {
+        model.addAttribute("themeId", themeId);
+        return "users";
+    }
 }

@@ -1,14 +1,13 @@
 package kz.gala.testing.to;
 
+import kz.gala.testing.model.BaseEntity;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
 import java.io.Serializable;
 
-public class UserTo implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class UserTo extends BaseEntity {
 
-    private Integer id;
     @NotBlank
     @SafeHtml
     private String name;
@@ -23,7 +22,7 @@ public class UserTo implements Serializable {
     }
 
     public UserTo(Integer id, String name, String position, String department) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.position = position;
         this.department = department;
@@ -41,14 +40,6 @@ public class UserTo implements Serializable {
         return department;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -64,7 +55,7 @@ public class UserTo implements Serializable {
     @Override
     public String toString() {
         return "UserTo{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", position='" + position + '\'' +
                 ", department='" + department + '\'' +

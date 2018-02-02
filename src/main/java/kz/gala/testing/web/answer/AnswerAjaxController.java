@@ -24,8 +24,7 @@ public class AnswerAjaxController extends AbstractAnswerController{
     @Override
     @GetMapping(value="/{enumerator}", produces = MediaType.APPLICATION_JSON_VALUE)
     public AnswerTo get(@PathVariable("questionId") int questionId, @PathVariable("enumerator") int enumerator) {
-        AnswerTo a = super.get(questionId, enumerator);
-        return a;
+        return super.get(questionId, enumerator);
     }
 
     @Override
@@ -57,8 +56,7 @@ public class AnswerAjaxController extends AbstractAnswerController{
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AnswerWithCorrect> getAll(@PathVariable("questionId") int questionId) {
-        List<AnswerWithCorrect> result = super.getAll(questionId);
-        return result;
+        return super.getAll(questionId);
     }
 
     @PostMapping(value = "/{enumerator}")

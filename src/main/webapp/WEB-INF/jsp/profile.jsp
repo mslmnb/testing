@@ -17,19 +17,19 @@
         <form:form modelAttribute="userTo" class="form-horizontal" method="post" action="user/profile">
             <input type="hidden" name="id" id="id" value="${userTo.id}">
 
-            <spring:message code="userTo.name" var="name"/>
+            <spring:message code="user.name" var="name"/>
             <testing:inputField name="name" label="${name}"/>
 
-            <spring:message code="userTo.position" var="position"/>
+            <spring:message code="user.position" var="position"/>
             <testing:inputField name="position" label="${position}"/>
 
-            <spring:message code="userTo.department" var="department"/>
+            <spring:message code="user.department" var="department"/>
             <testing:inputField name="department" label="${department}"/>
 
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">
                     <button class="btn btn-info" type="submit">
-                        <spring:message code="userTo.save"/>
+                        <spring:message code="user.save"/>
                     </button>
                 </div>
             </div>

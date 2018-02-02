@@ -3,6 +3,7 @@ package kz.gala.testing.service;
 import kz.gala.testing.AuthorizedUser;
 import kz.gala.testing.model.User;
 import kz.gala.testing.repository.UserRepository;
+import kz.gala.testing.to.UserFullTo;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.UserUtil;
 import kz.gala.testing.util.exception.NotFoundException;
@@ -10,8 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
+import static kz.gala.testing.util.UserUtil.prepareToSave;
+import static kz.gala.testing.util.UserUtil.updateFromFullTo;
+import static kz.gala.testing.util.UserUtil.updateFromTo;
 import static kz.gala.testing.util.ValidationUtil.checkNotFound;
 import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithId;
 
@@ -30,17 +37,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return checkNotFoundWithId(repository.get(userId), userId);
     }
 
+    //@CacheEvict(value = "users", allEntries = true) есть в topjava проверить
+    @Transactional                                  //  есть в topjava проверить
     @Override
-    public void update(UserTo userTo){
-        User user = get(userTo.getId());
-        UserUtil.updateFromTo(userTo, user);
-        save(user);
+    public void update(UserTo userTo) {
+        User user = updateFromTo(userTo, get(userTo.getId()));
+        repository.save(prepareToSave(user));
+    }
+
+    @Override
+    public void update(UserFullTo userFullTo) {
+        User user = updateFromFullTo(userFullTo, get(userFullTo.getId()));
+        repository.save(prepareToSave(user));
     }
 
     @Override
     public void updateWithNoComplete(UserTo userTo) {
         User user = get(userTo.getId());
-        UserUtil.updateFromTo(userTo, user);
+        updateFromTo(userTo, user);
         user.setComplete(false);
         save(user);
     }
@@ -66,4 +80,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return checkNotFound(u,"login=" + login);
     }
 
+    @Override
+    public void delete(int id) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id), id);
+    }
+
+    @Override
+    public List<User> getAll(int themeId) {
+        return repository.getAll(themeId);
+    }
 }

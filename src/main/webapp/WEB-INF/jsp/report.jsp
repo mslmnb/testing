@@ -16,13 +16,13 @@
         <h3><spring:message code="examReport.results"/></h3>
         <br>
 
-        <label class="control-label col-sm-2"><spring:message code="userTo.name"/></label>
+        <label class="control-label col-sm-2"><spring:message code="user.name"/></label>
         <div class="col-sm-10">${userReport.userName}</div>
         <br><br>
-        <label class="control-label col-sm-2"><spring:message code="userTo.position"/></label>
+        <label class="control-label col-sm-2"><spring:message code="user.position"/></label>
         <div class="col-sm-10">${userReport.userPosition}</div>
         <br><br>
-        <label class="control-label col-sm-2"><spring:message code="userTo.department"/></label>
+        <label class="control-label col-sm-2"><spring:message code="user.department"/></label>
         <div class="col-sm-10">${userReport.userDepartment}</div>
         <br><br><br>
 
