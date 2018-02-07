@@ -1,4 +1,4 @@
-package kz.gala.testing.web.admin;
+package kz.gala.testing.web.theme;
 
 import kz.gala.testing.Profiles;
 import kz.gala.testing.model.BaseEntity;
@@ -14,15 +14,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static kz.gala.testing.util.ThemeUtil.asTo;
 import static kz.gala.testing.util.ThemeUtil.convertToListThemeTo;
 import static kz.gala.testing.util.ValidationUtil.checkIdConsistent;
 import static kz.gala.testing.util.ValidationUtil.checkNew;
 
-public abstract class AbstractAdminController {
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractAdminController.class);
+public abstract class AbstractThemeController {
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractThemeController.class);
 
     public static final String EXCEPTION_MODIFICATION_RESTRICTION = "exception.theme.modificationRestriction";
 
@@ -38,7 +37,7 @@ public abstract class AbstractAdminController {
         modificationRestriction = environment.acceptsProfiles(Profiles.HEROKU);
     }
 
-    public AbstractAdminController(ThemeService themeService) {
+    public AbstractThemeController(ThemeService themeService) {
         this.themeService = themeService;
     }
 
@@ -62,6 +61,7 @@ public abstract class AbstractAdminController {
     public void update(Theme t, int id) {
         LOG.info("update {} with id={}", t, id);
         checkIdConsistent(t, id);
+        checkModificationAllowed(id);
         themeService.update(t);
     }
 

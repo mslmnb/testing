@@ -1,9 +1,9 @@
-package kz.gala.testing.web.admin;
+package kz.gala.testing.web.theme;
 
-import kz.gala.testing.model.Question;
 import kz.gala.testing.model.Theme;
 import kz.gala.testing.service.ThemeService;
 import kz.gala.testing.to.ThemeTo;
+import kz.gala.testing.web.theme.AbstractThemeController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value="ajax/admin/themes")
-public class AdminAjaxController extends AbstractAdminController{
+public class ThemeAjaxController extends AbstractThemeController {
 
-    public AdminAjaxController(ThemeService themeService) {
+    public ThemeAjaxController(ThemeService themeService) {
         super(themeService);
     }
 
