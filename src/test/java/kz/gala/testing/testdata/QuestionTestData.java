@@ -6,10 +6,8 @@ import kz.gala.testing.model.Question;
 
 import static kz.gala.testing.model.BaseEntity.START_SEQ;
 import static kz.gala.testing.testdata.ThemeTestData.THEME1;
+import static kz.gala.testing.testdata.ThemeTestData.THEME1_ID;
 
-/**
- * Created by Mussulmanbekova_GE on 03.07.2017.
- */
 public class QuestionTestData {
 
     public final static ModelMatcher<Question> MATCHER = ModelMatcher.of(Question.class);
@@ -63,19 +61,11 @@ public class QuestionTestData {
     public static final Answer ANSWER26 = new Answer(QUESTION9, 1, "ягода");
     public static final Answer ANSWER27 = new Answer(QUESTION9, 2, "фрукт");
 
-//    static {
-//        QUESTION1.setCorrectAnswerId(ANSWER1_ID + 1);
-//        QUESTION2.setCorrectAnswerId(ANSWER1_ID + 5);
-//        QUESTION3.setCorrectAnswerId(ANSWER1_ID + 6);
-//        QUESTION4.setCorrectAnswerId(ANSWER1_ID + 11);
-//        QUESTION5.setCorrectAnswerId(ANSWER1_ID + 12);
-//        QUESTION6.setCorrectAnswerId(ANSWER1_ID + 16);
-//        QUESTION7.setCorrectAnswerId(ANSWER1_ID + 18);
-//        QUESTION8.setCorrectAnswerId(ANSWER1_ID + 21);
-//        QUESTION9.setCorrectAnswerId(ANSWER1_ID + 26);
-//    }
+    public static Question getCreated() {
+        return new Question(null, THEME1, "Новый вопрос");
+    }
 
-    private QuestionTestData() {
-
+    public static Question getUpdated() {
+        return new Question(QUESTION1_ID, QUESTION1.getTheme(), "Обновленный вопрос");
     }
 }

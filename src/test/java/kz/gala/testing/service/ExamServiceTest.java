@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static kz.gala.testing.testdata.ExamTestData.*;
+import static kz.gala.testing.testdata.ThemeTestData.THEME1_ID;
 import static kz.gala.testing.testdata.UserTestData.USER_ID;
 
 
@@ -82,7 +82,7 @@ public class ExamServiceTest extends AbstractServiceTest {
     public void testUpdate() throws Exception {
         int questionId = EXAM1.getQuestionId();
         int userId = EXAM1.getUserId();
-        int userAnswerEnums = questionService.get(questionId).getCorrectAnswerEnums();
+        int userAnswerEnums = questionService.get(questionId, THEME1_ID).getCorrectAnswerEnums();
         EXAM1.setUserAnswerEnums(userAnswerEnums);
         service.update(EXAM1, userId);
         MATCHER.assertEquals(EXAM1, service.get(questionId,userId));
@@ -90,19 +90,26 @@ public class ExamServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetExamReport() {
-        MATCHER_REPORT.assertEquals(EXAM_REPORT, service.getExamReport(USER_ID));
+        MATCHER_REPORT.assertEquals(EXAM_REPORT, service.getExamReport(USER_ID, THEME1_ID));
     }
 
     @Test
-    public void testDelete() {
-        service.delete(USER_ID);
+    public void testDeleteAllFor() throws Exception {
+        service.deleteAllFor(USER_ID);
         MATCHER.assertCollectionEquals(new ArrayList<Exam>(), service.getAll(USER_ID));
     }
 
     @Test
+    public void testDeleteNotFound() {
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage("Not found entity with id=" + (USER_ID-1) );
+        service.deleteAllFor(USER_ID-1);
+    }
+
+    @Test
     public void testInsert() {
-        service.delete(USER_ID);
-        service.insert(USER_ID);
+        service.deleteAllFor(USER_ID);
+        service.insertFor(USER_ID);
         MATCHER.assertCollectionEquals(Arrays.asList(EXAM1, EXAM2, EXAM3, EXAM4, EXAM5, EXAM6, EXAM7, EXAM8, EXAM9), service.getAll(USER_ID));
     }
 

@@ -84,12 +84,12 @@ public abstract class AbstractUserController {
 
 
     public void examStart(int id) {
-        examService.delete(id);
-        examService.insert(id);
+        examService.deleteAllFor(id);
+        examService.insertFor(id);
     }
 
     public void delete(int id) {
-        LOG.info("delete user {}", id);
+        LOG.info("deleteAllFor user {}", id);
         checkModificationAllowed(id);
         service.delete(id);
     }

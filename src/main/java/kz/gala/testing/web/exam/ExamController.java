@@ -23,9 +23,10 @@ public class ExamController extends AbstractExamController{
     public String exam(Model model) {
         // в реальном проекте если пользователь уже завершил тестирование закрыть доступ к тестированию
         if (super.isComplete(AuthorizedUser.id())) {
-            model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id()));
+            model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id(),AuthorizedUser.themeId()));
             return "redirect:/exam/report";
         } else {
+            model.addAttribute("theme", AuthorizedUser.theme());
             return "exam";
         }
     }
@@ -33,7 +34,7 @@ public class ExamController extends AbstractExamController{
 
     @GetMapping(value="/report")
     public String getUserReport(Model model) {
-        model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id()));
+        model.addAttribute("userReport",super.getExamReport(AuthorizedUser.id(),AuthorizedUser.themeId()));
         return "report";
     }
 }

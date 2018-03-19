@@ -50,4 +50,23 @@ public class AnswerPrimaryKey implements Serializable { //обязательно
     public void setEnumerator(Integer enumerator) {
         this.enumerator = enumerator;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AnswerPrimaryKey that = (AnswerPrimaryKey) o;
+
+        if (!question.equals(that.question)) return false;
+        return enumerator.equals(that.enumerator);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = question.hashCode();
+        result = 31 * result + enumerator.hashCode();
+        return result;
+    }
 }

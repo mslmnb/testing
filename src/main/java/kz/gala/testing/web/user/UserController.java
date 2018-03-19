@@ -27,7 +27,7 @@ public class UserController extends AbstractUserController {
         super(service, examService);
     }
 
-    @GetMapping(value = "/profile")
+    @GetMapping(value = "/root")
     public String getProfile(Model model) {
         User user = super.get(AuthorizedUser.id());
         if (Role.ROLE_ADMIN.equals(user.getRole())) {
@@ -35,7 +35,7 @@ public class UserController extends AbstractUserController {
         }
         UserTo userTo = UserUtil.asTo(user);
         model.addAttribute("userTo", userTo);
-        return "profile";
+        return "exam";
     }
 
     @PostMapping(value = "/profile")

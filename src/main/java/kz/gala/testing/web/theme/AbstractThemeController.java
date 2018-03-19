@@ -47,7 +47,7 @@ public abstract class AbstractThemeController {
     }
 
     public void delete(int id) {
-        LOG.info("delete theme {}", id);
+        LOG.info("deleteAllFor theme {}", id);
         checkModificationAllowed(id);
         themeService.delete(id);
     }

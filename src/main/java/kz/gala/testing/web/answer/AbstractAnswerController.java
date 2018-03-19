@@ -53,7 +53,7 @@ public abstract class AbstractAnswerController {
     }
 
     public void delete(int questionId, int enumerator) {
-        LOG.info("delete answer {} for question {}", enumerator, questionId);
+        LOG.info("deleteAllFor answer {} for question {}", enumerator, questionId);
         checkModificationAllowed(questionId);
         answerService.delete(questionId, enumerator);
     }
@@ -73,16 +73,16 @@ public abstract class AbstractAnswerController {
         answerService.update(updatedAnswer);
     }
 
-    public List<AnswerWithCorrect> getAll(int questionId) {
+    public List<AnswerWithCorrect> getAll(int questionId, int themeId) {
         LOG.info("get all answers for the question {}", questionId);
         // к каждому ответу необходимо добавить boolean признак isCorrect (верный или неверный ответ)
-        return AnswerUtil.convertToListWithCorrect(answerService.getAll(questionId), questionService.get(questionId).getCorrectAnswerEnums());
+        return AnswerUtil.convertToListWithCorrect(answerService.getAll(questionId), questionService.get(questionId, themeId).getCorrectAnswerEnums());
     }
 
-    public void correct(int questionId, int enumerator, boolean correct) {
+    public void correct(int questionId, int themeId, int enumerator, boolean correct) {
         LOG.info("update correct value {} for the questionId {}, answer's enumerator {}", correct, questionId, enumerator);
         checkModificationAllowed(questionId);
-        questionService.correct(questionId, enumerator, correct);
+        questionService.correct(questionId, themeId, enumerator, correct);
     }
 
     private void checkModificationAllowed(int id) {

@@ -10,35 +10,43 @@ import java.util.List;
 @Repository
 public class DataJpaQuestionRepositoryImpl implements QuestionRepository {
 
-    private final CrudQuestionRepository crudRepository;
+    private final CrudQuestionRepository crudQuestionRepository;
+    private final CrudThemeRepository crudThemeRepository;
+
 
     @Autowired
-    public DataJpaQuestionRepositoryImpl(CrudQuestionRepository crudRepository) {
-        this.crudRepository = crudRepository;
+    public DataJpaQuestionRepositoryImpl(CrudQuestionRepository crudQuestionRepository, CrudThemeRepository crudThemeRepository) {
+        this.crudQuestionRepository = crudQuestionRepository;
+        this.crudThemeRepository = crudThemeRepository;
     }
 
     @Override
-    public Question save(Question q) {
-        return crudRepository.save(q);
+    public Question save(Question question, int themeId) {
+        if (!question.isNew() && get(question.getId(), themeId) == null) {
+            return null;
+        }
+        question.setTheme(crudThemeRepository.getOne(themeId));
+        return crudQuestionRepository.save(question);
     }
 
     @Override
-    public boolean delete(int id) {
-        return crudRepository.delete(id) != 0;
+    public boolean delete(int id, int themeId) {
+        return crudQuestionRepository.delete(id, themeId) != 0;
     }
 
     @Override
-    public Question get(int id) {
-        return crudRepository.findOne(id);
+    public Question get(int id, int themeId) {
+        Question question = crudQuestionRepository.findOne(id);
+        return question != null && question.getTheme().getId() == themeId ? question : null;
     }
 
     @Override
-    public Integer getCorrectAnswerEnums(int id) {
-        return get(id).getCorrectAnswerEnums();
+    public Integer getCorrectAnswerEnums(int id, int themeId) {
+        return get(id, themeId).getCorrectAnswerEnums();
     }
 
     @Override
     public List<Question> getAll(int themeId) {
-        return crudRepository.getAll(themeId);
+        return crudQuestionRepository.getAll(themeId);
     }
 }

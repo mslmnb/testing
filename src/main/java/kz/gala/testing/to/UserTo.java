@@ -1,9 +1,14 @@
 package kz.gala.testing.to;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kz.gala.testing.model.BaseEntity;
+import kz.gala.testing.model.Theme;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 public class UserTo extends BaseEntity {
@@ -18,14 +23,17 @@ public class UserTo extends BaseEntity {
     @SafeHtml
     private String department;
 
+    private Theme theme;
+
     public UserTo() {
     }
 
-    public UserTo(Integer id, String name, String position, String department) {
+    public UserTo(Integer id, String name, String position, String department, Theme theme) {
         super(id);
         this.name = name;
         this.position = position;
         this.department = department;
+        this.theme = theme;
     }
 
     public String getName() {
@@ -50,6 +58,14 @@ public class UserTo extends BaseEntity {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     @Override

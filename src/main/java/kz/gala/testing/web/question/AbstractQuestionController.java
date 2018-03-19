@@ -43,31 +43,31 @@ public abstract class AbstractQuestionController {
         this.questionService = questionService;
     }
 
-    public QuestionTo getTo(int id) {
-        return asTo(questionService.get(id));
+    public QuestionTo getTo(int id, int themeId) {
+        return asTo(questionService.get(id, themeId));
     }
 
-    public Question get(int id) {
+    public Question get(int id, int themeId) {
         LOG.info("get question {}", id);
-        return questionService.get(id);
+        return questionService.get(id, themeId);
     }
-    public void delete(int id) {
+    public void delete(int id, int themeId) {
         LOG.info("delete question {}", id);
         checkModificationAllowed(id);
-        questionService.delete(id);
+        questionService.delete(id, themeId);
     }
 
-    public Question create(Question q) {
-        LOG.info("create {}", q);
+    public Question create(Question q, int themeId) {
+        LOG.info("create question{} for the theme {}", q, themeId);
         checkNew(q);
-        return questionService.save(q);
+        return questionService.save(q, themeId);
     }
 
-    public void update(Question q, int id) {
-        LOG.info("update {} with id={}", q, id);
+    public void update(Question q, int themeId, int id) {
+        LOG.info("update question with id={} from {} for the theme {}", id, q, themeId);
         checkIdConsistent(q, id);
         checkModificationAllowed(id);
-        questionService.update(q);
+        questionService.update(q, themeId);
     }
 
     public List<QuestionTo> getAll(int themeId) {

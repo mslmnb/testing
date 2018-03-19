@@ -29,14 +29,14 @@ public class QuestionAjaxController extends AbstractQuestionController {
 
     @Override
     @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public QuestionTo getTo(@PathVariable("id") int id) {
-        return super.getTo(id);
+    public QuestionTo getTo(@PathVariable("id") int id, @PathVariable("themeId") int themeId) {
+        return super.getTo(id, themeId);
     }
 
     @Override
     @DeleteMapping(value="/{id}")
-    public void delete(@PathVariable("id") int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int id, @PathVariable("themeId") int themeId) {
+        super.delete(id, themeId);
     }
 
     @PostMapping
@@ -52,14 +52,13 @@ public class QuestionAjaxController extends AbstractQuestionController {
             return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
 
         }
-        question.setTheme(new Theme(themeId));
         if (question.isNew()) {
             question.setCorrectAnswerEnums(0);
-            super.create(question);
+            super.create(question, themeId);
         } else {
-            Question questionFromDb = super.get(question.getId());
+            Question questionFromDb = super.get(question.getId(), themeId);
             question.setCorrectAnswerEnums(questionFromDb.getCorrectAnswerEnums());
-            super.update(question, question.getId());
+            super.update(question, themeId, question.getId());
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

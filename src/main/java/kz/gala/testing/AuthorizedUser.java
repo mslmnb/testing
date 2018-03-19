@@ -1,5 +1,6 @@
 package kz.gala.testing;
 
+import kz.gala.testing.model.Theme;
 import kz.gala.testing.model.User;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.util.UserUtil;
@@ -35,6 +36,14 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
     }
     public static int id() {
         return get().userTo.getId();
+    }
+
+    public static int themeId() {
+        return get().userTo.getTheme().getId();
+    }
+
+    public static Theme theme() {
+        return get().userTo.getTheme();
     }
 
     public UserTo getUserTo() {

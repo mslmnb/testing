@@ -85,6 +85,10 @@ public class Question extends BaseEntity{
         this.theme = theme;
     }
 
+    public Theme getTheme() {
+        return theme;
+    }
+
     @Override
     public String toString() {
         return "Question{" +

@@ -39,4 +39,23 @@ public class ExamPrimaryKey implements Serializable { // обязательно 
     public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExamPrimaryKey that = (ExamPrimaryKey) o;
+
+        if (!userId.equals(that.userId)) return false;
+        return questionId.equals(that.questionId);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId.hashCode();
+        result = 31 * result + questionId.hashCode();
+        return result;
+    }
 }

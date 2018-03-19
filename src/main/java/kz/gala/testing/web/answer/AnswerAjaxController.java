@@ -55,13 +55,16 @@ public class AnswerAjaxController extends AbstractAnswerController{
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<AnswerWithCorrect> getAll(@PathVariable("questionId") int questionId) {
-        return super.getAll(questionId);
+    public List<AnswerWithCorrect> getAll(@PathVariable("questionId") int questionId, @PathVariable("themeId") int themeId) {
+        return super.getAll(questionId, themeId);
     }
 
     @PostMapping(value = "/{enumerator}")
-    public void correct(@PathVariable("questionId") int questionId, @PathVariable("enumerator") int enumerator, @RequestParam("correct") boolean correct) {
-        super.correct(questionId, enumerator, correct);
+    public void correct(@PathVariable("questionId") int questionId,
+                        @PathVariable("themeId") int themeId,
+                        @PathVariable("enumerator") int enumerator,
+                        @RequestParam("correct") boolean correct) {
+        super.correct(questionId, themeId, enumerator, correct);
     }
 
 

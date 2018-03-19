@@ -71,7 +71,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public ExamReport getExamReport(int userId) throws NotFoundException {
+    public ExamReport getExamReport(int userId, int themeId) throws NotFoundException {
         User user = checkNotFoundWithId(userRepository.get(userId), userId);
         user.setComplete(true);
         userRepository.save(user);
@@ -81,18 +81,18 @@ public class ExamServiceImpl implements ExamService {
                 .filter(e->e.getUserAnswerEnums()>0)
                 .count();
         int countOfCorrectAnswers = (int) exams.stream()
-                .filter(e->questionRepository.getCorrectAnswerEnums(e.getQuestionId())==e.getUserAnswerEnums())
+                .filter(e->questionRepository.getCorrectAnswerEnums((int)e.getQuestionId(), themeId)==e.getUserAnswerEnums())
                 .count();
         return new ExamReport(user,countOfQuestions, countOfAnswers, countOfCorrectAnswers);
     }
 
     @Override
-    public void insert(int userId) {
+    public void insertFor(int userId) {
         repository.insert(userId, userRepository.get(userId).getTheme().getId());
     }
 
     @Override
-    public void delete(int userId) {
-        repository.delete(userId);
+    public void deleteAllFor(int userId) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(userId)>0, userId);
     }
 }

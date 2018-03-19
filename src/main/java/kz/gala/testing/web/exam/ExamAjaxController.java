@@ -22,27 +22,22 @@ public class ExamAjaxController extends AbstractExamController {
 
     @PostMapping(value="/first", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getFirst(@RequestBody QuestionWithUserAnswer q) {
-        return super.getFirst(q, AuthorizedUser.id());
+        return super.getFirst(q, AuthorizedUser.id(), AuthorizedUser.themeId());
     }
-
-//    @PostMapping(value="/next", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ExamTo getNextFrom(QuestionWithUserAnswer q) {
-//        return super.getNextFrom(q, AuthorizedUser.id());
-//    }
 
     @PostMapping(value="/next", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getNextFrom(@RequestBody QuestionWithUserAnswer q) {
-        return super.getNextFrom(q, AuthorizedUser.id());
+        return super.getNextFrom(q, AuthorizedUser.id(), AuthorizedUser.themeId());
     }
     @PostMapping(value="/previous", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getPreviousFrom(@RequestBody QuestionWithUserAnswer q) {
-        return super.getPreviousFrom(q, AuthorizedUser.id());
+        return super.getPreviousFrom(q, AuthorizedUser.id(), AuthorizedUser.themeId());
     }
 
 
     @PostMapping(value="/last", produces = MediaType.APPLICATION_JSON_VALUE)
     public ExamTo getLast(@RequestBody QuestionWithUserAnswer q) {
-        return super.getLast(q, AuthorizedUser.id());
+        return super.getLast(q, AuthorizedUser.id(), AuthorizedUser.themeId());
     }
 
     @PostMapping(value="/report", produces = MediaType.APPLICATION_JSON_VALUE)

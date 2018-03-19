@@ -6,12 +6,9 @@ import kz.gala.testing.model.User;
 import kz.gala.testing.to.UserTo;
 import kz.gala.testing.to.UserFullTo;
 
-/**
- * Created by Mussulmanbekova_GE on 28.07.2017.
- */
 public class UserUtil {
     public static UserTo asTo(User user) {
-        return new UserTo(user.getId(),user.getName(),user.getPosition(),user.getDepartment());
+        return new UserTo(user.getId(),user.getName(),user.getPosition(),user.getDepartment(), user.getTheme());
     }
 
     public static UserFullTo asFullTo(User user) {

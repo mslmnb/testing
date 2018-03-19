@@ -8,7 +8,7 @@ public class RootController  {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:user/profile";
+        return "redirect:user/root";
     }
 
     @GetMapping(value = "/login")

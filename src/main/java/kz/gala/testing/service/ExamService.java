@@ -17,10 +17,10 @@ public interface ExamService {
     Exam get(int questionId, int userId) throws NotFoundException;
     Exam update(Exam exam,  int userId) throws NotFoundException;
 
-    ExamReport getExamReport(int userId) throws NotFoundException;
+    ExamReport getExamReport(int userId, int themeId) throws NotFoundException;
     boolean isComplete(int userId) throws NotFoundException;
 
-    void insert(int userId);
+    void insertFor(int userId);
 
-    void delete(int userId);
+    void deleteAllFor(int userId) throws NotFoundException;
 }

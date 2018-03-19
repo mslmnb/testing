@@ -15,8 +15,8 @@ public interface CrudQuestionRepository extends JpaRepository<Question, Integer>
     @Transactional
     @Modifying
     @SuppressWarnings("JpaQlInspection")
-    @Query("DELETE FROM Question q WHERE q.id=:id")
-    int delete(@Param("id") int id);
+    @Query("DELETE FROM Question q WHERE q.id=:id AND q.theme.id=:themeId")
+    int delete(@Param("id") int id, @Param("themeId") int themeId);
 
     @Override
     @Transactional

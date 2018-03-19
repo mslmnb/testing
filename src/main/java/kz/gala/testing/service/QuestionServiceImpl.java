@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithId;
+import static kz.gala.testing.util.ValidationUtil.checkNotFoundWithIds;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -22,25 +23,25 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question get(int id) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id), id);
+    public Question get(int id, int themeId) throws NotFoundException {
+        return checkNotFoundWithId(repository.get(id, themeId), id);
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id), id);
+    public void delete(int id, int themeId) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id, themeId), id);
     }
 
     @Override
-    public Question save(Question question) {
+    public Question save(Question question, int themeId) {
         Assert.notNull(question, "question must not be null");  //throws IllegalArgumentException
-        return repository.save(question);
+        return repository.save(question, themeId);
     }
 
     @Override
-    public Question update(Question question) throws NotFoundException {
+    public Question update(Question question, int themeId) throws NotFoundException {
         Assert.notNull(question, "question must not be null");  //throws IllegalArgumentException
-        return checkNotFoundWithId(repository.save(question), question.getId());
+        return checkNotFoundWithIds(repository.save(question, themeId), themeId, question.getId());
     }
 
     @Override
@@ -49,13 +50,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void correct(Integer questionId, Integer enumerator, Boolean correct) {
+    public void correct(int questionId, int themeId, int enumerator, boolean correct) {
 
-        Assert.notNull(enumerator, "enumerator must not be null");  //throws IllegalArgumentException
-        Assert.notNull(questionId, "questionId must not be null");  //throws IllegalArgumentException
-        Assert.notNull(correct, "correct must not be null");
         //откорректировать в соответствии со значением isCorrect поле question.correct_answer_enum
-        Question q = repository.get(questionId);
+        Question q = repository.get(questionId, themeId);
         Integer correctAnswerEnums = q.getCorrectAnswerEnums();
         int mask = (int) Math.pow(2, enumerator);
         // устанавливаю единицу в позиции enumerator
@@ -65,7 +63,7 @@ public class QuestionServiceImpl implements QuestionService {
             correctAnswerEnums = correctAnswerEnums ^ mask;
         }
         q.setCorrectAnswerEnums(correctAnswerEnums);
-        repository.save(q);
+        repository.save(q, themeId);
     }
 
 }

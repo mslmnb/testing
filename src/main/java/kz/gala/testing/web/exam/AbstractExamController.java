@@ -22,13 +22,13 @@ abstract public class AbstractExamController {
         this.questionService = questionService;
     }
 
-    public ExamTo getFirst(QuestionWithUserAnswer q, int userId) {
+    public ExamTo getFirst(QuestionWithUserAnswer q, int userId, int themeId) {
         log.info("getFirst");
         saveUserAnswer(q, userId);
         List<Exam> examList =  service.getFirst(userId); // первый и второй вопросы
         int currId = examList.get(0).getPrimaryKey().getQuestionId();
         int nextId = examList.get(1).getPrimaryKey().getQuestionId();
-        Question currQuestion = questionService.get(currId);
+        Question currQuestion = questionService.get(currId, themeId);
 
         return new ExamTo(currQuestion, nextId, null, examList.get(0).getUserAnswerEnums());
     }
@@ -46,37 +46,37 @@ abstract public class AbstractExamController {
         }
     }
 
-    public ExamTo getNextFrom(QuestionWithUserAnswer q, int userId) {
+    public ExamTo getNextFrom(QuestionWithUserAnswer q, int userId, int themeId) {
         log.info("getNextFrom {}", q.getQuestionId());
         saveUserAnswer(q, userId);
         List<Exam> examList = service.getNextFrom(q.getQuestionId(), userId);
         Integer prevId = examList.get(0).getPrimaryKey().getQuestionId();
         Integer currId = examList.get(1).getPrimaryKey().getQuestionId();
         Integer nextId = (examList.size()==2) ? null : examList.get(2).getPrimaryKey().getQuestionId();
-        Question currQuestion = questionService.get(currId);
+        Question currQuestion = questionService.get(currId, themeId);
 
         return new ExamTo(currQuestion, nextId, prevId, examList.get(1).getUserAnswerEnums());
     }
 
-    public ExamTo getPreviousFrom(QuestionWithUserAnswer q, int userId) {
+    public ExamTo getPreviousFrom(QuestionWithUserAnswer q, int userId, int themeId) {
         log.info("getPreviousFrom {}", q.getQuestionId());
         saveUserAnswer(q, userId);
         List<Exam> examList = service.getPreviousFrom(q.getQuestionId(), userId);
         Integer nextId = examList.get(0).getPrimaryKey().getQuestionId();
         Integer currId = examList.get(1).getPrimaryKey().getQuestionId();
         Integer prevId = (examList.size()==2) ? null : examList.get(2).getPrimaryKey().getQuestionId();
-        Question currQuestion = questionService.get(currId);
+        Question currQuestion = questionService.get(currId, themeId);
 
         return new ExamTo(currQuestion, nextId, prevId,  examList.get(1).getUserAnswerEnums());
     }
 
-    public ExamTo getLast(QuestionWithUserAnswer q, int userId) {
+    public ExamTo getLast(QuestionWithUserAnswer q, int userId, int themeId) {
         log.info("getLast {}", q.getQuestionId());
         saveUserAnswer(q, userId);
         List<Exam> examList = service.getLast(userId);
         Integer currId = examList.get(0).getPrimaryKey().getQuestionId();
         Integer prevId = examList.get(1).getPrimaryKey().getQuestionId();
-        Question currQuestion = questionService.get(currId);
+        Question currQuestion = questionService.get(currId, themeId);
 
         return new ExamTo(currQuestion, null, prevId, examList.get(0).getUserAnswerEnums());
     }
@@ -85,7 +85,7 @@ abstract public class AbstractExamController {
         return service.isComplete(userId);
     }
 
-    public ExamReport getExamReport(int userId) {
-        return service.getExamReport(userId);
+    public ExamReport getExamReport(int userId, int themeId) {
+        return service.getExamReport(userId, themeId);
     }
 }

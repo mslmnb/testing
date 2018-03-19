@@ -1,9 +1,13 @@
 package kz.gala.testing.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
@@ -13,6 +17,9 @@ import java.io.Serializable;
     @NamedQuery(name = Exam.PREVIOUS, query = "SELECT e FROM Exam e WHERE e.id.questionId<=:questionId AND e.id.userId=:userId ORDER BY e.id.questionId DESC "),
     @NamedQuery(name = Exam.ALL, query = "SELECT e FROM Exam e WHERE e.id.userId=:userId ORDER BY e.id.questionId")
 })
+
+//смотрим на все поля, не смотрим на геттеры, на is- геттеры, на сеттеры
+@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 
 
 @Entity
