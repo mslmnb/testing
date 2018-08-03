@@ -19,7 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("user")
+//@RequestMapping("user")
 public class UserController extends AbstractUserController {
 
     @Autowired
@@ -28,14 +28,22 @@ public class UserController extends AbstractUserController {
     }
 
     @GetMapping(value = "/root")
-    public String getProfile(Model model) {
+    public String root(Model model) {
         User user = super.get(AuthorizedUser.id());
         if (Role.ROLE_ADMIN.equals(user.getRole())) {
             return "redirect:/admin/themes";
         }
         UserTo userTo = UserUtil.asTo(user);
         model.addAttribute("userTo", userTo);
-        return "exam";
+        return "redirect:/exam";
+    }
+
+    @GetMapping(value = "/profile")
+    public String getProfile(Model model) {
+        User user = super.get(AuthorizedUser.id());
+        UserTo userTo = UserUtil.asTo(user);
+        model.addAttribute("userTo", userTo);
+        return "profile";
     }
 
     @PostMapping(value = "/profile")
